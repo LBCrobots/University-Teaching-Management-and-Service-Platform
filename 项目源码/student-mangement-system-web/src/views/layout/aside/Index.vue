@@ -8,7 +8,7 @@
   >
     <!--logo start-->
     <div class="imgBox hidden-xs-only" v-if="!isCollapse">
-      <img src="../../../assets/logo.png">
+      <img src="../../../assets/school-logo1.png">
     </div>
     <!--logo end-->
 

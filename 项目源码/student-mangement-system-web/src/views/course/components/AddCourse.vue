@@ -27,7 +27,7 @@
 
   <div class="dialong__button--wrap">
     <el-button @click="close">取消</el-button>
-    <el-button color="#178557" :loading="subLoading" type="success" @click="addCourse(ruleFormRef)">保存</el-button>
+    <el-button color="#c52020" :loading="subLoading" type="success" @click="addCourse(ruleFormRef)">保存</el-button>
   </div>
 </template>
 

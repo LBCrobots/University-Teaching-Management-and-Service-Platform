@@ -69,7 +69,7 @@ import TopBar from './header/TopBar.vue';
   top: 0;
   left: 0;
   padding: 10px;
-  background-image: url(../../assets/system-bg.jpg);
+  background-image: url(../../assets/background1.png);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;

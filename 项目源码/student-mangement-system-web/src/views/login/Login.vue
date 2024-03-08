@@ -1,26 +1,20 @@
 <template>
-<div class="login-container">
-  <div class="login-box">
-    <!--左边背景图 start-->
-    <div class="login-left">
-      <img src="../../assets/login/school-logo2.png">
-    </div>
-    <!--左边背景图 end-->
-    <!--登录表单 start-->
-    <div class="login-form">
-      <!--标题和logo start-->
-      <div class="login-title">
-        <img class="icon" src="../../assets/logo2.png">
-        <h2 class="title">学生信息管理系统</h2>
+    <div class="login-container">
+      <div class="login-box">
+        <!--登录表单 start-->
+        <div class="login-form">
+          <!--标题和logo start-->
+          <div class="login-title">
+            <h2 class="title">高校教学管理与服务平台</h2>
+          </div>
+          <!--标题和logo end-->
+          <!--登录表单组件 start-->
+          <LoginForm/>
+          <!--登录表单组件 end-->
+        </div>
+        <!--登录表单 end-->
       </div>
-      <!--标题和logo end-->
-      <!--登录表单组件 start-->
-       <LoginForm/>
-      <!--登录表单组件 end-->
     </div>
-    <!--登录表单 end-->
-  </div>
-</div>
 </template>
 
 <script setup lang="ts">
@@ -29,12 +23,12 @@ import LoginForm from './components/LoginForm.vue'
 
 <style scoped>
 .login-container {
-  background-color: #f0f2f5;
-  height: 100%;
+  background-color: #ffffff;
+  height: 100vh;
   width: 100%;
   overflow: hidden;
   display: flex;
-  background-image: url("../../assets/login/login_bg.svg");
+  background-image: url("../../assets/login/background2.png");
   justify-content: center;
   align-items: center;
   padding: 25px 25px;
@@ -44,7 +38,7 @@ import LoginForm from './components/LoginForm.vue'
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: #fffc;
+  background-color: rgba(255, 255, 255, 0.5);
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -63,6 +57,7 @@ import LoginForm from './components/LoginForm.vue'
   max-width: 480px;
   width: 50%;
   padding: 40px;
+  background-color: #ffffffbe;
   border-radius: 10px;
   box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
   box-sizing: border-box;
@@ -77,8 +72,9 @@ import LoginForm from './components/LoginForm.vue'
 
 .login-title .title{
   margin: 0;
-  font-size: 30px;
+  font-size: 25px;
   white-space: nowrap;
+  border-bottom: 3px solid rgb(94, 161, 228);
 }
 .login-title .icon{
   width: 60px;

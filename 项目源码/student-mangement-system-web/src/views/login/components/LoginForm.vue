@@ -55,8 +55,8 @@ const ruleFormRef = ref<FormInstance>()
 const passwordType = ref('password')
 const loading = ref(false)
 const rules = reactive({
-  password: [{ required: true, message: "请输入用户名", trigger: "blur" }],
-  username: [{ required: true, message: "请输入密码", trigger: "blur" }],
+  password: [{ required: true, message: "请输入密码", trigger: "blur" }],
+  username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
 })
 // 表单数据
 const ruleForm = reactive({
@@ -93,7 +93,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
           })
           ElNotification({
             title: '登录成功',
-            message: "欢迎登录 学生信息管理系统",
+            message: "欢迎登录 高校教学管理与服务平台",
             type: "success",
             duration: 3000
           })
@@ -118,7 +118,9 @@ const submitForm = (formEl: FormInstance | undefined) => {
 <style scoped>
 .login-btn{
   margin-top: 20px;
-  width: 100%; height: 47px
+  width: 100%; height: 47px;
+  background-color: rgba(196, 23, 23, 0.8);
+  border: rgba(196, 23, 23, 0.8);
 }
 .show-pwd {
   position: absolute;

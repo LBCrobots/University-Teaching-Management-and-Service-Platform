@@ -2,8 +2,8 @@
 <div class="home">
   <!--顶部背景图和内容 start-->
   <div class="top_bg">
-    <h1>好好学习，天天向上</h1>
-    <p>学生信息管理系统·欢迎您，admin</p>
+    <h1>海纳百川，有容乃大</h1>
+    <p>高校教学管理与服务平台欢迎您</p>
   </div>
   <!--顶部背景图和内容 end-->
   <!--本站数据统计 start-->
@@ -120,7 +120,7 @@ onMounted(() => {
 .top_bg {
   width: 100%;
   height: 200px;
-  background-image: url(../../assets/banner01.jpg);
+  background-image: url(../../assets/banner2.png);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -132,12 +132,12 @@ onMounted(() => {
 
 .top_bg h1 {
   font-size: 60px;
-  text-shadow: 3px 3px 0px #515151;
+  text-shadow: 1px 1px 0px #515151;
   padding-top: 50px;
 }
 
 .top_bg p {
-  font-weight: lighter;
+  font-weight: bold;
   font-size: 18px;
 }
 

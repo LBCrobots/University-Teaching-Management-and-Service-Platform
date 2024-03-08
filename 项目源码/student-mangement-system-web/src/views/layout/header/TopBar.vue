@@ -133,7 +133,7 @@ const url = import.meta.env.VITE_APP_BASE_API
   color: #8c8c8c;
 }
 .linkBox .el-link:hover {
-  color: #30bcd7;
+  color: #e33011;
 }
 .linkBox .el-link span {
   margin-left: 8px;

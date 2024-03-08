@@ -50,7 +50,7 @@
     <div class="table-box">
       <el-table row-key="id"  element-loading-text="数据加载中..." v-loading="loading" :data="tableData"
                 style="width: 100%;text-align: center" :cell-style="{textAlign: 'center'}"
-                :header-cell-style="{fontSize: '15px', background: '#178557',color: 'white',textAlign: 'center'}"
+                :header-cell-style="{fontSize: '15px', background: '#c52020',color: 'white',textAlign: 'center'}"
                 @cell-dblclick="celldblclick">
 
         <el-table-column label="序号" width="100" type="index" :index="Nindex"/>
@@ -373,7 +373,7 @@ const {tableData,pageIndex,pageSize,loading,total,name,stuno} = toRefs(state)
 
 :deep(.el-card__header) {
   border-bottom: 1px solid rgb(238 238 238);
-  color: #178557;
+  color: #c52020;
 }
 
 .text {
@@ -390,7 +390,7 @@ const {tableData,pageIndex,pageSize,loading,total,name,stuno} = toRefs(state)
 }
 /*分页样式*/
 :deep(.el-pagination.is-background .el-pager li:not(.is-disabled).is-active) {
-  background-color: #178557;
+  background-color: #c52020;
 }
 
 .el-pagination {
@@ -405,10 +405,10 @@ const {tableData,pageIndex,pageSize,loading,total,name,stuno} = toRefs(state)
 
 /*修改v-loading样式*/
 :deep(.el-loading-spinner .el-loading-text){
-  color: #178557;
+  color: #c52020;
 }
 :deep(.el-loading-spinner .path){
-  stroke: #178557;
+  stroke: #c52020;
 }
 
 </style>
