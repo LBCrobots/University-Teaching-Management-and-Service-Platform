@@ -1,12 +1,12 @@
 import {defineStore} from 'pinia'
 export const useSettingStore = defineStore({
-    // id: 必须的，在所有 Store 中唯一
     id:'settingState',
-    // state: 返回对象的函数
     state: ()=>({
-        // menu 是否收缩
+        /**
+         * isCollapse: menu 是否折叠
+         * showTag:    tagsView 是否展示 (默认展示)
+         */
         isCollapse:true,
-        // tagsView 是否展示 默认展示
         showTag:true,
     }),
     getters: {},

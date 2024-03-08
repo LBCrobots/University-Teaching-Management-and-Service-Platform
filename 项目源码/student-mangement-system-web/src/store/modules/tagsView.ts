@@ -1,17 +1,18 @@
 import {defineStore} from 'pinia'
 import router from "../../router"
 export const useTagsViewStore = defineStore({
-    // id: 必须的，在所有 Store 中唯一
     id:'tagsViewState',
-    // state: 返回对象的函数
     state: ()=>({
+        /**
+         * activeTabsValue: 活动中的标签页
+         * visitedViews:    已打开页面列表
+         * cachedViews:     缓冲页面列表
+         */
         activeTabsValue:'',
         visitedViews:[{path: '/home',name: 'home',meta:{title: '首页',affix: true},title: '首页'}],
         cachedViews:[],
-
     }),
     getters: {},
-    // 可以同步 也可以异步
     actions:{
         setTabsMenuValue(val: string){
             this.activeTabsValue = val
