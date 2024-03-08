@@ -3,7 +3,7 @@
   <div class="login-box">
     <!--左边背景图 start-->
     <div class="login-left">
-      <img src="../../assets/login/side-logo.png">
+      <img src="../../assets/login/school-logo2.png">
     </div>
     <!--左边背景图 end-->
     <!--登录表单 start-->
