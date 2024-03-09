@@ -13,12 +13,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-/**功能描述：查询工具类
- * @author:梁志杰
- * @date:2022/9/30
- * @description:cn.xueden.utils
- * @version:1.0
- */
+//功能描述：查询工具类
 @Slf4j
 public class QueryHelp {
     public static <R, Q> Predicate getPredicate(Root<R> root, Q query, CriteriaBuilder cb) {

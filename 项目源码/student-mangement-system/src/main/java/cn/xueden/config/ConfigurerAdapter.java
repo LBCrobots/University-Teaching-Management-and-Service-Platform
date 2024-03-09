@@ -17,12 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.io.IOException;
 import java.util.Arrays;
 
-/**功能描述：配置跨域
- * @author:梁志杰
- * @date:2022/12/1
- * @description:cn.xueden.config
- * @version:1.0
- */
+//功能描述：配置跨域
 @Configuration
 public class ConfigurerAdapter implements WebMvcConfigurer {
     @Value("${user.icon}")
