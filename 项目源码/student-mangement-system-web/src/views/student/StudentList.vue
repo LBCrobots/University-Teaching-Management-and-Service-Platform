@@ -16,7 +16,7 @@
             </el-col>
             <el-col :span="11">
               <div class="my-button">
-              <el-button plain style="width: 100%;" color="#2fa7b9" @click="addStudent">添加学生</el-button>
+              <el-button plain style="width: 100%;" color="#1E90FF" @click="addStudent">添加学生</el-button>
                 <el-button @click="exportExcelAction" type="primary">
                   <el-icon style="margin-right: 1px"><Download /></el-icon>导出 Excel
                 </el-button>
@@ -38,7 +38,7 @@
       <el-table element-loading-text="数据加载中..." v-loading="loading" :data="tableData"
                 style="width: 100%;text-align: center" :cell-style="{textAlign: 'center'}"
                 :row-class-name="rowClassName"
-                :header-cell-style="{fontSize: '15px', background: '#c52020',color: 'white',textAlign: 'center'}">
+                :header-cell-style="{fontSize: '15px', background: '#bb1f0abf',color: 'white',textAlign: 'center'}">
 
         <el-table-column label="序号" width="100" type="index" :index="Nindex"/>
         <el-table-column label="学号">
@@ -90,7 +90,7 @@
             <el-button size="small" @click="editStudent(scope.row.id)"
                        style="margin: 0 0 10px 10px;">编辑</el-button>
             <el-popconfirm confirm-button-text="确定" cancel-button-text="取消" :icon="Delete"
-                           icon-color="#626AEF" :title="'确定删除学生名为“'+scope.row.name+'”的学生吗？'"
+                           icon-color="#bb1f0abf" :title="'确定删除学生名为“'+scope.row.name+'”的学生吗？'"
                            @confirm="delStudent(scope.row.id)">
               <template #reference>
                 <el-button size="small" type="danger" style="margin-bottom: 10px;">删除</el-button>
@@ -283,7 +283,7 @@ const {tableData,pageIndex,pageSize,loading,total,searchValue} = toRefs(state)
 
 :deep(.el-card__header) {
   border-bottom: 1px solid rgb(238 238 238);
-  color: #c52020;
+  color: #bb1f0abf;
 }
 
 .text {
@@ -300,7 +300,7 @@ const {tableData,pageIndex,pageSize,loading,total,searchValue} = toRefs(state)
 }
 /*分页样式*/
 :deep(.el-pagination.is-background .el-pager li:not(.is-disabled).is-active) {
-  background-color: #c52020;
+  background-color: #bb1f0abf;
 }
 
 .el-pagination {
@@ -319,9 +319,9 @@ const {tableData,pageIndex,pageSize,loading,total,searchValue} = toRefs(state)
 }
 /*修改v-loading样式*/
 :deep(.el-loading-spinner .el-loading-text){
-  color: #c52020;
+  color: #bb1f0abf;
 }
 :deep(.el-loading-spinner .path){
-  stroke: #c52020;
+  stroke: #bb1f0abf;
 }
 </style>

@@ -25,7 +25,7 @@ a:hover {
 /* 滚动条样式 */
 ::-webkit-scrollbar-thumb {
   border-radius: 50px;
-  background: linear-gradient(to bottom, #d1060676, #e324244e);
+  background: linear-gradient(to bottom, #1464ef76, #4d8cfabb);
 }
 
 ::-webkit-scrollbar {
@@ -34,5 +34,5 @@ a:hover {
 }
 
 #nprogress .bar {
-  background: #f108089e !important;
+  background: #0871f19e !important;
 }

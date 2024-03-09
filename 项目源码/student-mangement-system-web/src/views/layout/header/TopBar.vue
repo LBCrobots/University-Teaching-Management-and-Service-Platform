@@ -44,7 +44,7 @@
               <p>性别</p>
               <p style="font-size: 25px;font-weight:600;">
                 {{ userInfo.sex }}
-                <span style="font-size: 10px;font-weight:100;margin-left:5px;">孩</span>
+                <span style="font-size: 10px;font-weight:100;margin-left:5px;">生</span>
               </p>
             </div>
             <div

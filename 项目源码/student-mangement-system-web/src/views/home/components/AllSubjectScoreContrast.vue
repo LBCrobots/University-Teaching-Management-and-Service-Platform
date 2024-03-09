@@ -2,10 +2,11 @@
   <div :id="id" :class="className" :style="{ height: height, width: width }" />
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup >
 import * as echarts from 'echarts'
 import { EChartsType } from 'echarts/core'
 import { onMounted,watch } from 'vue'
+import westeros from '../../../assets/subjects/westeros.json';
 let props = defineProps({
   legendData: {
     type:Array,
@@ -76,7 +77,8 @@ const options = {
 }
 let chart: EChartsType
 const initChart = () => {
-  let chart = echarts.init(document.getElementById(props.id))
+  echarts.registerTheme('westeros', westeros)
+  let chart = echarts.init(document.getElementById(props.id), 'westeros');
   chart.setOption(options)
   return chart
 }

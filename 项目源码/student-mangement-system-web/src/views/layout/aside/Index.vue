@@ -72,7 +72,7 @@ const isCollapse = computed(() => !SettingStore.isCollapse)
 /* 选中 */
 :deep(.el-menu-item.is-active) {
   color: white;
-  background: linear-gradient(to right, #a0c594, #039759);
+  background: linear-gradient(to right, #8dc3fd, #1E90FF);
 }
 
 

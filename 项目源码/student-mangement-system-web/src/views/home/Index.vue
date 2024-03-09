@@ -7,13 +7,13 @@
   </div>
   <!--顶部背景图和内容 end-->
   <!--本站数据统计 start-->
-  <p style="margin-bottom:15px;color: #144b9f;">
+  <p style="margin-bottom:15px;color: #8dc3fd;">
   <div style="width: 12px;height:12px;background-color:#f9a332;border-radius: 50%;float: left;margin-top: 5px;
             margin-right: 8px;"></div>本站数据统计
   </p>
   <el-row :gutter="40" class="data_row">
     <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="6">
-      <div style="background: linear-gradient(to right, #6D80FE, #23D2FD);">
+      <div style="background: linear-gradient(to right, #8dc3fd, #4169E1);">
         <div class="data_left">
           <el-icon>
             <Avatar />
@@ -26,7 +26,7 @@
       </div>
     </el-col>
     <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="6">
-      <div style="background: linear-gradient(to right, #FF988B, #FF6B88);">
+      <div style="background: linear-gradient(to right, #FF988B, #CD2626);">
         <div class="data_left">
           <el-icon>
             <Reading />
@@ -39,7 +39,7 @@
       </div>
     </el-col>
     <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="6">
-      <div style="background: linear-gradient(to right, #09B0E8, #29F49A);">
+      <div style="background: linear-gradient(to right, #87CEFA, #40E0D0);">
         <div class="data_left">
           <el-icon>
             <ChatDotSquare />
@@ -52,7 +52,7 @@
       </div>
     </el-col>
     <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="6">
-      <div style="background: linear-gradient(to right, #717CFE, #FC83EC);">
+      <div style="background: linear-gradient(to right, #FFBBFF, #8A2BE2);">
         <div class="data_left">
           <el-icon>
             <Clock />
@@ -67,7 +67,7 @@
   </el-row>
   <!--本站数据统计 end-->
   <!--学科成绩对比统计 start-->
-  <p style="margin-bottom:15px;color: #144b9f;">
+  <p style="margin-bottom:15px;color: #8dc3fd;">
   <div style="width: 12px;height:12px;background-color:#f9a332;border-radius: 50%;float: left;margin-top: 5px;
             margin-right: 8px;"></div>学科成绩对比统计
   </p>
@@ -116,6 +116,7 @@ onMounted(() => {
 <style scoped>
 .home {
   width: 100%;
+  background-color: #ffffff;
 }
 .top_bg {
   width: 100%;
@@ -132,7 +133,6 @@ onMounted(() => {
 
 .top_bg h1 {
   font-size: 60px;
-  text-shadow: 1px 1px 0px #515151;
   padding-top: 50px;
 }
 

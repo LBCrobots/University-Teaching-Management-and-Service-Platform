@@ -21,7 +21,7 @@
             </el-select>
             </el-col>
             <el-col :span="6">
-              <el-button plain  color="#2fa7b9" @click="registerScores">登记成绩</el-button>
+              <el-button plain  color="#1E90FF" @click="registerScores">登记成绩</el-button>
               <el-button plain @click="exportExcelAction" type="primary">
                 <el-icon style="margin-right: 1px"><Download /></el-icon>导出 Excel
               </el-button>
@@ -50,7 +50,7 @@
     <div class="table-box">
       <el-table row-key="id"  element-loading-text="数据加载中..." v-loading="loading" :data="tableData"
                 style="width: 100%;text-align: center" :cell-style="{textAlign: 'center'}"
-                :header-cell-style="{fontSize: '15px', background: '#c52020',color: 'white',textAlign: 'center'}"
+                :header-cell-style="{fontSize: '15px', background: '#bb1f0ae1',color: 'white',textAlign: 'center'}"
                 @cell-dblclick="celldblclick">
 
         <el-table-column label="序号" width="100" type="index" :index="Nindex"/>
@@ -373,7 +373,7 @@ const {tableData,pageIndex,pageSize,loading,total,name,stuno} = toRefs(state)
 
 :deep(.el-card__header) {
   border-bottom: 1px solid rgb(238 238 238);
-  color: #c52020;
+  color: #bb1f0ae1;
 }
 
 .text {
@@ -390,7 +390,7 @@ const {tableData,pageIndex,pageSize,loading,total,name,stuno} = toRefs(state)
 }
 /*分页样式*/
 :deep(.el-pagination.is-background .el-pager li:not(.is-disabled).is-active) {
-  background-color: #c52020;
+  background-color: #bb1f0ae1;
 }
 
 .el-pagination {
@@ -405,10 +405,10 @@ const {tableData,pageIndex,pageSize,loading,total,name,stuno} = toRefs(state)
 
 /*修改v-loading样式*/
 :deep(.el-loading-spinner .el-loading-text){
-  color: #c52020;
+  color: #bb1f0ae1;
 }
 :deep(.el-loading-spinner .path){
-  stroke: #c52020;
+  stroke: #bb1f0ae1;
 }
 
 </style>

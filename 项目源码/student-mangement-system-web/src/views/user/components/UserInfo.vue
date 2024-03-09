@@ -92,6 +92,6 @@ const url = import.meta.env.VITE_APP_BASE_API
   font-size: 30px;
 }
 .right_box .title {
-  color: #178557;
+  color: #1E90FF;
 }
 </style>
