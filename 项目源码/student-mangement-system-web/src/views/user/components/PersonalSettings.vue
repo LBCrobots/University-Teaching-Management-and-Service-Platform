@@ -44,7 +44,7 @@
             </el-col>
             <el-col :span="3">
               <el-form-item>
-                <el-button :loading="loading" plain color="#1E90FF"  style="margin-left: 50px;" @click="onBasicSubmit(basicFormRef)">
+                <el-button :loading="loading" plain color="#0554af"  style="margin-left: 50px;" @click="onBasicSubmit(basicFormRef)">
                   提交
                 </el-button>
               </el-form-item>
@@ -163,7 +163,7 @@ const {basic} = toRefs(state)
   box-sizing: border-box;
 }
 .left_box .title {
-  color: #1E90FF;
+  color: #0554af;
   margin-bottom: 10px;
   padding: 20px 20px;
   display: inline-flex;

@@ -30,7 +30,7 @@
         </el-col>
         <el-col  :span="4" style="text-align: center;">
           <el-form-item style="margin-right: 0px;">
-            <el-button plain color="#1E90FF" :loading="subLoading" @click="modifySubmit(modifyFormRef)">提交
+            <el-button plain color="#0554af" :loading="subLoading" @click="modifySubmit(modifyFormRef)">提交
             </el-button>
           </el-form-item>
         </el-col>

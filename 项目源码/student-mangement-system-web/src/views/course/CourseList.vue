@@ -16,7 +16,7 @@
             </el-col>
             <el-col :span="11">
               <div class="my-button">
-              <el-button plain style="width: 100%;" color="#1E90FF" @click="addCourse">添加课程</el-button>
+              <el-button plain style="width: 100%;" color="#0554af" @click="addCourse">添加课程</el-button>
                 <el-button @click="exportExcelAction" type="primary">
                   <el-icon style="margin-right: 1px"><Download /></el-icon>导出 Excel
                 </el-button>

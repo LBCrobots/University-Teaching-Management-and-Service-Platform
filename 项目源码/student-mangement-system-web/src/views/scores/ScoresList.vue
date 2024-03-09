@@ -21,7 +21,7 @@
             </el-select>
             </el-col>
             <el-col :span="6">
-              <el-button plain  color="#1E90FF" @click="registerScores">登记成绩</el-button>
+              <el-button plain  color="#0554af" @click="registerScores">登记成绩</el-button>
               <el-button plain @click="exportExcelAction" type="primary">
                 <el-icon style="margin-right: 1px"><Download /></el-icon>导出 Excel
               </el-button>

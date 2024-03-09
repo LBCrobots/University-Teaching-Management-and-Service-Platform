@@ -1,7 +1,7 @@
 <template>
   <div class="hamburger-container" @click="handleCollapse">
-    <el-icon class="icon" color="#c70505ae" v-if="isCollapse" ><expand /></el-icon>
-    <el-icon class="icon" color="#c70505ae" v-else><fold /></el-icon>
+    <el-icon class="icon" color="#0554af" v-if="isCollapse" ><expand /></el-icon>
+    <el-icon class="icon" color="#0554af" v-else><fold /></el-icon>
   </div>
 </template>
 

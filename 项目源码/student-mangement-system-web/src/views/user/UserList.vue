@@ -23,7 +23,7 @@
             </el-col>
             <el-col :span="8">
               <div class="my-button">
-                <el-button plain style="width: 50%;" color="#1E90FF" @click="addUser">添加用户</el-button>
+                <el-button plain style="width: 50%;" color="#0554af" @click="addUser">添加用户</el-button>
                 <el-button @click="exportExcelAction" type="primary">
                   <el-icon style="margin-right: 6px"><Download /></el-icon>导出 Excel
                 </el-button>
