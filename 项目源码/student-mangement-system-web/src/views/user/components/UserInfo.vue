@@ -32,8 +32,8 @@
         <br>
         <p>如有问题可联系站长</p>
         <p>
-          站长邮箱：<a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=11184629@qq.com"
-                      target="_blank" data-v-634963c2="">11184629 @qq.com</a>
+          站长邮箱：<a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=114514893@qq.com"
+                      target="_blank" data-v-634963c2="">114514893@qq.com</a>
         </p>
       </div>
       <el-divider />

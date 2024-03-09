@@ -11,7 +11,7 @@
  Target Server Version : 80032
  File Encoding         : 65001
 
- Date: 08/03/2024 14:22:31
+ Date: 09/03/2024 15:13:22
 */
 
 SET NAMES utf8mb4;
@@ -158,7 +158,7 @@ CREATE TABLE `s_student_score`  (
   CONSTRAINT `s_student_score_ibfk_1` FOREIGN KEY (`gradeclass_id`) REFERENCES `s_grade_class` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `s_student_score_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `s_student` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `s_student_score_ibfk_3` FOREIGN KEY (`course_id`) REFERENCES `s_course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 81 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '学生成绩表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 85 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '学生成绩表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of s_student_score
@@ -347,7 +347,7 @@ CREATE TABLE `sys_role`  (
   `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统角色信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统角色信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role
@@ -383,7 +383,7 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 1, '2022-12-02 12:55:05.000000', '我是一名管理员', 1, '2024-03-08 03:38:24.281000', 'E10ADC3949BA59ABBE56E057F20F883E', '绫波丽', '女', 1, 'admin', '11184629@qq.com', '27a0cd9a-581c-44bf-acba-5de5cab72b0a.png', 1);
+INSERT INTO `sys_user` VALUES (1, 1, '2022-12-02 12:55:05.000000', '我是一名管理员', 1, '2024-03-09 06:45:06.396000', 'E10ADC3949BA59ABBE56E057F20F883E', '绫波丽', '女', 1, 'admin', '114514893@qq.com', '27a0cd9a-581c-44bf-acba-5de5cab72b0a.png', 1);
 INSERT INTO `sys_user` VALUES (2, 1, '2022-12-05 13:06:48.040000', '韩立红颜知己，名义上的妾侍。落云宗女修，负责管理药园，韩立入落云宗修炼，归其管辖，被家族逼婚，一直推脱不肯完婚。后韩立结婴后，慕沛灵对外谎称已被韩立收为妾侍，韩立为突破瓶颈，假戏真唱收其为妾侍，改修颠凤培元功，后为突破元婴期未果身陨。', 1, '2022-12-06 03:36:51.824000', 'E10ADC3949BA59ABBE56E057F20F883E', '慕沛灵', '女', 1, 'mupeiling', 'mupeiling@qq.com', NULL, 2);
 INSERT INTO `sys_user` VALUES (3, 1, '2022-12-05 13:09:44.441000', '韩立红颜知己。又名雪玲，本是灵界银月妖狼玲珑仙子两魂之一。', 1, '2022-12-06 03:30:05.735000', 'E10ADC3949BA59ABBE56E057F20F883E', '银月', '女', 1, 'yinyue', 'yinyue@qq.com', NULL, 2);
 INSERT INTO `sys_user` VALUES (4, 1, '2022-12-05 13:10:42.589000', '这是一个凡人修仙者', 1, '2022-12-05 13:10:42.589000', 'E10ADC3949BA59ABBE56E057F20F883E', '韩立', '男', 1, 'hanli', '22@qq.com', NULL, 2);
