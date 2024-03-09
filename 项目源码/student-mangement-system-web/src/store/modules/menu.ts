@@ -1,15 +1,15 @@
 import {defineStore} from 'pinia'
 import {asyncRoutes, staticRouter} from "../../router";
 export const useMenuStore = defineStore({
-    // id: 必须的，在所有 Store 中唯一
     id:'menuState',
-    // state: 返回对象的函数
     state: ()=>({
-        // menu 静态路由
-        routers:[],
-        // 动态路由
+        /**
+         * routers:    menu静态路由
+         * addRouters: 动态路由
+         * roles:      用户角色
+         */
+        routers:[], 
         addRouters: [],
-        // 用户角色
         roles: []
     }),
     getters: {},
@@ -27,6 +27,7 @@ export const useMenuStore = defineStore({
         }
     }
 })
+
 // 通过递归过滤asyncRoutes
 export function filterAsyncRoutes ({routes, roles}: { routes: any, roles: any }) {
     const res = []
