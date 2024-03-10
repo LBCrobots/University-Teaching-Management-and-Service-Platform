@@ -13,3 +13,12 @@ export function loginOutApi() {
         url: 'loginOut'
     })
 }
+
+// 注册Api
+export function registerApi(data:object) {
+    return request({
+        url: 'register',
+        method: 'post',
+        data
+    })
+}
