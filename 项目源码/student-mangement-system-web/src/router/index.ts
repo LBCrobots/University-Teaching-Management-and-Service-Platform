@@ -1,9 +1,12 @@
-// 1. 导入Vue Router模块
+/**
+ * @/router/index.ts
+ * 定义页面路由 Vue Router
+ */
 import { createRouter, createWebHashHistory } from 'vue-router'
 import NProgress from "../config/nprogress";
 import { useUserStore } from '../store/modules/user'
 import { useMenuStore } from '../store/modules/menu'
-// 2. 定义一些路由,每个路由都需要映射到一个组件。
+
 // 定义静态路由
 export const staticRouter = [
     {
@@ -16,6 +19,14 @@ export const staticRouter = [
         name: 'Login',
         meta: { title: '学生信息管理系统 - 登录'},
         component: ()=> import('../views/login/Login.vue'),
+        isMenu: false
+
+    },
+    {
+        path: '/register',
+        name: 'Register',
+        meta: { title: '注册'},
+        component: ()=> import('../views/register/Register.vue'),
         isMenu: false
 
     },
@@ -51,6 +62,7 @@ export const staticRouter = [
         ]
     }
 ]
+
 // 定义动态路由
 export const asyncRoutes = [
     {
@@ -215,21 +227,22 @@ export const asyncRoutes = [
     }
 ]
 
-// 3. 创建路由实例并传递 `routes` 配置
+// 创建静态路由实例 createRouter -> Hash Mode
 const router = createRouter({
-    // 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
     history: createWebHashHistory(),
     routes: staticRouter
 })
-// 路由拦截 beforeEach
+
+// 路由拦截器 beforeEach
 router.beforeEach(async (to, from, next) => {
-// 1.NProgress 开始
+    // 进度条触发
     NProgress.start();
 
-    //2.如果是访问登录页，直接放行
+    // 若访问登录/注册页，直接放行
     if(to.path==='/login')return next()
+    if(to.path==='/register')return next()
 
-    //3.判断是否有Token,没有重定向到login
+    // 判断是否有Token,没有重定向到login
     const userStore = useUserStore()
     if(!userStore.token)return next({path:`/login?redirect=${to.path}`,replace:true})
 
@@ -249,6 +262,7 @@ router.beforeEach(async (to, from, next) => {
         next();
     }
 });
+
 /**
  * @description 路由跳转结束
  * */
