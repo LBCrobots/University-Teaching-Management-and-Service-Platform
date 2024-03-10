@@ -94,7 +94,7 @@ export const asyncRoutes = [
                 meta: {
                     title: '角色管理',
                     icon: 'Stamp',
-                    role: ['ROLE_ADMIN']
+                    role: []
                 },
                 component: ()=> import('../views/role/RoleList.vue')
             }
@@ -171,7 +171,7 @@ export const asyncRoutes = [
         meta: {
             title: '成绩管理',
             icon: 'GoldMedal',
-            role: ['ROLE_ADMIN','ROLE_TEACHER','ROLE_STUDENT']
+            role: ['ROLE_ADMIN','ROLE_TEACHER']
         },
         redirect: '/scores/index',
         component: ()=> import('../views/layout/Index.vue'),
