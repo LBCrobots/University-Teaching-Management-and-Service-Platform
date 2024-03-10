@@ -94,7 +94,7 @@ export const asyncRoutes = [
                 meta: {
                     title: '角色管理',
                     icon: 'Stamp',
-                    role: ['ROLE_ADMIN']
+                    role: []//['ROLE_ADMIN']隐藏角色管理功能
                 },
                 component: ()=> import('../views/role/RoleList.vue')
             }
@@ -106,7 +106,7 @@ export const asyncRoutes = [
         meta: {
             title: '数据管理',
             icon: 'DataAnalysis',
-            role: ['ROLE_ADMIN']
+            role: ['ROLE_ADMIN','ROLE_TEACHER','ROLE_STUDENT']
         },
         redirect: '/base/gradeclass',
         component: ()=> import('../views/layout/Index.vue'),
@@ -149,9 +149,19 @@ export const asyncRoutes = [
                 meta: {
                     title: '教师管理',
                     icon: 'Avatar',
-                    role: ['ROLE_ADMIN']
+                    role: ['ROLE_ADMIN','ROLE_TEACHER']
                 },
                 component: ()=> import('../views/teacher/TeacherList.vue')
+            },
+            {
+                path: 'studentcourse',
+                name: 'studentcourse',
+                meta: {
+                    title: '选课管理',
+                    icon: 'Management',
+                    role: ['ROLE_ADMIN','ROLE_STUDENT']
+                },
+                component: ()=> import('../views/studentcourse/StudentCourseList.vue')
             }
         ]
     },
@@ -161,7 +171,7 @@ export const asyncRoutes = [
         meta: {
             title: '成绩管理',
             icon: 'GoldMedal',
-            role: ['ROLE_USER','ROLE_ADMIN']
+            role: ['ROLE_ADMIN','ROLE_TEACHER']
         },
         redirect: '/scores/index',
         component: ()=> import('../views/layout/Index.vue'),
@@ -174,7 +184,7 @@ export const asyncRoutes = [
                 meta: {
                     title: '班级科目成绩',
                     icon: 'Money',
-                    role: ['ROLE_USER','ROLE_ADMIN']
+                    role: ['ROLE_ADMIN','ROLE_TEACHER','ROLE_STUDENT']
                 },
                 component: ()=> import('../views/scores/ScoresList.vue')
             }
@@ -186,7 +196,7 @@ export const asyncRoutes = [
         meta: {
             title: '数据统计',
             icon: 'Medal',
-            role: ['ROLE_USER','ROLE_ADMIN']
+            role: ['ROLE_ADMIN','ROLE_TEACHER','ROLE_STUDENT']
         },
         redirect: '/census/index',
         component: ()=> import('../views/layout/Index.vue'),
@@ -199,7 +209,7 @@ export const asyncRoutes = [
                 meta: {
                     title: '班级科目成绩统计',
                     icon: 'Histogram',
-                    role: ['ROLE_USER','ROLE_ADMIN']
+                    role: ['ROLE_ADMIN','ROLE_TEACHER','ROLE_STUDENT']
                 },
                 component: ()=> import('../views/census/ScoresCensus.vue')
             },
@@ -209,7 +219,7 @@ export const asyncRoutes = [
                 meta: {
                     title: '班级科目对比统计',
                     icon: 'Notification',
-                    role: ['ROLE_USER','ROLE_ADMIN']
+                    role: ['ROLE_ADMIN','ROLE_TEACHER','ROLE_STUDENT']
                 },
                 component: ()=> import('../views/census/ScoresContrastCensus.vue')
             }

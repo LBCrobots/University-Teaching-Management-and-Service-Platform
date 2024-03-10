@@ -38,6 +38,7 @@
         :loading="loading_register"
         class="secondary-btn"
         color="#ffffff80"
+        style="border: 1px solid rgb(94, 161, 228);"
         @click="navigateToRegister">
       我要注册
     </el-button>

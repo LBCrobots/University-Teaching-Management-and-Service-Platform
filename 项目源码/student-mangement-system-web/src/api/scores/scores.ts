@@ -6,8 +6,20 @@ export function getScoresListApi(data:object) {
         params: data
     })
 }
-// 登记学科成绩
+// 查询学科成绩
 export function registerScoresApi(gradeClassId:number,courseId:number) {
+    return request({
+        url: 'scores',
+        method: 'post',
+        data: {
+            gradeClassId: gradeClassId,
+            courseId: courseId
+        }
+    })
+}
+
+// 添加课程
+export function addSubjectsApi(gradeClassId:number,courseId:number) {
     return request({
         url: 'scores',
         method: 'post',

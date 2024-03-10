@@ -80,6 +80,7 @@
     <el-button
         class="secondary-btn"
         color="#ffffff80"
+        style="border: 1px solid rgb(94, 161, 228);"
         @click="navigateToLogin">
       返回登录
     </el-button>
