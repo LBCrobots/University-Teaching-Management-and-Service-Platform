@@ -42,13 +42,4 @@ const closeAllTab = async ()=>{
 </script>
 
 <style scoped>
-.more{
-  background-color: grey;
-  color: white;
-}
-.more .tags-view-item{
-  display: flex;
-  align-items: center;
-}
-
 </style>

@@ -148,7 +148,6 @@
     sex: '',
     status: 1,
     email: '',
-    userIcon: null,
     sysRole: {id:3}
   })
   // 显示密码图标
@@ -199,7 +198,13 @@
             loading.value = false
           }
       } else {
-        console.log('error submit!')
+        ElNotification({
+          title: '温馨提示',
+          message: "请查看提示将注册信息填写完整",
+          type: "error",
+          duration: 10000
+        })
+        console.log('valid false')
         loading.value = false
         return false
       }
