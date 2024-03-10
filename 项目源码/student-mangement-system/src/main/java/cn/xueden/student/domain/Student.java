@@ -53,7 +53,11 @@ public class Student extends BaseEntity {
     @Column(name = "qq")
     private String qq;
 
-
+    /**
+     * uid
+     */
+    @Column(name = "uid")
+    private String uid;
 
 
 }
