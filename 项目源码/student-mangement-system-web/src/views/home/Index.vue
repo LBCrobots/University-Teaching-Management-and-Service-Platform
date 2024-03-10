@@ -6,18 +6,19 @@
     <p>高校教学管理与服务平台欢迎您</p>
   </div>
   <!--顶部背景图和内容 end-->
+
   <!--本站数据统计 start-->
   <p style="margin-bottom:15px;color: #8dc3fd;">
-  <div style="width: 12px;height:12px;background-color:#f9a332;border-radius: 50%;float: left;margin-top: 5px;
-            margin-right: 8px;"></div>本站数据统计
+    <div class="titleDot"></div>
+    本站数据统计
   </p>
-  <el-row :gutter="40" class="data_row">
+  
+  <el-row  class="data_row">
+
     <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="6">
       <div style="background: linear-gradient(to right, #8dc3fd, #4169E1);">
         <div class="data_left">
-          <el-icon>
-            <Avatar />
-          </el-icon>
+          <el-icon> <Avatar /> </el-icon>
         </div>
         <div class="data_right">
           <h1>{{studentNums}}<span>人</span></h1>
@@ -25,12 +26,11 @@
         </div>
       </div>
     </el-col>
+
     <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="6">
       <div style="background: linear-gradient(to right, #FF988B, #CD2626);">
         <div class="data_left">
-          <el-icon>
-            <Reading />
-          </el-icon>
+          <el-icon> <Reading /> </el-icon>
         </div>
         <div class="data_right">
           <h1>{{classNums}}<span>个</span></h1>
@@ -38,12 +38,11 @@
         </div>
       </div>
     </el-col>
+
     <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="6">
       <div style="background: linear-gradient(to right, #87CEFA, #40E0D0);">
         <div class="data_left">
-          <el-icon>
-            <ChatDotSquare />
-          </el-icon>
+          <el-icon> <ChatDotSquare /> </el-icon>
         </div>
         <div class="data_right">
           <h1>{{ teacherNums }}<span>人</span></h1>
@@ -51,12 +50,11 @@
         </div>
       </div>
     </el-col>
+
     <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="6">
       <div style="background: linear-gradient(to right, #FFBBFF, #8A2BE2);">
         <div class="data_left">
-          <el-icon>
-            <Clock />
-          </el-icon>
+          <el-icon> <Clock /> </el-icon>
         </div>
         <div class="data_right">
           <h1>{{courseNums}}<span>门</span></h1>
@@ -66,10 +64,11 @@
     </el-col>
   </el-row>
   <!--本站数据统计 end-->
+  
   <!--学科成绩对比统计 start-->
   <p style="margin-bottom:15px;color: #8dc3fd;">
-  <div style="width: 12px;height:12px;background-color:#f9a332;border-radius: 50%;float: left;margin-top: 5px;
-            margin-right: 8px;"></div>学科成绩对比统计
+    <div class="titleDot"></div>
+    学科成绩对比统计
   </p>
   <el-row>
     <el-col>
@@ -141,13 +140,20 @@ onMounted(() => {
   font-size: 18px;
 }
 
-.data_row .el-col {
+.data_row{
   height: 100px;
   margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
   overflow: hidden;
 }
 
-.data_row .el-col>div {
+.data_row .el-col{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.el-col>div {
   width: 100%;
   height: 100%;
   border-radius: 10px;
@@ -184,5 +190,16 @@ onMounted(() => {
   font-size: 14px;
   font-weight: 600;
   margin-left: 3px;
+}
+
+.titleDot {
+  width: 12px;
+  height:12px;
+  background-color:#f9a332;
+  border-radius: 50%;
+  float: left;
+  margin-top: 5px;
+  margin-right: 8px;
+  margin-left: 20px;
 }
 </style>

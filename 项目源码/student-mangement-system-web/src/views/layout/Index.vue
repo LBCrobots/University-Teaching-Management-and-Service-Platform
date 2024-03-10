@@ -40,10 +40,12 @@ import TopBar from './header/TopBar.vue';
   --el-header-padding: 0px;
   --el-header-height: auto;
   height: 111px;
-  background: #F3F3F3;
 }
+/* 主要内容 */
 .el-main {
   background: #F3F3F3;
+  border-top-left-radius: 15px;
+  border: 1px solid #efefef;
 }
 .el-container {
   height: 100%;
