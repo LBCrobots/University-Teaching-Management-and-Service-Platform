@@ -94,7 +94,7 @@ export const asyncRoutes = [
                 meta: {
                     title: '角色管理',
                     icon: 'Stamp',
-                    role: []
+                    role: []//['ROLE_ADMIN']隐藏角色管理功能
                 },
                 component: ()=> import('../views/role/RoleList.vue')
             }
