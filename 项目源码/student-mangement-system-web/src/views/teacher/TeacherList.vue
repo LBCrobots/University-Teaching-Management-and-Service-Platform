@@ -152,6 +152,7 @@ import {ElMessage} from 'element-plus'
 import AddTeacher from "./components/AddTeacher.vue"
 import EditTeacher from "./components/EditTeacher.vue"
 import {exportExcel} from "../../utils/exprotExcel";
+// const { userInfo } = useUserStore()
 const state = reactive({
   // 搜索表单内容
   searchValue: "",
