@@ -106,7 +106,7 @@ watch(route, () => {
   box-sizing: border-box;
 }
 :deep(.el-tabs){
-  border-top: 1px solid #178557;
+  border-top: 1px solid #0554af;
 }
 :deep(.el-tabs .el-tabs__nav){
   border: none;
@@ -117,7 +117,7 @@ watch(route, () => {
 }
 
 :deep(.el-tabs .el-tabs__header .el-tabs__item.is-active ) {
-  color: #178557;
-  border-bottom:2px solid #178557;
+  color: #0554af;
+  border-bottom:2px solid #0554af;
 }
 </style>

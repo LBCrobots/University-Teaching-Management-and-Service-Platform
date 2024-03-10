@@ -6,12 +6,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
 
-/**功能描述：学生信息实体类
- * @author:梁志杰
- * @date:2022/12/11
- * @description:cn.xueden.student.domain
- * @version:1.0
- */
+//功能描述：学生信息实体类
 @Data
 @Entity
 @Table(name = "s_student")

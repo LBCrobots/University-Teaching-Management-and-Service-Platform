@@ -112,7 +112,7 @@ onMounted(() => {
 
 :deep(.el-card__header) {
   border-bottom: 1px solid rgb(238 238 238);
-  color: #c52020;
+  color: #c70505ae;
 }
 
 .text {

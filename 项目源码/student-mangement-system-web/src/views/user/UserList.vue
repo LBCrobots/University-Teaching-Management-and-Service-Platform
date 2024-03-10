@@ -23,7 +23,7 @@
             </el-col>
             <el-col :span="8">
               <div class="my-button">
-                <el-button plain style="width: 50%;" color="#2fa7b9" @click="addUser">添加用户</el-button>
+                <el-button plain style="width: 50%;" color="#0554af" @click="addUser">添加用户</el-button>
                 <el-button @click="exportExcelAction" type="primary">
                   <el-icon style="margin-right: 6px"><Download /></el-icon>导出 Excel
                 </el-button>
@@ -45,7 +45,7 @@
   <div class="table-box">
     <el-table element-loading-text="数据加载中..." v-loading="loading" :data="tableData"
     style="width: 100%;text-align: center" :cell-style="{textAlign: 'center'}"
-    :header-cell-style="{fontSize: '15px', background: '#c70505ae',color: 'white',textAlign: 'center'}">
+    :header-cell-style="{fontSize: '15px', background: '#bb1f0abf',color: 'white',textAlign: 'center'}">
 
       <el-table-column label="序号" width="100" type="index" :index="Nindex"/>
       <el-table-column label="用户名称">
@@ -111,7 +111,7 @@
           <el-button size="small"
                      style="margin: 0 0 10px 10px;" @click="editUser(scope.row.id)">编辑</el-button>
           <el-popconfirm confirm-button-text="确定" cancel-button-text="取消" :icon="Delete"
-                         icon-color="#626AEF" :title="'确定删除用户名为“'+scope.row.username+'”的用户吗？'"
+                         icon-color="#bb1f0abf" :title="'确定删除用户名为“'+scope.row.username+'”的用户吗？'"
                          @confirm="delUser(scope.row.id)">
             <template #reference>
               <el-button size="small" type="danger" style="margin-bottom: 10px;">删除</el-button>
@@ -337,7 +337,7 @@ const {tableData,pageIndex,pageSize,loading,total,status,searchValue} = toRefs(s
 
 :deep(.el-card__header) {
   border-bottom: 1px solid rgb(238 238 238);
-  color: #c70505ae;
+  color: #bb1f0abf;
 }
 
 .text {
@@ -355,7 +355,7 @@ const {tableData,pageIndex,pageSize,loading,total,status,searchValue} = toRefs(s
 
 /*分页样式*/
 :deep(.el-pagination.is-background .el-pager li:not(.is-disabled).is-active) {
-  background-color: #c70505ae;
+  background-color: #bb1f0abf;
 }
 
 .el-pagination {
@@ -376,9 +376,9 @@ const {tableData,pageIndex,pageSize,loading,total,status,searchValue} = toRefs(s
 
 /*修改v-loading样式*/
 :deep(.el-loading-spinner .el-loading-text){
-  color: #c70505ae;
+  color: #bb1f0abf;
 }
 :deep(.el-loading-spinner .path){
-  stroke: #c70505ae;
+  stroke: #bb1f0abf;
 }
 </style>

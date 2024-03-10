@@ -6,6 +6,7 @@
 import * as echarts from 'echarts'
 import { EChartsType } from 'echarts/core'
 import {onMounted,watch  } from 'vue'
+import shine from '../../../assets/subjects/shine.json';
 let props = defineProps({
   legendData: {
     type:Array,
@@ -106,7 +107,8 @@ const options = {
 }
 let chart: EChartsType
 const initChart = () => {
-  let chart = echarts.init(document.getElementById(props.id))
+  echarts.registerTheme('shine', shine)
+  let chart = echarts.init(document.getElementById(props.id), 'shine')
   chart.setOption(options,true)
   return chart
 }

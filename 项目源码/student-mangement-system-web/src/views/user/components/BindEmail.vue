@@ -42,7 +42,7 @@
           <el-col  :span="6"
                   v-show="showNewEmail && !showGetCode">
             <el-form-item style="width: 100%;">
-              <el-button plain color="#2fa7b9" @click="toBindSubmit">提交
+              <el-button plain color="#0554af" @click="toBindSubmit">提交
               </el-button>
             </el-form-item>
           </el-col>
@@ -50,14 +50,14 @@
           <el-col :span="12"
                   v-show="showGetCode && !showNewEmail">
             <el-form-item style="width: 100%;">
-              <el-button plain color="#2fa7b9" @click="confirmCode">
+              <el-button plain color="#0554af" @click="confirmCode">
                 确认更换
               </el-button>
             </el-form-item>
           </el-col>
           <el-col :span="24"
                   v-show="!showGetCode && !showNewEmail">
-            <el-button plain color="#2fa7b9" @click="showGetCode = true"
+            <el-button plain color="#0554af" @click="showGetCode = true"
                        style="margin-left: 0px;">更换绑定邮箱
             </el-button>
           </el-col>

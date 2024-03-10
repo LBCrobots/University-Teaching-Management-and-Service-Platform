@@ -16,12 +16,7 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.sql.Timestamp;
 
-/**功能描述：公共Entity
- * @author:梁志杰
- * @date:2022/9/30
- * @description:cn.xueden.base
- * @version:1.0
- */
+//功能描述：公共Entity
 @Getter
 @Setter
 @MappedSuperclass
