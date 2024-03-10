@@ -4,37 +4,37 @@
     <template #header>
       <div class="card-header">
         <h3>
-          <el-icon style="margin-right: 10px;"><Money /></el-icon>班级科目成绩
+          <el-icon style="margin-right: 10px;"><Money /></el-icon>选课管理
         </h3>
 
         <!--搜索区域 start-->
         <div class="card-search">
           <el-row :gutter="12">
-            <el-col :span="5">
+            <!-- <el-col :span="5">
               <el-select v-model="gradeClassId" placeholder="请选择班级" style="width: 100%;">
                 <el-option v-for="item in gradeClassOptions" :key="item.id" :label="item.name" :value="item.id" />
               </el-select>
-            </el-col>
-            <el-col :span="5">
+            </el-col> -->
+            <el-col :span="12">
             <el-select v-model="courseId" placeholder="请选择科目" style="width: 100%;">
               <el-option v-for="item in courseOptions" :key="item.id" :label="item.name" :value="item.id" />
             </el-select>
             </el-col>
-            <el-col :span="6">
-              <el-button plain  color="#0554af" @click="registerScores">查询成绩</el-button>
-              <el-button plain @click="exportExcelAction" type="primary">
+            <el-col :span="5">
+              <el-button plain  color="#0554af" @click="addSubjects">添加课程</el-button>
+              <!-- <el-button plain @click="exportExcelAction" type="primary">
                 <el-icon style="margin-right: 1px"><Download /></el-icon>导出 Excel
-              </el-button>
+              </el-button> -->
             </el-col>
-            <el-col :span="3">
+            <!-- <el-col :span="3">
               <el-input :prefix-icon="Search" v-model="stuno" @keyup.enter.native="search"
                         placeholder="学号搜索（回车）"/>
-            </el-col>
-            <el-col :span="3">
+            </el-col> -->
+            <!-- <el-col :span="3">
               <el-input :prefix-icon="Search" v-model="name" @keyup.enter.native="search"
                         placeholder="姓名搜索（回车）"/>
-            </el-col>
-            <el-col :span="2" style="display: inline-flex;justify-content: center;align-items: center; cursor: pointer;">
+            </el-col> -->
+            <el-col :span="5" style="display: inline-flex;justify-content: center;align-items: center; cursor: pointer;">
               <el-icon style="font-size: 20px;color: #b3b6bc;" @click="refresh">
                 <Refresh />
               </el-icon>
@@ -99,11 +99,11 @@
 
             <span  v-else>
               {{scope.row.score}}
-               <el-tooltip content="双击编辑" placement="top" effect="light">
+               <!-- <el-tooltip content="双击编辑" placement="top" effect="light">
                <el-icon style="cursor:pointer;">
                   <Edit />
                </el-icon>
-               </el-tooltip>
+               </el-tooltip> -->
             </span>
           </template>
         </el-table-column>
@@ -125,7 +125,7 @@
         <el-table-column label="操作">
           <template #default="scope">
             <el-popconfirm confirm-button-text="确定" cancel-button-text="取消" :icon="Delete"
-                           icon-color="#626AEF" :title="'确定删除学生名为“'+scope.row.student.name+'”的成绩吗？'"
+                           icon-color="#626AEF" :title="'确定删除学生名为“'+scope.row.student.name+'”的课程吗？'"
                            @confirm="delScores(scope.row.id)">
               <template #reference>
                 <el-button size="small" type="danger" style="margin-bottom: 10px;">删除</el-button>
@@ -151,7 +151,7 @@ import { ref, reactive,toRefs, onMounted  } from 'vue'
 // 定义班级下拉选择项
 import {gradeClassListApi} from "../../api/student/student";
 import {getAllCourseListApi} from "../../api/teacher/teacher";
-import {deleteScoresApi, editScoresApi, getScoresListApi, registerScoresApi} from "../../api/scores/scores";
+import {deleteScoresApi, editScoresApi, getScoresListApi, addSubjectsApi} from "../../api/scores/scores";
 import { formatTime } from "../../utils/date"
 import {ElMessage} from 'element-plus'
 import {exportExcel} from "../../utils/exprotExcel";
@@ -237,41 +237,36 @@ const refresh = () => {
   loadData(state);
 }
 // 搜索
-const search = () => {
-  if (state.name !== null&&state.name !== "") {
-    ElMessage({
-      type: 'success',
-      message: `学生姓名“${state.name}”搜索内容如下`,
-    })
-    loadData(state)
-  }
+// const search = () => {
+//   if (state.name !== null&&state.name !== "") {
+//     ElMessage({
+//       type: 'success',
+//       message: `学生姓名“${state.name}”搜索内容如下`,
+//     })
+//     loadData(state)
+//   }
 
-  if (state.stuno !== null&&state.stuno !== "") {
-    ElMessage({
-      type: 'success',
-      message: `学号“${state.stuno}”搜索内容如下`,
-    })
-    loadData(state)
-  }
-}
+//   if (state.stuno !== null&&state.stuno !== "") {
+//     ElMessage({
+//       type: 'success',
+//       message: `学号“${state.stuno}”搜索内容如下`,
+//     })
+//     loadData(state)
+//   }
+// }
 // 切换页面的执行事件，  val 当前页码
 const changePage = (val) => {
   state.pageIndex = val
   loadData(state)
 }
 
-// 查询班级学科成绩
-const registerScores = async () => {
-  if(gradeClassId.value < 1){
-    ElMessage.success('请选择班级')
-    console.log('gradeClassId.value:',gradeClassId.value)
-    return false
-  }
+// 添加课程
+const addSubjects = async () => {
   if(courseId.value < 1){
     ElMessage.success('请选择学科')
     return false
   }
-  const { data } =  await registerScoresApi(gradeClassId.value,courseId.value)
+  const { data } =  await addSubjectsApi(gradeClassId.value,courseId.value)
   if(data.status===200){
     await loadData(state)
     ElMessage.success(data.message)
@@ -281,41 +276,41 @@ const registerScores = async () => {
 
 }
 
-// 定义单元格是否可编辑
-const edit = ref(false)
-// 双击单元格函数
-const celldblclick = (row, column, cell, event)=> {
-  const scoreTarget: any = state.tableData.find(item => {
-    return item.id === row.id
-  })
-  if (scoreTarget !== undefined) {
-    scoreTarget._originalData = { ...scoreTarget }
-    scoreTarget.edit = !scoreTarget.edit
-  }
-}
-// 取消编辑
-const cancel = (key: any) => {
-  key._originalData = { ...key }
-  key.edit = !key.edit
-}
-// 保存编辑成绩
-const editScores = async (record: { id: any; score: any; })=> {
-  loading.value = true
-  const { id,score } = record
-  if(!score){
-    loading.value = false
-    ElMessage.error('提交失败，请更改成绩！')
-    return
-  }
-  const { data } = await editScoresApi(id,score)
-  if(data.status===200){
-    ElMessage.success(data.message)
-    await loadData(state)
-  }else {
-    ElMessage.error(data.message)
-  }
-  loading.value = false
-}
+// // 定义单元格是否可编辑
+// const edit = ref(false)
+// // 双击单元格函数
+// const celldblclick = (row, column, cell, event)=> {
+//   const scoreTarget: any = state.tableData.find(item => {
+//     return item.id === row.id
+//   })
+//   if (scoreTarget !== undefined) {
+//     scoreTarget._originalData = { ...scoreTarget }
+//     scoreTarget.edit = !scoreTarget.edit
+//   }
+// }
+// // 取消编辑
+// const cancel = (key: any) => {
+//   key._originalData = { ...key }
+//   key.edit = !key.edit
+// }
+// // 保存编辑成绩
+// const editScores = async (record: { id: any; score: any; })=> {
+//   loading.value = true
+//   const { id,score } = record
+//   if(!score){
+//     loading.value = false
+//     ElMessage.error('提交失败，请更改成绩！')
+//     return
+//   }
+//   const { data } = await editScoresApi(id,score)
+//   if(data.status===200){
+//     ElMessage.success(data.message)
+//     await loadData(state)
+//   }else {
+//     ElMessage.error(data.message)
+//   }
+//   loading.value = false
+// }
 
 // 删除成绩信息
 const delScores = async (id:number)=> {
@@ -327,28 +322,28 @@ const delScores = async (id:number)=> {
     ElMessage.error('删除失败')
   }
 }
-// 导出列表
-const column = [
-  {name: 'id',label: '成绩id'},
-  {name: 'stuno',label: '学号'},
-  {name: 'name',label: '学生姓名'},
-  {name: 'coursename',label: '学科'},
-  {name: 'score',label: '成绩'},
-  {name: 'type',label: '类型'}
-]
-const exportExcelAction = () => {
-  // 处理表格数据
-  const newTableData = state.tableData.flatMap((item: any)=> {
-    return {...item,...item.course,...item.student}
-  })
-  exportExcel({
-    column,
-    data:newTableData,
-    filename: '班级学科成绩数据',
-    format: 'xlsx',
-    autoWidth: true,
-  })
-}
+// // 导出列表
+// const column = [
+//   {name: 'id',label: '成绩id'},
+//   {name: 'stuno',label: '学号'},
+//   {name: 'name',label: '学生姓名'},
+//   {name: 'coursename',label: '学科'},
+//   {name: 'score',label: '成绩'},
+//   {name: 'type',label: '类型'}
+// ]
+// const exportExcelAction = () => {
+//   // 处理表格数据
+//   const newTableData = state.tableData.flatMap((item: any)=> {
+//     return {...item,...item.course,...item.student}
+//   })
+//   exportExcel({
+//     column,
+//     data:newTableData,
+//     filename: '班级学科成绩数据',
+//     format: 'xlsx',
+//     autoWidth: true,
+//   })
+// }
 
 //挂载后加载数据
 onMounted(() => {

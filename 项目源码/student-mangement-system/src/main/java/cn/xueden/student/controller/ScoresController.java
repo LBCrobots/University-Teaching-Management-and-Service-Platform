@@ -43,14 +43,14 @@ public class ScoresController {
     }
 
     /**
-     * 登记班级学科成绩
+     * 查询班级学科成绩
      * @param scoresModel
      * @return
      */
     @PostMapping
     public BaseResult registerScores(@RequestBody RegisterScoresModel scoresModel){
         scoresService.registerScores(scoresModel);
-        return BaseResult.success("登记成功");
+        return BaseResult.success("查询成功");
     }
 
     /**
