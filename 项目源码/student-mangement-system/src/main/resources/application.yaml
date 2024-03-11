@@ -2,11 +2,11 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: 123456
+    password: 114514
     url: jdbc:mysql://localhost:3306/xueden_student_mangement_system?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
     hikari:
       minimum-idle: 10
-      maximum-pool-size: 1000
+      maximum-pool-size: 10
       idle-timeout: 120000
       auto-commit: true
       max-lifetime: 1800000
@@ -25,8 +25,8 @@ spring:
   mail:
     host: smtp.qq.com
     port: 465
-    username: 2804684346@qq.com  # 修改
-    password: dcvnqakynwtkdghi  # 配置用户的密码（即上面我们申请到的授权码）
+    username: 379533177@qq.com
+    password: ryjxbuztvacacahj  # 配置用户的密码（即上面我们申请到的授权码）
     properties:
       mail:
         debug: true # 开启 debug，这样方便开发者查看邮件发送日志
@@ -35,7 +35,4 @@ spring:
             class: javax.net.ssl.SSLSocketFactory
 # 用户头像存放路径
 user:
-  icon: F:\JavaWeb\student-mangement-system
-
-server:
-  port: 7002
+  icon: E:\\student-mangement-system\\
