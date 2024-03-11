@@ -84,6 +84,15 @@ const state = reactive({
     code2: ''
   },
 })
+// 表单检查规则
+const toBindRules = reactive({
+  email:[
+    { required: true, message: '请输入邮箱', trigger: 'blur'},
+    { type: 'email',  message: '请输入正确的邮箱地址', trigger: ['blur', 'change']}
+  ],
+  code: [{ required: true, message: "请输入用户名", trigger: "blur" }],
+  code2: [{ required: true, message: "请输入用户名", trigger: "blur" }],
+})
 const { userInfo } = useUserStore()
 // 一个计算属性 将邮箱中间位置转为星号
 const userEmail = computed(() => {

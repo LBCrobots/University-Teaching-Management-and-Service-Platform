@@ -13,7 +13,7 @@
        <!--基本设置 start-->
         <div class="set">
           <h4>基础设置</h4>
-          <el-form ref="basicFormRef" :rules="basicRules" status-icon :model="basic">
+          <el-form ref="basicFormRef" :rules="basicRules" status-icon :model="basic" @submit.prevent>
             <el-row :gutter="20">
             <!--用户真实姓名-->
             <el-col :span="8">
