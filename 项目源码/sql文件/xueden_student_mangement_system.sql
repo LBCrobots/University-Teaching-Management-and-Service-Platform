@@ -11,7 +11,7 @@
  Target Server Version : 80032
  File Encoding         : 65001
 
- Date: 10/03/2024 16:25:14
+ Date: 11/03/2024 16:33:59
 */
 
 SET NAMES utf8mb4;
@@ -31,7 +31,7 @@ CREATE TABLE `s_course`  (
   `course_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `course_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '课程信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '课程信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of s_course
@@ -44,7 +44,7 @@ INSERT INTO `s_course` VALUES (5, 1, '2022-12-14 11:01:37.747000', '计算机组
 INSERT INTO `s_course` VALUES (6, 1, '2022-12-14 11:01:58.498000', '计算机网络原理', 1, '2022-12-14 11:01:58.498000', '计算机网络原理', 'c006');
 INSERT INTO `s_course` VALUES (7, 1, '2022-12-14 11:02:11.274000', '编译原理', 1, '2022-12-14 11:02:11.275000', '编译原理', 'c007');
 INSERT INTO `s_course` VALUES (8, 1, '2022-12-14 11:02:34.564000', '大学物理', 1, '2022-12-14 11:02:34.564000', '大学物理', 'c008');
-INSERT INTO `s_course` VALUES (9, 1, '2022-12-14 11:03:01.895000', 'JAVA程序员设计', 1, '2022-12-14 11:03:01.895000', 'JAVA程序员设计', 'c009');
+INSERT INTO `s_course` VALUES (9, 1, '2022-12-14 11:03:01.895000', 'JAVA程序员设计', 1, '2022-12-14 11:03:01.895000', 'JAVA程序设计', 'c009');
 INSERT INTO `s_course` VALUES (10, 1, '2022-12-14 11:04:31.361000', '数字逻辑设计', 1, '2022-12-14 11:04:31.361000', '数字逻辑设计', 'c010');
 INSERT INTO `s_course` VALUES (11, 1, '2022-12-14 11:04:53.763000', '数据结构与算法', 1, '2022-12-14 11:04:53.763000', '数据结构与算法', 'c011');
 INSERT INTO `s_course` VALUES (12, 1, '2022-12-14 11:05:08.130000', '软件工程', 1, '2022-12-14 11:05:08.130000', '软件工程', 'c012');
@@ -67,7 +67,7 @@ CREATE TABLE `s_grade_class`  (
   `grade` int NULL DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '班级信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '班级信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of s_grade_class
@@ -103,7 +103,7 @@ CREATE TABLE `s_student`  (
   INDEX `FKhqce64ggjxx3othwe3cu4hdsd`(`grade_class_id` ASC) USING BTREE,
   INDEX `uid`(`uid` ASC) USING BTREE,
   CONSTRAINT `s_student_ibfk_1` FOREIGN KEY (`grade_class_id`) REFERENCES `s_grade_class` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '学生信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '学生信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of s_student
@@ -217,7 +217,76 @@ INSERT INTO `s_student_score` VALUES (81, 1, '2022-12-22 05:15:18.617000', '初�
 INSERT INTO `s_student_score` VALUES (82, 1, '2024-03-08 05:40:09.106000', '初始成绩', 1, '2024-03-10 02:13:44.218000', 99, '已批改', 1, 7, 6);
 INSERT INTO `s_student_score` VALUES (83, 1, '2024-03-08 05:40:09.120000', '初始成绩', 1, '2024-03-08 05:47:21.707000', 90, '已批改', 1, 8, 6);
 INSERT INTO `s_student_score` VALUES (84, 1, '2024-03-08 05:47:37.502000', '初始成绩', 1, '2024-03-10 02:13:00.486000', 50, '已批改', 2, 11, 9);
-INSERT INTO `s_student_score` VALUES (85, 1, '2024-03-08 05:47:37.505000', '初始成绩', 1, '2024-03-10 03:08:28.067000', 99, '已批改', 2, 12, 9);
+INSERT INTO `s_student_score` VALUES (85, 1, '2024-03-08 05:47:37.505000', '初始成绩', 2, '2024-03-11 08:06:42.428000', 100, '已批改', 2, 12, 9);
+INSERT INTO `s_student_score` VALUES (86, 2, '2024-03-11 08:33:16.912000', '初始成绩', 2, '2024-03-11 08:33:16.913000', 0, '未批改', 2, 13, 1);
+INSERT INTO `s_student_score` VALUES (87, 2, '2024-03-11 08:33:16.918000', '初始成绩', 2, '2024-03-11 08:33:16.918000', 0, '未批改', 2, 14, 1);
+INSERT INTO `s_student_score` VALUES (88, 2, '2024-03-11 08:33:16.920000', '初始成绩', 2, '2024-03-11 08:33:16.921000', 0, '未批改', 2, 15, 1);
+INSERT INTO `s_student_score` VALUES (89, 2, '2024-03-11 08:33:16.923000', '初始成绩', 2, '2024-03-11 08:33:16.923000', 0, '未批改', 2, 16, 1);
+INSERT INTO `s_student_score` VALUES (90, 2, '2024-03-11 08:33:16.925000', '初始成绩', 2, '2024-03-11 08:33:16.925000', 0, '未批改', 2, 17, 1);
+INSERT INTO `s_student_score` VALUES (91, 2, '2024-03-11 08:33:16.927000', '初始成绩', 2, '2024-03-11 08:33:16.927000', 0, '未批改', 2, 18, 1);
+INSERT INTO `s_student_score` VALUES (92, 2, '2024-03-11 08:33:16.930000', '初始成绩', 2, '2024-03-11 08:33:16.930000', 0, '未批改', 2, 19, 1);
+INSERT INTO `s_student_score` VALUES (93, 2, '2024-03-11 08:33:16.933000', '初始成绩', 2, '2024-03-11 08:33:16.933000', 0, '未批改', 2, 20, 1);
+INSERT INTO `s_student_score` VALUES (94, 2, '2024-03-11 08:33:19.007000', '初始成绩', 2, '2024-03-11 08:33:19.007000', 0, '未批改', 4, 18, 1);
+INSERT INTO `s_student_score` VALUES (95, 2, '2024-03-11 08:33:23.090000', '初始成绩', 2, '2024-03-11 08:33:23.090000', 0, '未批改', 5, 1, 1);
+INSERT INTO `s_student_score` VALUES (96, 2, '2024-03-11 08:33:23.092000', '初始成绩', 2, '2024-03-11 08:33:23.092000', 0, '未批改', 5, 4, 1);
+INSERT INTO `s_student_score` VALUES (97, 2, '2024-03-11 08:33:23.095000', '初始成绩', 2, '2024-03-11 08:33:23.095000', 0, '未批改', 5, 13, 1);
+INSERT INTO `s_student_score` VALUES (98, 2, '2024-03-11 08:33:23.098000', '初始成绩', 2, '2024-03-11 08:33:23.098000', 0, '未批改', 5, 14, 1);
+INSERT INTO `s_student_score` VALUES (99, 2, '2024-03-11 08:33:23.101000', '初始成绩', 2, '2024-03-11 08:33:23.101000', 0, '未批改', 5, 15, 1);
+INSERT INTO `s_student_score` VALUES (100, 2, '2024-03-11 08:33:23.103000', '初始成绩', 2, '2024-03-11 08:33:23.103000', 0, '未批改', 5, 16, 1);
+INSERT INTO `s_student_score` VALUES (101, 2, '2024-03-11 08:33:23.105000', '初始成绩', 2, '2024-03-11 08:33:23.105000', 0, '未批改', 5, 17, 1);
+INSERT INTO `s_student_score` VALUES (102, 2, '2024-03-11 08:33:23.107000', '初始成绩', 2, '2024-03-11 08:33:23.107000', 0, '未批改', 5, 18, 1);
+INSERT INTO `s_student_score` VALUES (103, 2, '2024-03-11 08:33:23.109000', '初始成绩', 2, '2024-03-11 08:33:23.109000', 0, '未批改', 5, 19, 1);
+INSERT INTO `s_student_score` VALUES (104, 2, '2024-03-11 08:33:23.112000', '初始成绩', 2, '2024-03-11 08:33:23.112000', 0, '未批改', 5, 20, 1);
+INSERT INTO `s_student_score` VALUES (105, 2, '2024-03-11 08:33:25.464000', '初始成绩', 2, '2024-03-11 08:33:25.464000', 0, '未批改', 6, 1, 1);
+INSERT INTO `s_student_score` VALUES (106, 2, '2024-03-11 08:33:25.466000', '初始成绩', 2, '2024-03-11 08:33:25.467000', 0, '未批改', 6, 4, 1);
+INSERT INTO `s_student_score` VALUES (107, 2, '2024-03-11 08:33:25.469000', '初始成绩', 2, '2024-03-11 08:33:25.469000', 0, '未批改', 6, 13, 1);
+INSERT INTO `s_student_score` VALUES (108, 2, '2024-03-11 08:33:25.471000', '初始成绩', 2, '2024-03-11 08:33:25.471000', 0, '未批改', 6, 14, 1);
+INSERT INTO `s_student_score` VALUES (109, 2, '2024-03-11 08:33:25.474000', '初始成绩', 2, '2024-03-11 08:33:25.474000', 0, '未批改', 6, 15, 1);
+INSERT INTO `s_student_score` VALUES (110, 2, '2024-03-11 08:33:25.476000', '初始成绩', 2, '2024-03-11 08:33:25.476000', 0, '未批改', 6, 16, 1);
+INSERT INTO `s_student_score` VALUES (111, 2, '2024-03-11 08:33:25.478000', '初始成绩', 2, '2024-03-11 08:33:25.478000', 0, '未批改', 6, 17, 1);
+INSERT INTO `s_student_score` VALUES (112, 2, '2024-03-11 08:33:25.481000', '初始成绩', 2, '2024-03-11 08:33:25.481000', 0, '未批改', 6, 18, 1);
+INSERT INTO `s_student_score` VALUES (113, 2, '2024-03-11 08:33:25.483000', '初始成绩', 2, '2024-03-11 08:33:25.483000', 0, '未批改', 6, 19, 1);
+INSERT INTO `s_student_score` VALUES (114, 2, '2024-03-11 08:33:25.484000', '初始成绩', 2, '2024-03-11 08:33:25.484000', 0, '未批改', 6, 20, 1);
+INSERT INTO `s_student_score` VALUES (115, 2, '2024-03-11 08:33:29.256000', '初始成绩', 2, '2024-03-11 08:33:29.256000', 0, '未批改', 7, 1, 1);
+INSERT INTO `s_student_score` VALUES (116, 2, '2024-03-11 08:33:29.257000', '初始成绩', 2, '2024-03-11 08:33:29.258000', 0, '未批改', 7, 4, 1);
+INSERT INTO `s_student_score` VALUES (117, 2, '2024-03-11 08:33:29.259000', '初始成绩', 2, '2024-03-11 08:33:29.259000', 0, '未批改', 7, 13, 1);
+INSERT INTO `s_student_score` VALUES (118, 2, '2024-03-11 08:33:29.261000', '初始成绩', 2, '2024-03-11 08:33:29.261000', 0, '未批改', 7, 14, 1);
+INSERT INTO `s_student_score` VALUES (119, 2, '2024-03-11 08:33:29.264000', '初始成绩', 2, '2024-03-11 08:33:29.264000', 0, '未批改', 7, 15, 1);
+INSERT INTO `s_student_score` VALUES (120, 2, '2024-03-11 08:33:29.266000', '初始成绩', 2, '2024-03-11 08:33:29.266000', 0, '未批改', 7, 16, 1);
+INSERT INTO `s_student_score` VALUES (121, 2, '2024-03-11 08:33:29.268000', '初始成绩', 2, '2024-03-11 08:33:29.268000', 0, '未批改', 7, 17, 1);
+INSERT INTO `s_student_score` VALUES (122, 2, '2024-03-11 08:33:29.270000', '初始成绩', 2, '2024-03-11 08:33:29.270000', 0, '未批改', 7, 18, 1);
+INSERT INTO `s_student_score` VALUES (123, 2, '2024-03-11 08:33:29.271000', '初始成绩', 2, '2024-03-11 08:33:29.271000', 0, '未批改', 7, 19, 1);
+INSERT INTO `s_student_score` VALUES (124, 2, '2024-03-11 08:33:29.273000', '初始成绩', 2, '2024-03-11 08:33:29.273000', 0, '未批改', 7, 20, 1);
+INSERT INTO `s_student_score` VALUES (125, 2, '2024-03-11 08:33:31.485000', '初始成绩', 2, '2024-03-11 08:33:31.485000', 0, '未批改', 8, 1, 1);
+INSERT INTO `s_student_score` VALUES (126, 2, '2024-03-11 08:33:31.488000', '初始成绩', 2, '2024-03-11 08:33:31.488000', 0, '未批改', 8, 4, 1);
+INSERT INTO `s_student_score` VALUES (127, 2, '2024-03-11 08:33:31.490000', '初始成绩', 2, '2024-03-11 08:33:31.490000', 0, '未批改', 8, 13, 1);
+INSERT INTO `s_student_score` VALUES (128, 2, '2024-03-11 08:33:31.492000', '初始成绩', 2, '2024-03-11 08:33:31.492000', 0, '未批改', 8, 14, 1);
+INSERT INTO `s_student_score` VALUES (129, 2, '2024-03-11 08:33:31.493000', '初始成绩', 2, '2024-03-11 08:33:31.493000', 0, '未批改', 8, 15, 1);
+INSERT INTO `s_student_score` VALUES (130, 2, '2024-03-11 08:33:31.495000', '初始成绩', 2, '2024-03-11 08:33:31.495000', 0, '未批改', 8, 16, 1);
+INSERT INTO `s_student_score` VALUES (131, 2, '2024-03-11 08:33:31.497000', '初始成绩', 2, '2024-03-11 08:33:31.497000', 0, '未批改', 8, 17, 1);
+INSERT INTO `s_student_score` VALUES (132, 2, '2024-03-11 08:33:31.499000', '初始成绩', 2, '2024-03-11 08:33:31.499000', 0, '未批改', 8, 18, 1);
+INSERT INTO `s_student_score` VALUES (133, 2, '2024-03-11 08:33:31.501000', '初始成绩', 2, '2024-03-11 08:33:31.501000', 0, '未批改', 8, 19, 1);
+INSERT INTO `s_student_score` VALUES (134, 2, '2024-03-11 08:33:31.502000', '初始成绩', 2, '2024-03-11 08:33:31.502000', 0, '未批改', 8, 20, 1);
+INSERT INTO `s_student_score` VALUES (135, 2, '2024-03-11 08:33:34.471000', '初始成绩', 2, '2024-03-11 08:33:34.471000', 0, '未批改', 9, 1, 1);
+INSERT INTO `s_student_score` VALUES (136, 2, '2024-03-11 08:33:34.473000', '初始成绩', 2, '2024-03-11 08:33:34.473000', 0, '未批改', 9, 4, 1);
+INSERT INTO `s_student_score` VALUES (137, 2, '2024-03-11 08:33:34.474000', '初始成绩', 2, '2024-03-11 08:33:34.474000', 0, '未批改', 9, 13, 1);
+INSERT INTO `s_student_score` VALUES (138, 2, '2024-03-11 08:33:34.476000', '初始成绩', 2, '2024-03-11 08:33:34.476000', 0, '未批改', 9, 14, 1);
+INSERT INTO `s_student_score` VALUES (139, 2, '2024-03-11 08:33:34.477000', '初始成绩', 2, '2024-03-11 08:33:34.477000', 0, '未批改', 9, 15, 1);
+INSERT INTO `s_student_score` VALUES (140, 2, '2024-03-11 08:33:34.479000', '初始成绩', 2, '2024-03-11 08:33:34.479000', 0, '未批改', 9, 16, 1);
+INSERT INTO `s_student_score` VALUES (141, 2, '2024-03-11 08:33:34.482000', '初始成绩', 2, '2024-03-11 08:33:34.482000', 0, '未批改', 9, 17, 1);
+INSERT INTO `s_student_score` VALUES (142, 2, '2024-03-11 08:33:34.484000', '初始成绩', 2, '2024-03-11 08:33:34.484000', 0, '未批改', 9, 18, 1);
+INSERT INTO `s_student_score` VALUES (143, 2, '2024-03-11 08:33:34.486000', '初始成绩', 2, '2024-03-11 08:33:34.487000', 0, '未批改', 9, 19, 1);
+INSERT INTO `s_student_score` VALUES (144, 2, '2024-03-11 08:33:34.488000', '初始成绩', 2, '2024-03-11 08:33:34.488000', 0, '未批改', 9, 20, 1);
+INSERT INTO `s_student_score` VALUES (145, 2, '2024-03-11 08:33:38.256000', '初始成绩', 2, '2024-03-11 08:33:38.256000', 0, '未批改', 10, 1, 1);
+INSERT INTO `s_student_score` VALUES (146, 2, '2024-03-11 08:33:38.258000', '初始成绩', 2, '2024-03-11 08:33:38.258000', 0, '未批改', 10, 4, 1);
+INSERT INTO `s_student_score` VALUES (147, 2, '2024-03-11 08:33:38.260000', '初始成绩', 2, '2024-03-11 08:33:38.260000', 0, '未批改', 10, 13, 1);
+INSERT INTO `s_student_score` VALUES (148, 2, '2024-03-11 08:33:38.262000', '初始成绩', 2, '2024-03-11 08:33:38.262000', 0, '未批改', 10, 14, 1);
+INSERT INTO `s_student_score` VALUES (149, 2, '2024-03-11 08:33:38.265000', '初始成绩', 2, '2024-03-11 08:33:38.265000', 0, '未批改', 10, 15, 1);
+INSERT INTO `s_student_score` VALUES (150, 2, '2024-03-11 08:33:38.267000', '初始成绩', 2, '2024-03-11 08:33:38.267000', 0, '未批改', 10, 16, 1);
+INSERT INTO `s_student_score` VALUES (151, 2, '2024-03-11 08:33:38.268000', '初始成绩', 2, '2024-03-11 08:33:38.268000', 0, '未批改', 10, 17, 1);
+INSERT INTO `s_student_score` VALUES (152, 2, '2024-03-11 08:33:38.269000', '初始成绩', 2, '2024-03-11 08:33:38.269000', 0, '未批改', 10, 18, 1);
+INSERT INTO `s_student_score` VALUES (153, 2, '2024-03-11 08:33:38.271000', '初始成绩', 2, '2024-03-11 08:33:38.271000', 0, '未批改', 10, 19, 1);
+INSERT INTO `s_student_score` VALUES (154, 2, '2024-03-11 08:33:38.273000', '初始成绩', 2, '2024-03-11 08:33:38.273000', 0, '未批改', 10, 20, 1);
 
 -- ----------------------------
 -- Table structure for s_teacher
@@ -240,7 +309,7 @@ CREATE TABLE `s_teacher`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `FKgpacv4uc6gmdaridy3afaf5co`(`course_id` ASC) USING BTREE,
   CONSTRAINT `s_teacher_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `s_course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '教师信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '教师信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of s_teacher
@@ -252,7 +321,9 @@ INSERT INTO `s_teacher` VALUES (4, 1, '2022-12-16 12:21:57.329000', '乱星海�
 INSERT INTO `s_teacher` VALUES (5, 1, '2022-12-16 12:22:55.723000', '弥罗老祖是仙界真言门覆灭前最后一任宗主，修炼时间法则至大罗后期，坐下有五大亲传弟子；', 1, '2022-12-16 12:22:55.723000', '弥罗老祖', '13800138005', '11184629', '男', 't005', 5, 0);
 INSERT INTO `s_teacher` VALUES (6, 1, '2022-12-16 12:25:14.578000', '本体是只黄金巨蟹，前世为魔域魔君石空解。自以为前主人未知原因陨落、自己掉落魔界魔源海苦灵岛附近百万余年，隐秘收集仙灵力修复自身。', 1, '2022-12-16 12:25:14.578000', '蟹道人', '13800138006', '11184629', '男', 't006', 6, 0);
 INSERT INTO `s_teacher` VALUES (8, 1, '2022-12-16 12:27:26.298000', '天才人物，千竹教教主，自创《大衍决》、《傀儡术》。万年前自知无望突破化神，把元神寄付傀儡之上存于世间。', 1, '2024-03-08 03:47:33.295000', '大衍神君', '13800138008', '11184629', '男', 't008', 8, 0);
-INSERT INTO `s_teacher` VALUES (9, 2, '2024-03-10 06:39:00.544000', 'momo是线代老师', 1, '2024-03-10 06:39:00.544000', 'momo', '123456', '123456', '女', 't009', 1, 2);
+INSERT INTO `s_teacher` VALUES (9, 2, '2024-03-10 06:39:00.544000', 'momo是线代老师呀', 2, '2024-03-11 07:10:12.842000', 'momo', '123456', '123456', '女', 't009', 1, 2);
+INSERT INTO `s_teacher` VALUES (15, 2, '2024-03-11 07:54:39.288000', 'momo又教高数捏', 2, '2024-03-11 07:54:39.288000', 'momo', '123456', '123456', '女', 't009', 2, 2);
+INSERT INTO `s_teacher` VALUES (16, 2, '2024-03-11 08:29:20.393000', '', 2, '2024-03-11 08:29:20.394000', 'momo', '1', '1', '女', 't008', 4, 2);
 
 -- ----------------------------
 -- Table structure for sys_role

@@ -125,12 +125,12 @@
         <el-table-column label="操作">
           <template #default="scope">
             <el-popconfirm confirm-button-text="确定" cancel-button-text="取消" :icon="Delete"
-                           icon-color="#626AEF" :title="'确定删除学生名为“'+scope.row.student.name+'”的成绩吗？'"
-                           @confirm="delScores(scope.row.id)">
-              <template #reference>
-                <el-button size="small" type="danger" style="margin-bottom: 10px;">删除</el-button>
-              </template>
-            </el-popconfirm>
+               icon-color="#626AEF" :title="'确定删除学生名为“'+scope.row.student.name+'”的成绩吗？'"
+               @confirm="delScores(scope.row.id)">
+          <template #reference>
+            <el-button size="small" type="danger" style="margin-bottom: 10px;" :disabled="userInfo.id !== 1" class="no-cursor">删除</el-button>
+          </template>
+        </el-popconfirm>
           </template>
         </el-table-column>
 
@@ -155,6 +155,8 @@ import {deleteScoresApi, editScoresApi, getScoresListApi, registerScoresApi} fro
 import { formatTime } from "../../utils/date"
 import {ElMessage} from 'element-plus'
 import {exportExcel} from "../../utils/exprotExcel";
+import { useUserStore } from '../../store/modules/user'
+const { userInfo } = useUserStore()
 // 定义班级ID
 const gradeClassId = ref(null)
 const gradeClassOptions = ref<object[]>([])
@@ -401,6 +403,10 @@ const {tableData,pageIndex,pageSize,loading,total,name,stuno} = toRefs(state)
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+}
+
+.no-cursor {
+  cursor: default !important;
 }
 
 /*修改v-loading样式*/
