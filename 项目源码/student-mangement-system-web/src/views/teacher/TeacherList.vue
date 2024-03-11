@@ -151,8 +151,9 @@ import { formatTime } from "../../utils/date"
 import {ElMessage} from 'element-plus'
 import AddTeacher from "./components/AddTeacher.vue"
 import EditTeacher from "./components/EditTeacher.vue"
+import { useUserStore } from '../../store/modules/user'
 import {exportExcel} from "../../utils/exprotExcel";
-// const { userInfo } = useUserStore()
+const { userInfo } = useUserStore()
 const state = reactive({
   // 搜索表单内容
   searchValue: "",
@@ -174,8 +175,16 @@ const loadData = async (state: any)=> {
     'searchValue': state.searchValue
   }
   const { data } = await getTeacherListApi(params)
-  state.tableData = data.content
-  state.total = data.totalElements
+
+  if(userInfo.role.name === '系统管理员'){
+    state.tableData = data.content
+    state.total = data.totalElements
+  }
+  else {
+    state.tableData = data.content.filter((item: { uid: any }) => item.uid === userInfo.id.toString())
+    state.total = data.content.filter((item: { uid: any }) => item.uid === userInfo.id.toString()).length
+  }
+
   state.loading = false
 }
 const Nindex = (index) => {
