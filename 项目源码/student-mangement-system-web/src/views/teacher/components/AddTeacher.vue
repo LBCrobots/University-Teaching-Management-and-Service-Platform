@@ -2,7 +2,7 @@
   <el-form ref="ruleFormRef" :rules="rules"  :model="formTeacher"  label-width="80px">
     <el-row>
       <el-col :span="12">
-        <el-form-item prop="gradeClass" label="教授科目">
+        <el-form-item prop="course" label="教授科目">
           <el-select v-model="formTeacher.course.id" placeholder="请选择科目" style="width: 100%;">
             <el-option v-for="item in courseOptions" :key="item.id" :label="item.name" :value="item.id" />
           </el-select>
@@ -15,12 +15,12 @@
       </el-col>
       <el-col :span="12">
         <el-form-item label="教师姓名" prop="name">
-          <el-input v-model="formTeacher.name" placeholder="请输入教师姓名" />
+          <el-input v-model="formTeacher.name" :readonly="userInfo.id !== 1" placeholder="请输入教师姓名" />
         </el-form-item>
       </el-col>
       <el-col :span="12">
         <el-form-item label="性别" prop="sex">
-          <el-input v-model="formTeacher.sex" placeholder="请输入性别" />
+          <el-input v-model="formTeacher.sex" :readonly="userInfo.id !== 1" placeholder="请输入性别" />
         </el-form-item>
       </el-col>
       <el-col :span="12">
@@ -57,12 +57,14 @@ import {ref, reactive} from 'vue'
 import {ElMessage} from 'element-plus'
 import {addTeacherApi, getAllCourseListApi} from "../../../api/teacher/teacher";
 import type { FormInstance, FormRules } from 'element-plus'
+import { useUserStore } from '../../../store/modules/user'
+const { userInfo } = useUserStore()
 const ruleFormRef = ref<FormInstance>()
 const subLoading = ref(false)
 const formTeacher = reactive({
-  name: '',
+  name: userInfo.username,
   teachno: '',
-  sex: '',
+  sex: userInfo.sex,
   phone: '',
   course: {
     id: ''
@@ -71,7 +73,7 @@ const formTeacher = reactive({
   remarks: ''
 })
 // 定义表单约束规则对象
-const rules = reactive<FormRules>({
+const rules = reactive<FormRules>({  
   name: [{ required: true, message: '教师姓名不能为空', trigger: 'blur' }],
   sex: [{ required: true, message: '性别不能为空', trigger: 'blur' }],
   phone: [{ required: true, message: '手机号不能为空', trigger: 'blur' }],

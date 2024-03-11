@@ -11,7 +11,7 @@
  Target Server Version : 80032
  File Encoding         : 65001
 
- Date: 10/03/2024 16:25:14
+ Date: 11/03/2024 14:37:27
 */
 
 SET NAMES utf8mb4;
@@ -31,7 +31,7 @@ CREATE TABLE `s_course`  (
   `course_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `course_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '课程信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '课程信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of s_course
@@ -67,7 +67,7 @@ CREATE TABLE `s_grade_class`  (
   `grade` int NULL DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '班级信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '班级信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of s_grade_class
@@ -103,7 +103,7 @@ CREATE TABLE `s_student`  (
   INDEX `FKhqce64ggjxx3othwe3cu4hdsd`(`grade_class_id` ASC) USING BTREE,
   INDEX `uid`(`uid` ASC) USING BTREE,
   CONSTRAINT `s_student_ibfk_1` FOREIGN KEY (`grade_class_id`) REFERENCES `s_grade_class` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '学生信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '学生信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of s_student
@@ -240,7 +240,7 @@ CREATE TABLE `s_teacher`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `FKgpacv4uc6gmdaridy3afaf5co`(`course_id` ASC) USING BTREE,
   CONSTRAINT `s_teacher_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `s_course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '教师信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '教师信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of s_teacher
@@ -252,7 +252,7 @@ INSERT INTO `s_teacher` VALUES (4, 1, '2022-12-16 12:21:57.329000', '乱星海�
 INSERT INTO `s_teacher` VALUES (5, 1, '2022-12-16 12:22:55.723000', '弥罗老祖是仙界真言门覆灭前最后一任宗主，修炼时间法则至大罗后期，坐下有五大亲传弟子；', 1, '2022-12-16 12:22:55.723000', '弥罗老祖', '13800138005', '11184629', '男', 't005', 5, 0);
 INSERT INTO `s_teacher` VALUES (6, 1, '2022-12-16 12:25:14.578000', '本体是只黄金巨蟹，前世为魔域魔君石空解。自以为前主人未知原因陨落、自己掉落魔界魔源海苦灵岛附近百万余年，隐秘收集仙灵力修复自身。', 1, '2022-12-16 12:25:14.578000', '蟹道人', '13800138006', '11184629', '男', 't006', 6, 0);
 INSERT INTO `s_teacher` VALUES (8, 1, '2022-12-16 12:27:26.298000', '天才人物，千竹教教主，自创《大衍决》、《傀儡术》。万年前自知无望突破化神，把元神寄付傀儡之上存于世间。', 1, '2024-03-08 03:47:33.295000', '大衍神君', '13800138008', '11184629', '男', 't008', 8, 0);
-INSERT INTO `s_teacher` VALUES (9, 2, '2024-03-10 06:39:00.544000', 'momo是线代老师', 1, '2024-03-10 06:39:00.544000', 'momo', '123456', '123456', '女', 't009', 1, 2);
+INSERT INTO `s_teacher` VALUES (9, 2, '2024-03-10 06:39:00.544000', 'momo是线代老师呀', 2, '2024-03-11 03:44:41.526000', 'momo', '123456', '123456', '女', 't009', 1, 2);
 
 -- ----------------------------
 -- Table structure for sys_role
