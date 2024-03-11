@@ -43,6 +43,7 @@ public class LoginController {
         resultMap.put("userIcon",dbSysUser.getUserIcon());
         resultMap.put("createTime",dbSysUser.getCreateTime());
         resultMap.put("role",dbSysUser.getSysRole());
+        resultMap.put("id",dbSysUser.getId());
         return BaseResult.success("登录成功",resultMap);
     }
 

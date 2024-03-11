@@ -64,6 +64,7 @@
   import { useRouter } from 'vue-router'
   import { loginApi } from '../../../api/login/login'
   import { useUserStore } from '../../../store/modules/user'
+import { id } from 'element-plus/es/locale';
   const router = useRouter()
   const ruleFormRef = ref<FormInstance>()
   const passwordType = ref('password')
@@ -111,7 +112,8 @@
               sex: data.result.sex,
               userIcon: data.result.userIcon,
               createTime: data.result.createTime,
-              role: data.result.role
+              role: data.result.role,
+              id: data.result.id
             })
             await router.push({
               path: '/index',
