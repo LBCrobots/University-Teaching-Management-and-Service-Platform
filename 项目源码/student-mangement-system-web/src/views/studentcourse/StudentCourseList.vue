@@ -126,12 +126,13 @@
         <el-table-column label="操作">
           <template #default="scope">
             <el-popconfirm confirm-button-text="确定" cancel-button-text="取消" :icon="Delete"
-                           icon-color="#626AEF" :title="'确定删除学生名为“'+scope.row.student.name+'”的课程吗？'"
-                           @confirm="delScores(scope.row.id)">
+               icon-color="#626AEF" :title="'确定删除学生名为“'+scope.row.student.name+'”的课程吗？'"
+               @confirm="delScores(scope.row.id)">
               <template #reference>
-                <el-button size="small" type="danger" style="margin-bottom: 10px;">删除</el-button>
+                <el-button size="small" type="danger" style="margin-bottom: 10px;" :disabled="scope.row.type === '已批改'" class="no-cursor">删除</el-button>
               </template>
             </el-popconfirm>
+
           </template>
         </el-table-column>
 
@@ -418,6 +419,10 @@ const {tableData,pageIndex,pageSize,loading,total,name,stuno} = toRefs(state)
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+}
+
+.no-cursor {
+  cursor: default !important;
 }
 
 /*修改v-loading样式*/
