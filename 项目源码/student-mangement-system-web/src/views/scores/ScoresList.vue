@@ -21,7 +21,8 @@
             </el-select>
             </el-col>
             <el-col :span="6">
-              <el-button plain  color="#0554af" @click="registerScores">查询成绩</el-button>
+              <el-button plain color="#0554af" v-if="userInfo.role.id !== 1" @click="searchScores">查询成绩</el-button>
+              <el-button plain color="#0554af" v-else @click="registerScores">批量选课</el-button>
               <el-button plain @click="exportExcelAction" type="primary">
                 <el-icon style="margin-right: 1px"><Download /></el-icon>导出 Excel
               </el-button>
@@ -128,7 +129,7 @@
                icon-color="#626AEF" :title="'确定删除学生名为“'+scope.row.student.name+'”的成绩吗？'"
                @confirm="delScores(scope.row.id)">
           <template #reference>
-            <el-button size="small" type="danger" style="margin-bottom: 10px;" :disabled="userInfo.id !== 1" class="no-cursor">删除</el-button>
+            <el-button size="small" type="danger" style="margin-bottom: 10px;" :disabled="userInfo.role.id !== 1" class="no-cursor">删除</el-button>
           </template>
         </el-popconfirm>
           </template>
@@ -151,12 +152,13 @@ import { ref, reactive,toRefs, onMounted  } from 'vue'
 // 定义班级下拉选择项
 import {gradeClassListApi} from "../../api/student/student";
 import {getAllCourseListApi} from "../../api/teacher/teacher";
-import {deleteScoresApi, editScoresApi, getScoresListApi, registerScoresApi} from "../../api/scores/scores";
+import {deleteScoresApi, editScoresApi, getScoresListApi, registerScoresApi, getScoresApi} from "../../api/scores/scores";
 import { formatTime } from "../../utils/date"
 import {ElMessage} from 'element-plus'
 import {exportExcel} from "../../utils/exprotExcel";
 import { useUserStore } from '../../store/modules/user'
 const { userInfo } = useUserStore()
+console.log(userInfo)
 // 定义班级ID
 const gradeClassId = ref(null)
 const gradeClassOptions = ref<object[]>([])
@@ -262,7 +264,7 @@ const changePage = (val) => {
   loadData(state)
 }
 
-// 查询班级学科成绩
+// 批量选课
 const registerScores = async () => {
   if(gradeClassId.value < 1){
     ElMessage.success('请选择班级')
@@ -281,6 +283,19 @@ const registerScores = async () => {
     ElMessage.error(data.message)
   }
 
+}
+
+//查询成绩
+const searchScores = async () => {
+  if(gradeClassId.value < 1){
+    ElMessage.success('请选择班级')
+    return false
+  }
+  if(courseId.value < 1){
+    ElMessage.success('请选择学科')
+    return false
+  }
+  await loadData(state)
 }
 
 // 定义单元格是否可编辑
