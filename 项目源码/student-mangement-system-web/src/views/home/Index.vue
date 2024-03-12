@@ -88,7 +88,7 @@ const studentNums = ref(0)
 const classNums = ref(0)
 const teacherNums = ref(0)
 const courseNums = ref(0)
-const legendData = ref(['总人数','平均成绩', '最高成绩', '最低成绩'])
+const legendData = ref(['平均成绩', '最高成绩', '最低成绩', '总人数'])
 const seriesData = ref([])
 const categoryData = ref([])
 
@@ -131,26 +131,26 @@ onMounted(() => {
 }
 
 .top_bg h1 {
-  font-size: 60px;
+  font-size: calc(12px + 3vw);
   padding-top: 50px;
 }
 
 .top_bg p {
   font-weight: bold;
-  font-size: 18px;
+  font-size: calc(14px + .25vw);
 }
 
 .data_row{
-  height: 100px;
-  margin-bottom: 20px;
   margin-left: 10px;
   margin-right: 10px;
   overflow: hidden;
 }
 
 .data_row .el-col{
+  height: 100px;
   padding-left: 10px;
   padding-right: 10px;
+  margin-bottom: 20px;
 }
 
 .el-col>div {

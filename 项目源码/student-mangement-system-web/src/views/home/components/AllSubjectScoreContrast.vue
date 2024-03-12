@@ -5,7 +5,7 @@
 <script lang="ts" setup >
 import * as echarts from 'echarts'
 import { EChartsType } from 'echarts/core'
-import { onMounted,watch } from 'vue'
+import { onMounted,watch, ref, Ref } from 'vue'
 import westeros from '../../../assets/subjects/westeros.json';
 let props = defineProps({
   legendData: {
@@ -76,19 +76,27 @@ const options = {
   series: props.seriesData,
 }
 let chart: EChartsType
+let chartElement: Ref<HTMLElement | null> = ref(null)
+
 const initChart = () => {
-  echarts.registerTheme('westeros', westeros)
-  let chart = echarts.init(document.getElementById(props.id), 'westeros');
-  chart.setOption(options)
-  return chart
+  let element = chartElement.value
+  if(element){
+    echarts.registerTheme('westeros', westeros)
+    let newChart = echarts.init(element, 'westeros');
+    newChart.setOption(options)
+    if (newChart != undefined) return newChart
+  }
 }
+
 watch([()=>props.categoryData, () => props.seriesData], ([newCategoryData, newSeriesData]) => {
-  console.log(`x is ${newCategoryData} and y is `,newSeriesData)
+  console.log(`[eChart] x is ${newCategoryData} and y is `,newSeriesData)
   options.series = newSeriesData
   options.xAxis.data = newCategoryData
-  initChart()
+  chart.setOption(options) // update options data
 })
 onMounted(() => {
+  console.log('onMounted')
+  chartElement.value = document.getElementById(props.id)
   chart = initChart()
   window.addEventListener('resize', function () {
     chart && chart.resize()
