@@ -21,7 +21,7 @@
             </el-select>
             </el-col>
             <el-col :span="5">
-              <el-button plain  color="#0554af" v-if="userInfo.role.id !== 1" @click="addSubjects">添加课程</el-button>
+              <el-button plain color="#0554af" v-if="userInfo.role.id !== 1" @click="addSubjects">添加课程</el-button>
               <el-button plain color="#0554af" v-else @click="searchScores">查询选课</el-button>
               <!-- <el-button plain @click="exportExcelAction" type="primary">
                 <el-icon style="margin-right: 1px"><Download /></el-icon>导出 Excel
@@ -156,7 +156,9 @@ import {deleteScoresApi, editScoresApi, getScoresListApi, addSubjectsApi} from "
 import { formatTime } from "../../utils/date"
 import {ElMessage} from 'element-plus'
 import { useUserStore } from '../../store/modules/user'
+import { useUserNoStore } from "../../store/modules/userno";
 const { userInfo } = useUserStore()
+const userNoStore = useUserNoStore()
 // 定义班级ID
 const gradeClassId = ref(null)
 const gradeClassOptions = ref<object[]>([])
@@ -214,8 +216,17 @@ const loadData = async (state: any)=> {
     'gradeClassId': gradeClassId.value
   }
   const { data } = await getScoresListApi(params)
-  state.tableData = data.content
-  state.total = data.totalElements
+
+  if(userInfo.role.name === '系统管理员'){
+    state.tableData = data.content
+    state.total = data.totalElements
+  }
+  else {
+    state.tableData = data.content.filter((item: { uid: any }) => item.student.uid === userInfo.id.toString())
+    state.total = data.content.filter((item: { uid: any }) => item.student.uid === userInfo.id.toString()).length
+    // userNoStore.setStuno(state.tableData[0])
+    console.log(state.tableData[0])
+  }
   state.loading = false
 
 }
@@ -262,7 +273,7 @@ const changePage = (val) => {
   loadData(state)
 }
 
-// 添加课程
+//TODO 添加课程
 const addSubjects = async () => {
   if(courseId.value < 1){
     ElMessage.success('请选择学科')
