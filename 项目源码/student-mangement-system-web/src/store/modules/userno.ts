@@ -1,21 +1,17 @@
-import {defineStore} from 'pinia'
+import { defineStore } from 'pinia'
+
 export const useUserNoStore = defineStore({
-    id:'userNoStore',
-    state: ()=>{
-        return {
-            token: '',
-            userInfo:{},
-            roles:[]
-        }
-    },
-    getters: {},
-    actions:{
-        setToken(token:string){
-            this.token = token;
+    id: 'userNoStore',
+        state: () => ({
+        teachno: '',
+        stuno: ''
+    }),
+    actions: {
+        setTeachno(teachno) {
+            this.teachno = teachno
         },
-        setUserInfo(userInfo:any){
-            this.userInfo = userInfo
+        setStuno(stuno) {
+            this.stuno = stuno
         }
-    },
-    persist: true
+    }
 })

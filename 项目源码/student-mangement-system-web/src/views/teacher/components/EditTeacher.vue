@@ -58,11 +58,12 @@ import {ElMessage} from 'element-plus'
 import {editTeacherApi, getAllCourseListApi} from "../../../api/teacher/teacher"
 import type { FormInstance, FormRules } from 'element-plus'
 import { useUserStore } from '../../../store/modules/user'
+import { use } from 'echarts'
 const { userInfo } = useUserStore()
 const ruleFormRef = ref<FormInstance>()
 const subLoading = ref(false)
 const formTeacher = reactive({
-  id: 0,
+  id: '',
   name: '',
   teachno: '',
   sex: '',

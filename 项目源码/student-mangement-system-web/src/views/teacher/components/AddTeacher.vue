@@ -10,7 +10,7 @@
       </el-col>
       <el-col :span="12">
         <el-form-item label="教师工号" prop="teachno">
-          <el-input v-model="formTeacher.teachno" placeholder="请输入教师工号" />
+          <el-input v-model="formTeacher.teachno" :readonly="userInfo.role.id !== 1" placeholder="请输入教师工号" />
         </el-form-item>
       </el-col>
       <el-col :span="12">
@@ -58,12 +58,14 @@ import {ElMessage} from 'element-plus'
 import {addTeacherApi, getAllCourseListApi} from "../../../api/teacher/teacher";
 import type { FormInstance, FormRules } from 'element-plus'
 import { useUserStore } from '../../../store/modules/user'
+import { useUserNoStore } from "../../../store/modules/userno";
+const userNoStore = useUserNoStore()
 const { userInfo } = useUserStore()
 const ruleFormRef = ref<FormInstance>()
 const subLoading = ref(false)
 const formTeacher = reactive({
   name: userInfo.username,
-  teachno: '',
+  teachno: userNoStore.teachno,
   sex: userInfo.sex,
   phone: '',
   course: {
@@ -109,7 +111,7 @@ async function getAllCourseList() {
   try {
     const { data } = await getAllCourseListApi()
     if (data.status === 200) {
-      courseOptions.value = data.result
+      courseOptions.value = data.result.filter((item: { name: string; }) => item.name !== '未定')
     }
   } catch (e) {
     console.log(e)
