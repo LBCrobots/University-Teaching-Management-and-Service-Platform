@@ -31,7 +31,7 @@
             <!--头像-->
             <el-col :span="5">
               <el-form-item  label="头像：" style="margin: auto;">
-                <el-upload class="avatar-uploader" :action="uploadURL" name="fileResource" :show-file-list="false" :on-success="handleAvatarSuccess">
+                <el-upload class="avatar-uploader" action name="fileResource" :http-request="uploadAvatar" :show-file-list="false">
                   <img v-if="basic.userIcon" :src="url+'uploadFile/'+basic.userIcon"
                        style="width: 50px;border-radius: 50px;" />
                   <img v-else  src="../../../assets/default_avatar.png"
@@ -75,7 +75,7 @@ import {ref,reactive,toRefs,onMounted,computed } from 'vue'
 import { useUserStore } from '../../../store/modules/user'
 import { ElMessage } from 'element-plus'
 import type { FormInstance } from 'element-plus'
-import { updateInfoApi } from "../../../api/user/user";
+import { updateInfoApi, updateAvatarApi } from "../../../api/user/user";
 import BindEmail from './BindEmail.vue'
 import UpdatePwd from "./UpdatePwd.vue"
 import UserInfo from "./UserInfo.vue"
@@ -95,17 +95,23 @@ const basicRules = reactive({
   sex: [{ required: true, message: "请输入性别", trigger: "blur" }],
   userIcon: [{ required: true, message: "请上传头像", trigger: "blur" }],
 })
-// 图片上传到服务器的路径
-const uploadURL = import.meta.env.VITE_APP_BASE_API + "user/userIcon"
+
+// 图片上传请求
+async function uploadAvatar(item) {
+  console.log('upload Avatar')
+  let formDatas = new FormData()
+  formDatas.append('fileResource', item.file);
+  const {data} = await updateAvatarApi(formDatas)
+  if(data.status === 200){
+    console.log("handleAvatarSuccess[A]:",data)
+    state.basic.userIcon = data.result.userIcon;
+  }
+  console.log(data.status)
+  console.log(data)
+}
+
 // 服务器路径
 const url = import.meta.env.VITE_APP_BASE_API
-// 图片上传成功后执行的函数
-const handleAvatarSuccess = (res: { status: number; result: { userIcon: string } }) => {
-  if(res.status === 200){
-    console.log("handleAvatarSuccess:",res)
-    state.basic.userIcon = res.result.userIcon;
-  }
-}
 
 // 提交基础信息
 const userStore = useUserStore()
