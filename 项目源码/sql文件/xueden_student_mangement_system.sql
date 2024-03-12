@@ -11,7 +11,7 @@
  Target Server Version : 80032
  File Encoding         : 65001
 
- Date: 12/03/2024 11:03:56
+ Date: 12/03/2024 15:22:55
 */
 
 SET NAMES utf8mb4;
@@ -31,11 +31,12 @@ CREATE TABLE `s_course`  (
   `course_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `course_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '课程信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '课程信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of s_course
 -- ----------------------------
+INSERT INTO `s_course` VALUES (0, 1, '2024-03-12 07:21:12.901000', '', 1, '2024-03-12 07:21:12.902000', '未定', '0');
 INSERT INTO `s_course` VALUES (1, 1, '2022-12-14 10:59:59.497000', '', 1, '2022-12-14 10:59:59.498000', '线性代数', 'c001');
 INSERT INTO `s_course` VALUES (2, 1, '2022-12-14 11:00:31.283000', '高等数学', 1, '2022-12-14 11:00:31.284000', '高等数学', 'c002');
 INSERT INTO `s_course` VALUES (3, 1, '2022-12-14 11:00:50.909000', '大学英语', 1, '2022-12-14 11:00:50.910000', '大学英语', 'c003');
@@ -50,6 +51,7 @@ INSERT INTO `s_course` VALUES (11, 1, '2022-12-14 11:04:53.763000', '数据结�
 INSERT INTO `s_course` VALUES (12, 1, '2022-12-14 11:05:08.130000', '软件工程', 1, '2022-12-14 11:05:08.130000', '软件工程', 'c012');
 INSERT INTO `s_course` VALUES (13, 1, '2022-12-14 11:05:23.760000', '数据库系统', 1, '2022-12-14 11:05:23.760000', '数据库系统', 'c013');
 INSERT INTO `s_course` VALUES (14, 1, '2022-12-14 11:06:00.019000', '操作系统', 1, '2022-12-14 11:06:00.019000', '操作系统', 'c014');
+INSERT INTO `s_course` VALUES (15, 1, '2024-03-12 05:47:44.250000', '', 1, '2024-03-12 05:47:44.251000', '软件工程导论', 'c015');
 
 -- ----------------------------
 -- Table structure for s_grade_class
@@ -67,7 +69,7 @@ CREATE TABLE `s_grade_class`  (
   `grade` int NULL DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '班级信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '班级信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of s_grade_class
@@ -181,7 +183,7 @@ INSERT INTO `s_student_score` VALUES (44, 1, '2022-12-21 07:10:46.894000', '初�
 INSERT INTO `s_student_score` VALUES (45, 1, '2022-12-21 07:10:46.899000', '初始成绩', 1, '2022-12-21 07:11:33.257000', 68, '已批改', 1, 18, 1);
 INSERT INTO `s_student_score` VALUES (46, 1, '2022-12-21 07:10:46.905000', '初始成绩', 1, '2022-12-21 07:11:41.978000', 84, '已批改', 1, 19, 1);
 INSERT INTO `s_student_score` VALUES (47, 1, '2022-12-21 07:10:46.909000', '初始成绩', 1, '2022-12-21 07:11:51.490000', 58, '已批改', 1, 20, 1);
-INSERT INTO `s_student_score` VALUES (48, 1, '2022-12-21 07:10:46.913000', '初始成绩', 2, '2024-03-11 08:48:14.832000', 55, '已批改', 1, 21, 1);
+INSERT INTO `s_student_score` VALUES (48, 1, '2022-12-21 07:10:46.913000', '初始成绩', 2, '2024-03-12 03:34:15.354000', 60, '已批改', 1, 21, 1);
 INSERT INTO `s_student_score` VALUES (49, 1, '2022-12-22 05:10:53.235000', '初始成绩', 1, '2022-12-22 05:12:14.932000', 88, '已批改', 3, 1, 1);
 INSERT INTO `s_student_score` VALUES (50, 1, '2022-12-22 05:10:53.265000', '初始成绩', 1, '2022-12-22 05:12:07.171000', 94, '已批改', 3, 4, 1);
 INSERT INTO `s_student_score` VALUES (51, 1, '2022-12-22 05:10:53.271000', '初始成绩', 1, '2022-12-22 05:12:00.644000', 81, '已批改', 3, 13, 1);
@@ -220,6 +222,17 @@ INSERT INTO `s_student_score` VALUES (84, 1, '2024-03-08 05:47:37.502000', '初�
 INSERT INTO `s_student_score` VALUES (85, 1, '2024-03-08 05:47:37.505000', '初始成绩', 1, '2024-03-11 08:53:32.940000', 110, '已批改', 2, 12, 9);
 INSERT INTO `s_student_score` VALUES (256, 1, '2024-03-12 00:57:43.884000', '初始成绩', 1, '2024-03-12 00:58:12.318000', 100, '已批改', 13, 19, 1);
 INSERT INTO `s_student_score` VALUES (257, 1, '2024-03-12 00:57:43.886000', '初始成绩', 1, '2024-03-12 00:58:00.633000', 90, '已批改', 13, 20, 1);
+INSERT INTO `s_student_score` VALUES (268, 1, '2024-03-12 03:32:54.933000', '初始成绩', 1, '2024-03-12 03:33:15.812000', 99, '已批改', 1, 30, 5);
+INSERT INTO `s_student_score` VALUES (269, 1, '2024-03-12 06:03:45.366000', '初始成绩', 1, '2024-03-12 06:03:45.366000', 0, '未批改', 15, 1, 1);
+INSERT INTO `s_student_score` VALUES (270, 1, '2024-03-12 06:03:45.369000', '初始成绩', 1, '2024-03-12 06:03:45.369000', 0, '未批改', 15, 4, 1);
+INSERT INTO `s_student_score` VALUES (271, 1, '2024-03-12 06:03:45.373000', '初始成绩', 1, '2024-03-12 06:03:45.373000', 0, '未批改', 15, 13, 1);
+INSERT INTO `s_student_score` VALUES (272, 1, '2024-03-12 06:03:45.376000', '初始成绩', 1, '2024-03-12 06:03:45.376000', 0, '未批改', 15, 14, 1);
+INSERT INTO `s_student_score` VALUES (273, 1, '2024-03-12 06:03:45.379000', '初始成绩', 1, '2024-03-12 06:03:45.379000', 0, '未批改', 15, 15, 1);
+INSERT INTO `s_student_score` VALUES (274, 1, '2024-03-12 06:03:45.381000', '初始成绩', 1, '2024-03-12 06:03:45.381000', 0, '未批改', 15, 16, 1);
+INSERT INTO `s_student_score` VALUES (275, 1, '2024-03-12 06:03:45.383000', '初始成绩', 1, '2024-03-12 06:03:45.383000', 0, '未批改', 15, 17, 1);
+INSERT INTO `s_student_score` VALUES (276, 1, '2024-03-12 06:03:45.385000', '初始成绩', 1, '2024-03-12 06:03:45.385000', 0, '未批改', 15, 18, 1);
+INSERT INTO `s_student_score` VALUES (277, 1, '2024-03-12 06:03:45.387000', '初始成绩', 1, '2024-03-12 06:03:45.387000', 0, '未批改', 15, 19, 1);
+INSERT INTO `s_student_score` VALUES (278, 1, '2024-03-12 06:03:45.390000', '初始成绩', 1, '2024-03-12 06:03:45.390000', 0, '未批改', 15, 20, 1);
 
 -- ----------------------------
 -- Table structure for s_teacher
@@ -256,7 +269,7 @@ INSERT INTO `s_teacher` VALUES (6, 1, '2022-12-16 12:25:14.578000', '本体是�
 INSERT INTO `s_teacher` VALUES (8, 1, '2022-12-16 12:27:26.298000', '天才人物，千竹教教主，自创《大衍决》、《傀儡术》。万年前自知无望突破化神，把元神寄付傀儡之上存于世间。', 1, '2024-03-08 03:47:33.295000', '大衍神君', '13800138008', '11184629', '男', 't008', 8, 0);
 INSERT INTO `s_teacher` VALUES (9, 2, '2024-03-10 06:39:00.544000', 'momo是线代老师呀', 2, '2024-03-11 07:10:12.842000', 'momo', '123456', '123456', '女', 't009', 1, 2);
 INSERT INTO `s_teacher` VALUES (15, 2, '2024-03-11 07:54:39.288000', 'momo又教高数捏', 2, '2024-03-11 07:54:39.288000', 'momo', '123456', '123456', '女', 't009', 2, 2);
-INSERT INTO `s_teacher` VALUES (16, 2, '2024-03-11 08:29:20.393000', '', 2, '2024-03-11 08:29:20.394000', 'momo', '1', '1', '女', 't008', 4, 2);
+INSERT INTO `s_teacher` VALUES (16, 2, '2024-03-11 08:29:20.393000', 'hh', 1, '2024-03-12 05:54:49.202000', 'momo', '2', '2', '女', 't009', 0, 2);
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -272,7 +285,7 @@ CREATE TABLE `sys_role`  (
   `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统角色信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统角色信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role
@@ -308,9 +321,9 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 1, '2022-12-02 12:55:05.000000', '我是一名管理员', 1, '2024-03-09 08:00:51.376000', 'E10ADC3949BA59ABBE56E057F20F883E', '绫波丽', '女', 1, 'admin', '114514893@qq.com', 'dac7d91f-0c08-4ac9-9304-353adaff28ce.jpg', 1);
-INSERT INTO `sys_user` VALUES (2, 1, '2022-12-05 13:06:48.040000', '韩立红颜知己，名义上的妾侍。落云宗女修，负责管理药园，韩立入落云宗修炼，归其管辖，被家族逼婚，一直推脱不肯完婚。后韩立结婴后，慕沛灵对外谎称已被韩立收为妾侍，韩立为突破瓶颈，假戏真唱收其为妾侍，改修颠凤培元功，后为突破元婴期未果身陨。', 2, '2024-03-10 06:18:46.778000', 'E10ADC3949BA59ABBE56E057F20F883E', 'momo', '女', 1, 'momo', 'momo@qq.com', '569cfaac-8c67-4123-8b18-102ecad3b827.jpg', 2);
-INSERT INTO `sys_user` VALUES (3, 1, '2022-12-05 13:09:44.441000', '韩立红颜知己。又名雪玲，本是灵界银月妖狼玲珑仙子两魂之一。', 3, '2024-03-10 02:01:49.649000', 'E10ADC3949BA59ABBE56E057F20F883E', 'keke', '女', 1, 'keke', 'keke@qq.com', '7f26a86c-48e9-4eed-8d15-da11b201751f.png', 3);
+INSERT INTO `sys_user` VALUES (1, 1, '2022-12-02 12:55:05.000000', '114514', 1, '2024-03-09 08:00:51.376000', 'E10ADC3949BA59ABBE56E057F20F883E', '绫波丽', '女', 1, 'admin', '114514893@qq.com', 'dac7d91f-0c08-4ac9-9304-353adaff28ce.jpg', 1);
+INSERT INTO `sys_user` VALUES (2, 1, '2022-12-05 13:06:48.040000', 't009', 2, '2024-03-10 06:18:46.778000', 'E10ADC3949BA59ABBE56E057F20F883E', 'momo', '女', 1, 'momo', 'momo@qq.com', '569cfaac-8c67-4123-8b18-102ecad3b827.jpg', 2);
+INSERT INTO `sys_user` VALUES (3, 1, '2022-12-05 13:09:44.441000', '202201012', 3, '2024-03-10 02:01:49.649000', 'E10ADC3949BA59ABBE56E057F20F883E', 'keke', '女', 1, 'keke', 'keke@qq.com', '7f26a86c-48e9-4eed-8d15-da11b201751f.png', 3);
 
 -- ----------------------------
 -- Table structure for token

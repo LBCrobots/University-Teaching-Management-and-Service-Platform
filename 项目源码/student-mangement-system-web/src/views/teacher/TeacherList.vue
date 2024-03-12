@@ -183,6 +183,8 @@ const loadData = async (state: any)=> {
   else {
     state.tableData = data.content.filter((item: { uid: any }) => item.uid === userInfo.role.id.toString())
     state.total = data.content.filter((item: { uid: any }) => item.uid === userInfo.role.id.toString()).length
+    console.log(userInfo)
+    console.log(111)
   }
 
   state.loading = false
