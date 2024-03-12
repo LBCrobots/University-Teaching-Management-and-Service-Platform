@@ -83,7 +83,6 @@ const initChart = () => {
   if(element){
     echarts.registerTheme('westeros', westeros)
     let newChart = echarts.init(element, 'westeros');
-    newChart.setOption(options)
     if (newChart != undefined) return newChart
   }
 }
@@ -101,6 +100,9 @@ onMounted(() => {
   window.addEventListener('resize', function () {
     chart && chart.resize()
   })
+  if(props.seriesData.length) {
+    chart.setOption(options)
+  }
 })
 </script>
 
