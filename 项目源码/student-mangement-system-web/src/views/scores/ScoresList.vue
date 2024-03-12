@@ -158,7 +158,6 @@ import {ElMessage} from 'element-plus'
 import {exportExcel} from "../../utils/exprotExcel";
 import { useUserStore } from '../../store/modules/user'
 const { userInfo } = useUserStore()
-console.log(userInfo)
 // 定义班级ID
 const gradeClassId = ref(null)
 const gradeClassOptions = ref<object[]>([])

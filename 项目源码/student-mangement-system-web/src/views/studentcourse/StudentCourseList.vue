@@ -21,7 +21,8 @@
             </el-select>
             </el-col>
             <el-col :span="5">
-              <el-button plain  color="#0554af" @click="addSubjects">添加课程</el-button>
+              <el-button plain  color="#0554af" v-if="userInfo.role.id !== 1" @click="addSubjects">添加课程</el-button>
+              <el-button plain color="#0554af" v-else @click="searchScores">查询选课</el-button>
               <!-- <el-button plain @click="exportExcelAction" type="primary">
                 <el-icon style="margin-right: 1px"><Download /></el-icon>导出 Excel
               </el-button> -->
@@ -154,7 +155,8 @@ import {getAllCourseListApi} from "../../api/teacher/teacher";
 import {deleteScoresApi, editScoresApi, getScoresListApi, addSubjectsApi} from "../../api/scores/scores";
 import { formatTime } from "../../utils/date"
 import {ElMessage} from 'element-plus'
-import {exportExcel} from "../../utils/exprotExcel";
+import { useUserStore } from '../../store/modules/user'
+const { userInfo } = useUserStore()
 // 定义班级ID
 const gradeClassId = ref(null)
 const gradeClassOptions = ref<object[]>([])
@@ -274,6 +276,15 @@ const addSubjects = async () => {
     ElMessage.error(data.message)
   }
 
+}
+
+//查询成绩
+const searchScores = async () => {
+  if(courseId.value < 1){
+    ElMessage.success('请选择学科')
+    return false
+  }
+  await loadData(state)
 }
 
 // // 定义单元格是否可编辑
