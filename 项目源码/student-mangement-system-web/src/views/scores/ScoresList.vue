@@ -21,8 +21,7 @@
             </el-select>
             </el-col>
             <el-col :span="6">
-              <el-button plain color="#0554af" v-if="userInfo.role.id !== 1" @click="searchScores">查询成绩</el-button>
-              <el-button plain color="#0554af" v-else @click="registerScores">批量选课</el-button>
+              <el-button plain color="#0554af" @click="searchScores">查询成绩</el-button>
               <el-button plain @click="exportExcelAction" type="primary">
                 <el-icon style="margin-right: 1px"><Download /></el-icon>导出 Excel
               </el-button>
@@ -152,11 +151,14 @@ import { ref, reactive,toRefs, onMounted  } from 'vue'
 // 定义班级下拉选择项
 import {gradeClassListApi} from "../../api/student/student";
 import {getAllCourseListApi} from "../../api/teacher/teacher";
-import {deleteScoresApi, editScoresApi, getScoresListApi, registerScoresApi, getScoresApi} from "../../api/scores/scores";
+import {deleteScoresApi, editScoresApi, getScoresListApi} from "../../api/scores/scores";
+import {getTeacherListApi} from "../../api/teacher/teacher"
 import { formatTime } from "../../utils/date"
 import {ElMessage} from 'element-plus'
 import {exportExcel} from "../../utils/exprotExcel";
 import { useUserStore } from '../../store/modules/user'
+import { useUserNoStore } from "../../store/modules/userno";
+const userNoStore = useUserNoStore()
 const { userInfo } = useUserStore()
 // 定义班级ID
 const gradeClassId = ref(null)
@@ -188,7 +190,7 @@ async function getAllCourseList() {
     console.log(e)
   }
 }
-
+//成绩列表数据
 const state = reactive({
   // 学号
   stuno: "",
@@ -215,10 +217,55 @@ const loadData = async (state: any)=> {
     'gradeClassId': gradeClassId.value
   }
   const { data } = await getScoresListApi(params)
-  state.tableData = data.content
-  state.total = data.totalElements
-  state.loading = false
+  console.log('data:',data.totalElements)
 
+  if(userInfo.role.id === 1){
+    state.tableData = data.content
+    state.total = data.totalElements
+  }
+  else {
+    state.tableData = data.content.filter((item: { course: { courseno: never; }; }) => userNoStore.teachcourse.includes(item.course.courseno))
+    state.total = data.totalElements
+  }
+
+  state.loading = false
+}
+
+const state2 = reactive({
+  // 搜索表单内容
+  searchValue: "",
+  // 表格全部信息
+  tableData: [],
+  total: 0, //总条数
+  pageSize: 10, //每页显示行数
+  pageIndex: 1, //当前页码
+  loading: false, // 数据加载
+})
+// 获取教师列表数据
+const loadData2 = async (state: any)=> {
+  state2.loading = true
+  // 先清空数据
+  state2.tableData=[]
+  const params = {
+    'pageIndex':state2.pageIndex,
+    'pageSize': state2.pageSize,
+    'searchValue': state2.searchValue
+  }
+  const { data } = await getTeacherListApi(params)
+
+  if(userInfo.role.id === 1){
+    state2.tableData = data.content
+    state2.total = data.totalElements
+  }
+  else {
+    state2.tableData = data.content.filter((item: { uid: any }) => item.uid === userInfo.id.toString())
+    state2.total = data.content.filter((item: { uid: any }) => item.uid === userInfo.id.toString()).length
+    userNoStore.setTeachno(state.tableData[0].teachno)
+    let coursenoList = state.tableData.map(item => item.course.courseno);
+    userNoStore.setTeachcourse(coursenoList)
+  }
+
+  state2.loading = false
 }
 const Nindex = (index) => {
   // 当前页数 - 1 * 每页数据条数 + 1
@@ -261,27 +308,6 @@ const search = () => {
 const changePage = (val) => {
   state.pageIndex = val
   loadData(state)
-}
-
-// 批量选课
-const registerScores = async () => {
-  if(gradeClassId.value < 1){
-    ElMessage.success('请选择班级')
-    console.log('gradeClassId.value:',gradeClassId.value)
-    return false
-  }
-  if(courseId.value < 1){
-    ElMessage.success('请选择学科')
-    return false
-  }
-  const { data } =  await registerScoresApi(gradeClassId.value,courseId.value)
-  if(data.status===200){
-    await loadData(state)
-    ElMessage.success(data.message)
-  }else {
-    ElMessage.error(data.message)
-  }
-
 }
 
 //查询成绩
@@ -368,6 +394,7 @@ const exportExcelAction = () => {
 
 //挂载后加载数据
 onMounted(() => {
+  loadData2(state2)
   loadData(state)
   getAllCourseList()
   gradeClassList()
