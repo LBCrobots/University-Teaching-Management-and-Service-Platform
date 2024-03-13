@@ -129,7 +129,7 @@
                icon-color="#626AEF" :title="'确定删除学生名为“'+scope.row.student.name+'”的课程吗？'"
                @confirm="delScores(scope.row.id)">
               <template #reference>
-                <el-button size="small" type="danger" style="margin-bottom: 10px;" :disabled="scope.row.type === '已批改'" class="no-cursor">删除</el-button>
+                <el-button size="small" type="danger" style="margin-bottom: 10px;" :disabled="scope.row.type === '已批改' && userInfo.role.id!==1" class="no-cursor">删除</el-button>
               </template>
             </el-popconfirm>
 
