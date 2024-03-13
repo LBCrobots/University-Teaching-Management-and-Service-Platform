@@ -13,14 +13,14 @@ public interface UpdateMapper {
     @Insert("INSERT INTO s_student(uid) VALUES(#{uid})")
     int insertStudentUID(Long uid);
 
+    @Select("SELECT * from s_course where id = 17")
+    Course getDefaultCourse();
+
     /*新增教师信息*/
     @Insert("INSERT into s_teacher(create_by, create_time, update_by, update_time, name, sex, teach_no, course_id, uid, remarks) " +
             "values (#{createBy}, #{createTime}, #{updateBy}, #{updateTime}, #{name}, #{sex}, #{teachno}, 17, #{uid}, #{remarks})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void addTeacher(Teacher teacher);
-
-    @Select("SELECT * from s_course where id = 17")
-    Course getDefaultCourse();
 
     /*新增学生信息*/
     @Insert("INSERT into s_student(create_by, create_time, update_by, update_time, name, sex, uid, remarks) " +
@@ -45,4 +45,8 @@ public interface UpdateMapper {
 
     @Delete("DELETE from s_student where uid = #{uid}")
     void deleteStudent(Long uid);
+
+    /*根据用户id获取其role类型*/
+    @Select("SELECT role_id from sys_user where id = #{id}")
+    Long getRole(Long id);
 }

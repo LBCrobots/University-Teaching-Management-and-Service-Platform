@@ -15,6 +15,7 @@ import com.example.utils.Md5Util;
 import com.example.utils.PageUtil;
 import com.example.utils.QueryHelp;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,6 +27,7 @@ import java.util.Map;
 
 /**功能描述：系统用户业务接口实现类*/
 @Service
+@Slf4j
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class SysUserServiceImpl implements ISysUserService {
@@ -97,8 +99,9 @@ public class SysUserServiceImpl implements ISysUserService {
         sysUser.setUpdateTime(new Timestamp(System.currentTimeMillis()));
 
         SysUser dbSysUser = sysUserRepository.save(sysUser);
-
-        if (sysUser.getSysRole().getId() == 2L){
+        log.info("获得的role是：{}",sysUser.getSysRole().getId());
+        Long roleId = updateMapper.getRole(sysUser.getId());
+        if (roleId == 2L){
 
             Teacher teacher = new Teacher();
             teacher.setCreateBy(1L);
@@ -112,7 +115,7 @@ public class SysUserServiceImpl implements ISysUserService {
             teacher.setTeachno("t00" + teacher.getUid());
             updateMapper.addTeacher(teacher);
         }
-        else if (sysUser.getSysRole().getId() == 3L){
+        else if (roleId == 3L){
 
             Student student = new Student();
             student.setCreateBy(1L);
@@ -155,7 +158,7 @@ public class SysUserServiceImpl implements ISysUserService {
             dbSysUser.setPassword(encryptedPassword);
         }
         //根据id找到teacher表或者student表的uid，实现更新
-        Long roleId = sysUser.getSysRole().getId();
+        Long roleId = updateMapper.getRole(sysUser.getId());
         Long uid = sysUser.getId();
         if (roleId == 2) {
             Teacher dbTeacher = updateMapper.getByTeacherUid(uid);
