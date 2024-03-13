@@ -114,17 +114,17 @@ async function uploadAvatar(item) {
 const url = import.meta.env.VITE_APP_BASE_API
 
 // 提交基础信息
-const userStore = useUserStore()
 const onBasicSubmit = (formEl: FormInstance | undefined) => {
   if (!formEl) return
   formEl.validate(async(valid) => {
     if (valid) {
       loading.value = true
-      // 登录
+      // 更新请求
       const { data } = await updateInfoApi({ ...state.basic });
       if(data.status===200){
-        // 设置token
-        userStore.setUserInfo({
+        // 设置本地数据
+        const userStore = useUserStore()
+        userStore.setBasicUserInfo({
           realname: state.basic.realname,
           sex: state.basic.sex,
           userIcon: state.basic.userIcon
@@ -149,9 +149,10 @@ const onBasicSubmit = (formEl: FormInstance | undefined) => {
     }
   })
 }
-const { userInfo } = userStore
+
 //挂载后加载数据
 onMounted(() => {
+  let { userInfo } = useUserStore()
   state.basic.realname = userInfo.realname
   state.basic.sex = userInfo.sex
   state.basic.userIcon = userInfo.userIcon
