@@ -237,6 +237,7 @@ const loadData = async (state: any)=> {
   }
   const { data } = await getScoresListApi(params)
 
+  //TODO
   if(userInfo.role.id === 1){
     state.tableData = data.content
     state.total = data.totalElements
@@ -267,24 +268,7 @@ const refresh = () => {
   // 更新数据
   loadData(state);
 }
-// 搜索
-// const search = () => {
-//   if (state.name !== null&&state.name !== "") {
-//     ElMessage({
-//       type: 'success',
-//       message: `学生姓名“${state.name}”搜索内容如下`,
-//     })
-//     loadData(state)
-//   }
 
-//   if (state.stuno !== null&&state.stuno !== "") {
-//     ElMessage({
-//       type: 'success',
-//       message: `学号“${state.stuno}”搜索内容如下`,
-//     })
-//     loadData(state)
-//   }
-// }
 // 切换页面的执行事件，  val 当前页码
 const changePage = (val) => {
   state.pageIndex = val

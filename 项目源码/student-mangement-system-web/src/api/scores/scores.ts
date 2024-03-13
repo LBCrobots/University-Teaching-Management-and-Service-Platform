@@ -18,18 +18,6 @@ export function registerScoresApi(gradeClassId:number,courseId:number) {
     })
 }
 
-//TODO 添加课程
-export function addSubjectsApi(gradeClassId:number,courseId:number) {
-    return request({
-        url: 'scores',
-        method: 'post',
-        data: {
-            gradeClassId: gradeClassId,
-            courseId: courseId
-        }
-    })
-}
-
 // 更新成绩
 export function editScoresApi(id:number,score: number) {
     return request({
@@ -46,5 +34,33 @@ export function deleteScoresApi(id:number) {
     return request({
         url: `scores/${id}`,
         method: 'delete'
+    })
+}
+
+//TODO 根据学生uid获取课程信息
+export function getCourseByStudentUidApi(uid:string) {
+    return request({
+        url: `course/uid/${uid}`,
+        method: 'get'
+    })
+}
+
+//TODO 添加课程
+export function addSubjectsApi(gradeClassId:number,courseId:number) {
+    return request({
+        url: 'scores',
+        method: 'post',
+        data: {
+            gradeClassId: gradeClassId,
+            courseId: courseId
+        }
+    })
+}
+
+//TODO 根据教师uid获取课程信息
+export function getCourseByTeacherUidApi(uid:string) {
+    return request({
+        url: `course/uid/${uid}`,
+        method: 'get'
     })
 }

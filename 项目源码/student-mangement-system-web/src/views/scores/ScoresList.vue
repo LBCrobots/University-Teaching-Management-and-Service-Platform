@@ -217,8 +217,8 @@ const loadData = async (state: any)=> {
     'gradeClassId': gradeClassId.value
   }
   const { data } = await getScoresListApi(params)
-  console.log('data:',data.totalElements)
 
+  //TODO
   if(userInfo.role.id === 1){
     state.tableData = data.content
     state.total = data.totalElements
@@ -259,8 +259,7 @@ const loadData2 = async (state: any)=> {
   }
   else {
     state2.tableData = data.content.filter((item: { uid: any }) => item.uid === userInfo.id.toString())
-    state2.total = data.content.filter((item: { uid: any }) => item.uid === userInfo.id.toString()).length
-    userNoStore.setTeachno(state.tableData[0].teachno)
+    state2.total = data.totalElements
     let coursenoList = state.tableData.map(item => item.course.courseno);
     userNoStore.setTeachcourse(coursenoList)
   }
