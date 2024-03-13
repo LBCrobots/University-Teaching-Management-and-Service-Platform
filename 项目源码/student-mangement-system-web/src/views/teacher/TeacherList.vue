@@ -153,7 +153,9 @@ import AddTeacher from "./components/AddTeacher.vue"
 import EditTeacher from "./components/EditTeacher.vue"
 import { useUserStore } from '../../store/modules/user'
 import {exportExcel} from "../../utils/exprotExcel";
+import { useUserNoStore } from "../../store/modules/userno";
 const { userInfo } = useUserStore()
+const userNoStore = useUserNoStore()
 const state = reactive({
   // 搜索表单内容
   searchValue: "",
@@ -183,6 +185,7 @@ const loadData = async (state: any)=> {
   else {
     state.tableData = data.content.filter((item: { uid: any }) => item.uid === userInfo.id.toString())
     state.total = data.content.filter((item: { uid: any }) => item.uid === userInfo.id.toString()).length
+    userNoStore.setTeachno(state.tableData[0].teachno)
   }
 
   state.loading = false

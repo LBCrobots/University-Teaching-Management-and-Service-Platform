@@ -42,7 +42,7 @@ async function getAllCourseList() {
   try {
     const { data } = await getAllCourseListApi()
     if (data.status === 200) {
-      courseOptions.value = data.result
+      courseOptions.value = data.result.filter((item: { name: string; }) => item.name !== '未定')
     }
   } catch (e) {
     console.log(e)

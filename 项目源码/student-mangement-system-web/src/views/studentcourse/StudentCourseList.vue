@@ -21,7 +21,8 @@
             </el-select>
             </el-col>
             <el-col :span="5">
-              <el-button plain  color="#0554af" @click="addSubjects">添加课程</el-button>
+              <el-button plain color="#0554af" v-if="userInfo.role.id !== 1" @click="addSubjects">添加课程</el-button>
+              <el-button plain color="#0554af" v-else @click="searchScores">查询选课</el-button>
               <!-- <el-button plain @click="exportExcelAction" type="primary">
                 <el-icon style="margin-right: 1px"><Download /></el-icon>导出 Excel
               </el-button> -->
@@ -125,12 +126,13 @@
         <el-table-column label="操作">
           <template #default="scope">
             <el-popconfirm confirm-button-text="确定" cancel-button-text="取消" :icon="Delete"
-                           icon-color="#626AEF" :title="'确定删除学生名为“'+scope.row.student.name+'”的课程吗？'"
-                           @confirm="delScores(scope.row.id)">
+               icon-color="#626AEF" :title="'确定删除学生名为“'+scope.row.student.name+'”的课程吗？'"
+               @confirm="delScores(scope.row.id)">
               <template #reference>
-                <el-button size="small" type="danger" style="margin-bottom: 10px;">删除</el-button>
+                <el-button size="small" type="danger" style="margin-bottom: 10px;" :disabled="scope.row.type === '已批改' && userInfo.role.id!==1" class="no-cursor">删除</el-button>
               </template>
             </el-popconfirm>
+
           </template>
         </el-table-column>
 
@@ -154,7 +156,10 @@ import {getAllCourseListApi} from "../../api/teacher/teacher";
 import {deleteScoresApi, editScoresApi, getScoresListApi, addSubjectsApi} from "../../api/scores/scores";
 import { formatTime } from "../../utils/date"
 import {ElMessage} from 'element-plus'
-import {exportExcel} from "../../utils/exprotExcel";
+import { useUserStore } from '../../store/modules/user'
+import { useUserNoStore } from "../../store/modules/userno";
+const { userInfo } = useUserStore()
+const userNoStore = useUserNoStore()
 // 定义班级ID
 const gradeClassId = ref(null)
 const gradeClassOptions = ref<object[]>([])
@@ -179,7 +184,7 @@ async function getAllCourseList() {
   try {
     const { data } = await getAllCourseListApi()
     if (data.status === 200) {
-      courseOptions.value = data.result
+      courseOptions.value = data.result.filter((item: { name: string; }) => item.name !== '未定')
     }
   } catch (e) {
     console.log(e)
@@ -212,8 +217,17 @@ const loadData = async (state: any)=> {
     'gradeClassId': gradeClassId.value
   }
   const { data } = await getScoresListApi(params)
-  state.tableData = data.content
-  state.total = data.totalElements
+
+  if(userInfo.role.name === '系统管理员'){
+    state.tableData = data.content
+    state.total = data.totalElements
+  }
+  else {
+    state.tableData = data.content.filter((item: { uid: any }) => item.student.uid === userInfo.id.toString())
+    state.total = data.content.filter((item: { uid: any }) => item.student.uid === userInfo.id.toString()).length
+    // userNoStore.setStuno(state.tableData[0])
+    console.log(state.tableData[0])
+  }
   state.loading = false
 
 }
@@ -260,7 +274,7 @@ const changePage = (val) => {
   loadData(state)
 }
 
-// 添加课程
+//TODO 添加课程
 const addSubjects = async () => {
   if(courseId.value < 1){
     ElMessage.success('请选择学科')
@@ -274,6 +288,15 @@ const addSubjects = async () => {
     ElMessage.error(data.message)
   }
 
+}
+
+//查询成绩
+const searchScores = async () => {
+  if(courseId.value < 1){
+    ElMessage.success('请选择学科')
+    return false
+  }
+  await loadData(state)
 }
 
 // // 定义单元格是否可编辑
@@ -396,6 +419,10 @@ const {tableData,pageIndex,pageSize,loading,total,name,stuno} = toRefs(state)
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+}
+
+.no-cursor {
+  cursor: default !important;
 }
 
 /*修改v-loading样式*/

@@ -10,17 +10,17 @@
       </el-col>
       <el-col :span="12">
         <el-form-item label="教师工号" prop="teachno">
-          <el-input v-model="formTeacher.teachno" :readonly="userInfo.id !== 1" placeholder="请输入教师工号" />
+          <el-input v-model="formTeacher.teachno" :readonly="userInfo.role.id !== 1" placeholder="请输入教师工号" />
         </el-form-item>
       </el-col>
       <el-col :span="12">
         <el-form-item label="教师姓名" prop="name">
-          <el-input v-model="formTeacher.name" :readonly="userInfo.id !== 1" placeholder="请输入教师姓名" />
+          <el-input v-model="formTeacher.name" :readonly="userInfo.role.id !== 1" placeholder="请输入教师姓名" />
         </el-form-item>
       </el-col>
       <el-col :span="12">
         <el-form-item label="性别" prop="sex">
-          <el-input v-model="formTeacher.sex" :readonly="userInfo.id !== 1" placeholder="请输入性别" />
+          <el-input v-model="formTeacher.sex" :readonly="userInfo.role.id !== 1" placeholder="请输入性别" />
         </el-form-item>
       </el-col>
       <el-col :span="12">
@@ -58,11 +58,12 @@ import {ElMessage} from 'element-plus'
 import {editTeacherApi, getAllCourseListApi} from "../../../api/teacher/teacher"
 import type { FormInstance, FormRules } from 'element-plus'
 import { useUserStore } from '../../../store/modules/user'
+import { use } from 'echarts'
 const { userInfo } = useUserStore()
 const ruleFormRef = ref<FormInstance>()
 const subLoading = ref(false)
 const formTeacher = reactive({
-  id: 0,
+  id: '',
   name: '',
   teachno: '',
   sex: '',
