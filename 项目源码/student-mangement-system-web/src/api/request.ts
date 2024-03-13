@@ -1,8 +1,21 @@
 import axios from 'axios'
+import { useUserStore } from '../store/modules/user'
+
 const service  = axios.create({
-    baseURL: import.meta.env.VITE_APP_BASE_API,
+    // baseURL: import.meta.env.VITE_APP_BASE_API,
+    baseURL: '/api',
     timeout: 3000000,
-    // 跨域时候允许携带凭证
-    withCredentials: true
+    withCredentials: true,
 })
+
+// Axios 请求前置拦截器 | 加入token
+service.interceptors.request.use( config => {
+    if (!config.headers) config.headers = {};
+    let token = useUserStore().token
+    token? config.headers.token = token : ''
+    return config
+}, error => {
+    console.log("[Interceptors Error]" + error);
+})
+
 export default service

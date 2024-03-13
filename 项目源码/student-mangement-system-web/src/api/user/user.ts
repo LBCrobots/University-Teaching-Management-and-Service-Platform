@@ -99,3 +99,12 @@ export function getAllRoleListApi() {
         method: 'get'
     })
 }
+
+// 上传用户头像
+export function updateAvatarApi(data:FormData) {
+    return request({
+        url: 'user/userIcon',
+        method: 'post',
+        data
+    })
+}

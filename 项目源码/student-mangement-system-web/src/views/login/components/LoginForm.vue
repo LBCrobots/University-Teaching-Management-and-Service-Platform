@@ -103,27 +103,7 @@ import { id } from 'element-plus/es/locale';
         // 登录
           const { data } = await loginApi({ ...ruleForm });
           if(data.status===200){
-            // 设置token
-            userStore.setToken(data.result.token)
-            userStore.setUserInfo({
-              username: data.result.username,
-              realname: data.result.realname,
-              email: data.result.email,
-              sex: data.result.sex,
-              userIcon: data.result.userIcon,
-              createTime: data.result.createTime,
-              role: data.result.role,
-              id: data.result.id
-            })
-            await router.push({
-              path: '/index',
-            })
-            ElNotification({
-              title: '登录成功',
-              message: "欢迎登录 高校教学管理与服务平台",
-              type: "success",
-              duration: 3000
-            })
+            login(data)
           }else {
             ElNotification({
               title: '温馨提示',
@@ -140,6 +120,41 @@ import { id } from 'element-plus/es/locale';
       }
     })
   }
+
+// 登录到首页
+async function login(data): Promise<void> {
+  const value = await setDatas(data);
+  console.log(value);
+  
+  router.push({
+    path: '/index',
+  })
+  console.log("[Login] Push to Index");
+
+  ElNotification({
+    title: '登录成功',
+    message: "欢迎登录 高校教学管理与服务平台",
+    type: "success",
+    duration: 3000
+  })
+}
+
+// 设置用户数据
+async function setDatas(data):Promise<string> {
+  userStore.setToken(data.result.token)
+  userStore.setUserInfo({
+    username: data.result.username,
+    realname: data.result.realname,
+    email: data.result.email,
+    sex: data.result.sex,
+    userIcon: data.result.userIcon,
+    createTime: data.result.createTime,
+    role: data.result.role,
+    id: data.result.id
+  })
+  return "[Login] Set Datas"
+}
+
 </script>
 
 <style scoped>
