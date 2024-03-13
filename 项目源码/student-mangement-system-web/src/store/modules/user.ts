@@ -9,7 +9,7 @@ export const useUserStore = defineStore({
          */
         return {
             token: '',
-            userInfo:{},
+            userInfo:{} as UserInfo,
             roles:[]
         }
     },
@@ -22,7 +22,28 @@ export const useUserStore = defineStore({
         // 设置登录用户信息
         setUserInfo(userInfo:any){
             this.userInfo = userInfo
+        },
+        // 更新基础用户信息
+        setBasicUserInfo({realname, sex, userIcon}:BasicUserInfo){
+            this.userInfo.realname = realname
+            this.userInfo.sex = sex
+            this.userInfo.userIcon = userIcon
         }
     },
     persist: true
 })
+
+interface BasicUserInfo {
+    realname: string
+    sex: string
+    userIcon: string
+}
+
+interface UserInfo {
+    createTime: string
+    email: string
+    realname: string
+    sex: string
+    userIcon: string
+    role: {}
+}
