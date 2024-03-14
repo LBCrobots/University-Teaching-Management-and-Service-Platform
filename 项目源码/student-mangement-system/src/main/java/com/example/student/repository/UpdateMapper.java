@@ -23,8 +23,8 @@ public interface UpdateMapper {
     void addTeacher(Teacher teacher);
 
     /*新增学生信息*/
-    @Insert("INSERT into s_student(create_by, create_time, update_by, update_time, name, sex, uid, remarks) " +
-            "values (#{createBy}, #{createTime}, #{updateBy}, #{updateTime}, #{name}, #{sex}, #{uid}, #{remarks})")
+    @Insert("INSERT into s_student(create_by, create_time, update_by, update_time, name, sex, uid, remarks, stuno, grade_class_id) " +
+            "values (#{createBy}, #{createTime}, #{updateBy}, #{updateTime}, #{name}, #{sex}, #{uid}, #{remarks}, '未定', 0)")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void  addStudent(Student student);
 

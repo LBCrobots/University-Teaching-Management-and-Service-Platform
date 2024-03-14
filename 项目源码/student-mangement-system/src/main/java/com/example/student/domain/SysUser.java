@@ -40,6 +40,9 @@ public class SysUser extends BaseEntity {
     @Column(name = "user_icon")
     private String userIcon;
 
+    @Column(name = "remarks")
+    private String remarks;
+
     /**
      * 所属角色
      */

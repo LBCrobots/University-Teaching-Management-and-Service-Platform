@@ -122,6 +122,7 @@ public class SysUserServiceImpl implements ISysUserService {
             student.setCreateTime(sysUser.getCreateTime());
             student.setUpdateBy(1L);
             student.setUpdateTime(sysUser.getUpdateTime());
+            student.setRemarks(sysUser.getRemarks());
             student.setName(sysUser.getRealname());
             student.setSex(sysUser.getSex());
             student.setUid(sysUser.getId());
