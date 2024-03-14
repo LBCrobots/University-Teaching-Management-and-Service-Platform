@@ -2,7 +2,7 @@
   <el-form ref="ruleFormRef" :rules="rules"  :model="formStudent"  label-width="80px">
     <el-row>
       <el-col :span="12">
-        <el-form-item  label="所属班级" prop="gradeClass">
+        <el-form-item label="所属班级" prop="gradeClass">
           <el-select v-model="formStudent.gradeClass.id" placeholder="请选择班级" style="width: 100%;">
             <el-option v-for="item in gradeClassOptions" :key="item.id" :label="item.name" :value="item.id" />
           </el-select>
@@ -53,14 +53,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, reactive, Ref } from 'vue'
 import {ElMessage} from 'element-plus'
 import {editStudentApi, gradeClassListApi} from "../../../api/student/student";
 import type { FormInstance, FormRules } from 'element-plus'
 const ruleFormRef = ref<FormInstance>()
 const subLoading = ref(false)
 const formStudent = reactive({
-  id: 0,
+  id: '',
   name: '',
   stuno: '',
   sex: '',
@@ -76,9 +76,20 @@ const props = defineProps(['studentInfo'])
 console.log('EditStudent:props--',props)
 const studentInfo = ref(props.studentInfo)
 // 给表单填充数据
-for (const key in formStudent) {
-  formStudent[key] = studentInfo.value[key]
+async function FillUpForm() {
+  for (const key in formStudent) {
+    formStudent[key] = studentInfo.value[key]
+    console.log('fillup For')
+  }
+  console.log('fillup Re')
+  return 'fillup'
 }
+FillUpForm().then(v => {
+  console.log('fillup Then')
+  let gradeClassId:string = studentInfo.value['gradeClass'].id
+  formStudent['gradeClass'] = {id: gradeClassId}
+  console.log(formStudent)
+})
 // 定义表单约束规则对象
 const rules = reactive<FormRules>({
   name: [{ required: true, message: '学生姓名不能为空', trigger: 'blur' }],
@@ -109,13 +120,14 @@ const editStudent = async (formEl: FormInstance | undefined) => {
   })
 }
 // 定义班级下拉选择项
-const gradeClassOptions = ref<object[]>([])
+const gradeClassOptions: Ref<{id:number, name:string}[]> = ref([{id:1, name:'defaultClass'}])
 // 获取所有班级列表
 async function gradeClassList() {
   try {
     const { data } = await gradeClassListApi()
     if (data.status === 200) {
       gradeClassOptions.value = data.result
+      console.log(gradeClassOptions.value)
     }
   } catch (e) {
     console.log(e)
