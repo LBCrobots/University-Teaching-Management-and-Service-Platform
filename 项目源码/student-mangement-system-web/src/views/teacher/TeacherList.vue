@@ -154,8 +154,8 @@ import EditTeacher from "./components/EditTeacher.vue"
 import { useUserStore } from '../../store/modules/user'
 import {exportExcel} from "../../utils/exprotExcel";
 import { useUserNoStore } from "../../store/modules/userno";
-const { userInfo } = useUserStore()
 const userNoStore = useUserNoStore()
+const { userInfo } = useUserStore()
 const state = reactive({
   // 搜索表单内容
   searchValue: "",
@@ -178,13 +178,14 @@ const loadData = async (state: any)=> {
   }
   const { data } = await getTeacherListApi(params)
 
-  if(userInfo.role.name === '系统管理员'){
+  //TODO
+  if(userInfo.role.id === 1){
     state.tableData = data.content
     state.total = data.totalElements
   }
   else {
     state.tableData = data.content.filter((item: { uid: any }) => item.uid === userInfo.id.toString())
-    state.total = data.content.filter((item: { uid: any }) => item.uid === userInfo.id.toString()).length
+    state.total = data.totalElements
     userNoStore.setTeachno(state.tableData[0].teachno)
   }
 

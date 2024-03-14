@@ -10,36 +10,55 @@
         <!--搜索区域 start-->
         <div class="card-search">
           <el-row :gutter="12">
-            <!-- <el-col :span="5">
-              <el-select v-model="gradeClassId" placeholder="请选择班级" style="width: 100%;">
-                <el-option v-for="item in gradeClassOptions" :key="item.id" :label="item.name" :value="item.id" />
+
+            <template v-if="userInfo.role.id === 1">
+                <el-col :span="4">
+              <el-select v-model="courseId" placeholder="请选择科目" style="width: 100%;">
+                <el-option v-for="item in courseOptions" :key="item.id" :label="item.name" :value="item.id" />
               </el-select>
-            </el-col> -->
-            <el-col :span="12">
-            <el-select v-model="courseId" placeholder="请选择科目" style="width: 100%;">
-              <el-option v-for="item in courseOptions" :key="item.id" :label="item.name" :value="item.id" />
-            </el-select>
-            </el-col>
-            <el-col :span="5">
-              <el-button plain color="#0554af" v-if="userInfo.role.id !== 1" @click="addSubjects">添加课程</el-button>
-              <el-button plain color="#0554af" v-else @click="searchScores">查询选课</el-button>
-              <!-- <el-button plain @click="exportExcelAction" type="primary">
-                <el-icon style="margin-right: 1px"><Download /></el-icon>导出 Excel
-              </el-button> -->
-            </el-col>
-            <!-- <el-col :span="3">
-              <el-input :prefix-icon="Search" v-model="stuno" @keyup.enter.native="search"
-                        placeholder="学号搜索（回车）"/>
-            </el-col> -->
-            <!-- <el-col :span="3">
-              <el-input :prefix-icon="Search" v-model="name" @keyup.enter.native="search"
-                        placeholder="姓名搜索（回车）"/>
-            </el-col> -->
-            <el-col :span="5" style="display: inline-flex;justify-content: center;align-items: center; cursor: pointer;">
-              <el-icon style="font-size: 20px;color: #b3b6bc;" @click="refresh">
-                <Refresh />
-              </el-icon>
-            </el-col>
+              </el-col>
+              <el-col :span="6">
+                <el-button plain color="#0554af" @click="searchScores">查询选课</el-button>
+              </el-col>
+              <el-col :span="3">
+                <el-select v-model="gradeClassId" placeholder="请选择班级" style="width: 100%;">
+                  <el-option v-for="item in gradeClassOptions" :key="item.id" :label="item.name" :value="item.id" />
+                </el-select>
+              </el-col>
+              <el-col :span="4">
+              <el-select v-model="courseId" placeholder="请选择科目" style="width: 100%;">
+                <el-option v-for="item in courseOptions" :key="item.id" :label="item.name" :value="item.id" />
+              </el-select>
+              </el-col>
+              <el-col :span="6">
+                <el-button plain color="#0554af" @click="registerScores">批量选课</el-button>
+                <el-button plain @click="exportExcelAction" type="primary">
+                  <el-icon style="margin-right: 1px"><Download /></el-icon>导出 Excel
+                </el-button>
+              </el-col>
+              <el-col :span="0" style="display: inline-flex;justify-content: center;align-items: center; cursor: pointer;">
+                <el-icon style="font-size: 20px;color: #b3b6bc;" @click="refresh">
+                  <Refresh />
+                </el-icon>
+              </el-col>
+            </template>
+
+            <template v-else>
+                <el-col :span="10">
+              <el-select v-model="courseId" placeholder="请选择科目" style="width: 100%;">
+                <el-option v-for="item in courseOptions" :key="item.id" :label="item.name" :value="item.id" />
+              </el-select>
+              </el-col>
+              <el-col :span="8">
+                <el-button plain color="#0554af" @click="addSubjects">添加课程</el-button>
+              </el-col>
+              <el-col :span="2" style="display: inline-flex;justify-content: center;align-items: center; cursor: pointer;">
+                <el-icon style="font-size: 20px;color: #b3b6bc;" @click="refresh">
+                  <Refresh />
+                </el-icon>
+              </el-col>
+            </template>
+
           </el-row>
         </div>
         <!--搜索区域 end-->
@@ -153,7 +172,7 @@ import { ref, reactive,toRefs, onMounted  } from 'vue'
 // 定义班级下拉选择项
 import {gradeClassListApi} from "../../api/student/student";
 import {getAllCourseListApi} from "../../api/teacher/teacher";
-import {deleteScoresApi, editScoresApi, getScoresListApi, addSubjectsApi} from "../../api/scores/scores";
+import {deleteScoresApi, getScoresListApi, addSubjectsApi, registerScoresApi} from "../../api/scores/scores";
 import { formatTime } from "../../utils/date"
 import {ElMessage} from 'element-plus'
 import { useUserStore } from '../../store/modules/user'
@@ -218,15 +237,14 @@ const loadData = async (state: any)=> {
   }
   const { data } = await getScoresListApi(params)
 
-  if(userInfo.role.name === '系统管理员'){
+  //TODO
+  if(userInfo.role.id === 1){
     state.tableData = data.content
     state.total = data.totalElements
   }
   else {
     state.tableData = data.content.filter((item: { uid: any }) => item.student.uid === userInfo.id.toString())
-    state.total = data.content.filter((item: { uid: any }) => item.student.uid === userInfo.id.toString()).length
-    // userNoStore.setStuno(state.tableData[0])
-    console.log(state.tableData[0])
+    state.total = data.totalElements
   }
   state.loading = false
 
@@ -250,24 +268,7 @@ const refresh = () => {
   // 更新数据
   loadData(state);
 }
-// 搜索
-// const search = () => {
-//   if (state.name !== null&&state.name !== "") {
-//     ElMessage({
-//       type: 'success',
-//       message: `学生姓名“${state.name}”搜索内容如下`,
-//     })
-//     loadData(state)
-//   }
 
-//   if (state.stuno !== null&&state.stuno !== "") {
-//     ElMessage({
-//       type: 'success',
-//       message: `学号“${state.stuno}”搜索内容如下`,
-//     })
-//     loadData(state)
-//   }
-// }
 // 切换页面的执行事件，  val 当前页码
 const changePage = (val) => {
   state.pageIndex = val
@@ -299,41 +300,26 @@ const searchScores = async () => {
   await loadData(state)
 }
 
-// // 定义单元格是否可编辑
-// const edit = ref(false)
-// // 双击单元格函数
-// const celldblclick = (row, column, cell, event)=> {
-//   const scoreTarget: any = state.tableData.find(item => {
-//     return item.id === row.id
-//   })
-//   if (scoreTarget !== undefined) {
-//     scoreTarget._originalData = { ...scoreTarget }
-//     scoreTarget.edit = !scoreTarget.edit
-//   }
-// }
-// // 取消编辑
-// const cancel = (key: any) => {
-//   key._originalData = { ...key }
-//   key.edit = !key.edit
-// }
-// // 保存编辑成绩
-// const editScores = async (record: { id: any; score: any; })=> {
-//   loading.value = true
-//   const { id,score } = record
-//   if(!score){
-//     loading.value = false
-//     ElMessage.error('提交失败，请更改成绩！')
-//     return
-//   }
-//   const { data } = await editScoresApi(id,score)
-//   if(data.status===200){
-//     ElMessage.success(data.message)
-//     await loadData(state)
-//   }else {
-//     ElMessage.error(data.message)
-//   }
-//   loading.value = false
-// }
+// 批量选课
+const registerScores = async () => {
+  if(gradeClassId.value < 1){
+    ElMessage.success('请选择班级')
+    console.log('gradeClassId.value:',gradeClassId.value)
+    return false
+  }
+  if(courseId.value < 1){
+    ElMessage.success('请选择学科')
+    return false
+  }
+  const { data } =  await registerScoresApi(gradeClassId.value,courseId.value)
+  if(data.status===200){
+    await loadData(state)
+    ElMessage.success(data.message)
+  }else {
+    ElMessage.error(data.message)
+  }
+
+}
 
 // 删除成绩信息
 const delScores = async (id:number)=> {
@@ -345,28 +331,28 @@ const delScores = async (id:number)=> {
     ElMessage.error('删除失败')
   }
 }
-// // 导出列表
-// const column = [
-//   {name: 'id',label: '成绩id'},
-//   {name: 'stuno',label: '学号'},
-//   {name: 'name',label: '学生姓名'},
-//   {name: 'coursename',label: '学科'},
-//   {name: 'score',label: '成绩'},
-//   {name: 'type',label: '类型'}
-// ]
-// const exportExcelAction = () => {
-//   // 处理表格数据
-//   const newTableData = state.tableData.flatMap((item: any)=> {
-//     return {...item,...item.course,...item.student}
-//   })
-//   exportExcel({
-//     column,
-//     data:newTableData,
-//     filename: '班级学科成绩数据',
-//     format: 'xlsx',
-//     autoWidth: true,
-//   })
-// }
+// 导出列表
+const column = [
+  {name: 'id',label: '成绩id'},
+  {name: 'stuno',label: '学号'},
+  {name: 'name',label: '学生姓名'},
+  {name: 'coursename',label: '学科'},
+  {name: 'score',label: '成绩'},
+  {name: 'type',label: '类型'}
+]
+const exportExcelAction = () => {
+  // 处理表格数据
+  const newTableData = state.tableData.flatMap((item: any)=> {
+    return {...item,...item.course,...item.student}
+  })
+  exportExcel({
+    column,
+    data:newTableData,
+    filename: '班级学科成绩数据',
+    format: 'xlsx',
+    autoWidth: true,
+  })
+}
 
 //挂载后加载数据
 onMounted(() => {
