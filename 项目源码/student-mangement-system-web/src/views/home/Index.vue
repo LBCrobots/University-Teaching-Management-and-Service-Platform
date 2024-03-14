@@ -33,7 +33,7 @@
           <el-icon> <Reading /> </el-icon>
         </div>
         <div class="data_right">
-          <h1>{{classNums}}<span>个</span></h1>
+          <h1>{{classNums-1}}<span>个</span></h1>
           <p>班级个数</p>
         </div>
       </div>
