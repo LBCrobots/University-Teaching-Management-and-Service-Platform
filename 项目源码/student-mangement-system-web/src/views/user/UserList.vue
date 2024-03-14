@@ -305,8 +305,6 @@ const column = [
   {name: 'email',label: '邮箱'},
   {name: 'remarks',label: '备注'}
 ]
-console.log('column',column)
-console.log(state.tableData)
 const exportExcelAction = () => {
   exportExcel({
     column,
