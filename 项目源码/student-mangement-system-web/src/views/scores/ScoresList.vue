@@ -258,7 +258,7 @@ const loadData2 = async (state: any)=> {
     state2.total = data.totalElements
   }
   else {
-    state2.tableData = data.content.filter((item: { uid: any }) => item.uid === userInfo.id.toString())
+    state2.tableData = data.content.filter((item: { uid: any }) => item.uid === userInfo.id)
     state2.total = data.totalElements
     let coursenoList = state.tableData.map(item => item.course.courseno);
     userNoStore.setTeachcourse(coursenoList)

@@ -112,7 +112,6 @@ async function uploadAvatar(item) {
 
 // 服务器路径
 const url = import.meta.env.VITE_APP_BASE_API
-
 // 提交基础信息
 const onBasicSubmit = (formEl: FormInstance | undefined) => {
   if (!formEl) return

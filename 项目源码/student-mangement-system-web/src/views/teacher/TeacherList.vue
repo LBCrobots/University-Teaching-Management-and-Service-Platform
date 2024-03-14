@@ -184,7 +184,7 @@ const loadData = async (state: any)=> {
     state.total = data.totalElements
   }
   else {
-    state.tableData = data.content.filter((item: { uid: any }) => item.uid === userInfo.id.toString())
+    state.tableData = data.content.filter((item: { uid: any }) => item.uid === userInfo.id)
     state.total = data.totalElements
     userNoStore.setTeachno(state.tableData[0].teachno)
   }

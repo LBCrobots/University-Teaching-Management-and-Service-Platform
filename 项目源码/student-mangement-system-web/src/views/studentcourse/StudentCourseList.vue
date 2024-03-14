@@ -243,7 +243,9 @@ const loadData = async (state: any)=> {
     state.total = data.totalElements
   }
   else {
-    state.tableData = data.content.filter((item: { uid: any }) => item.student.uid === userInfo.id.toString())
+    state.tableData = data.content
+    // console.log('userInfo:',typeof data.content[0].student.uid)
+    state.tableData = data.content.filter((item: { uid: any }) => item.student.uid === userInfo.id)
     state.total = data.totalElements
   }
   state.loading = false

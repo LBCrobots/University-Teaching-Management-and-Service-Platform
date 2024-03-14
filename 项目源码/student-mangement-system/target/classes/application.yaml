@@ -25,7 +25,7 @@ spring:
   mail:
     host: smtp.qq.com
     port: 465
-    username: 2804684346@qq.com  # 修改
+    username: 1532795384@qq.com  # 修改
     password: dcvnqakynwtkdghi  # 配置用户的密码（即上面我们申请到的授权码）
     properties:
       mail:

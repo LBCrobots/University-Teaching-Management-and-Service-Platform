@@ -46,7 +46,7 @@ public class PassportInterceptor implements HandlerInterceptor {
             }
             // 注册操作符合条件，继续执行。
             return true;
-        } else if (url.contains("/uploadFile")) {
+        } else if (url.contains("userIcon")) {
             log.info("图片请求，放行...");
             return true;
         }

@@ -52,7 +52,7 @@ public class ScoresController {
     @PostMapping
     public BaseResult registerScores(@RequestBody RegisterScoresModel scoresModel){
         scoresService.registerScores(scoresModel);
-        return BaseResult.success("登记成功");
+        return BaseResult.success("操作成功");
     }
 
 
