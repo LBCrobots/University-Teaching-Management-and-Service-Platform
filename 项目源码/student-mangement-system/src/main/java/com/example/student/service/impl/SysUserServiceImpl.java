@@ -126,6 +126,7 @@ public class SysUserServiceImpl implements ISysUserService {
             student.setName(sysUser.getRealname());
             student.setSex(sysUser.getSex());
             student.setUid(sysUser.getId());
+            student.setStuno("未定");
             updateMapper.addStudent(student);
         }
         return dbSysUser.getId()!=null;
@@ -158,23 +159,32 @@ public class SysUserServiceImpl implements ISysUserService {
             String encryptedPassword = Md5Util.MD5(sysUser.getPassword());
             dbSysUser.setPassword(encryptedPassword);
         }
+
+        sysUserRepository.save(dbSysUser);
         //根据id找到teacher表或者student表的uid，实现更新
         Long roleId = updateMapper.getRole(sysUser.getId());
+        log.info("roleId是:{}",roleId);
         Long uid = sysUser.getId();
-        if (roleId == 2) {
+        log.info("uid是:{}",uid);
+        if (roleId == 2L) {
             Teacher dbTeacher = updateMapper.getByTeacherUid(uid);
+            log.info("dbTeacher是:{}",dbTeacher);
             dbTeacher.setUpdateTime(new Timestamp(System.currentTimeMillis()));
             dbTeacher.setName(dbSysUser.getRealname());
             dbTeacher.setSex(dbSysUser.getSex());
+            dbTeacher.setRemarks(dbSysUser.getRemarks());
+            log.info("dbTeacher2是:{}",dbTeacher);
             updateMapper.updateByTeacherUid(dbTeacher);
-        } else if (roleId == 3) {
+        } else if (roleId == 3L) {
             Student dbStudent = updateMapper.getByStudentUid(uid);
+            log.info("dbStudent是:{}",dbStudent);
             dbStudent.setUpdateTime(new Timestamp(System.currentTimeMillis()));
             dbStudent.setName(dbSysUser.getRealname());
             dbStudent.setSex(dbSysUser.getSex());
+            dbStudent.setRemarks(dbSysUser.getRemarks());
+            log.info("dbTeacher2是:{}",dbStudent);
             updateMapper.updateByStudentUid(dbStudent);
         }
-        sysUserRepository.save(dbSysUser);
     }
 
     /**

@@ -13,6 +13,7 @@ import com.example.utils.PageVo;
 import com.example.utils.ManageUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +28,7 @@ import java.util.Map;
 
 /**功能描述：系统用户前端控制器*/
 @RestController
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("user")
 public class UserController {
@@ -144,7 +146,9 @@ public class UserController {
     public BaseResult updateInfo(@RequestBody SysUser sysUser, HttpServletRequest request){
         // 获取登录用户Id
         String token = (String)request.getServletContext().getAttribute("token");
+        log.info("token是：{}", token);
         Long userId = HutoolJWTUtil.parseToken(token);
+        log.info("userId是：{}", userId);
         sysUser.setId(userId);
         sysUserService.editUser(sysUser);
         return BaseResult.success("更新成功");

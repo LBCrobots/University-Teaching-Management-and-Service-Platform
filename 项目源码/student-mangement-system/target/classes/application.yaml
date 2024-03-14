@@ -2,7 +2,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: 114514
+    password: 123456
     url: jdbc:mysql://localhost:3306/xueden_student_mangement_system?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
     hikari:
       minimum-idle: 10
@@ -25,7 +25,7 @@ spring:
   mail:
     host: smtp.qq.com
     port: 465
-    username: 1532795384@qq.com  # 修改
+    username: 2804684346@qq.com
     password: dcvnqakynwtkdghi  # 配置用户的密码（即上面我们申请到的授权码）
     properties:
       mail:
