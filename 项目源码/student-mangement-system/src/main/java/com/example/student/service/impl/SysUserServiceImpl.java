@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Map;
 
 /**功能描述：系统用户业务接口实现类*/
@@ -167,14 +168,18 @@ public class SysUserServiceImpl implements ISysUserService {
         Long uid = sysUser.getId();
         log.info("uid是:{}",uid);
         if (roleId == 2L) {
-            Teacher dbTeacher = updateMapper.getByTeacherUid(uid);
-            log.info("dbTeacher是:{}",dbTeacher);
-            dbTeacher.setUpdateTime(new Timestamp(System.currentTimeMillis()));
-            dbTeacher.setName(dbSysUser.getRealname());
-            dbTeacher.setSex(dbSysUser.getSex());
-            dbTeacher.setRemarks(dbSysUser.getRemarks());
-            log.info("dbTeacher2是:{}",dbTeacher);
-            updateMapper.updateByTeacherUid(dbTeacher);
+            List<Teacher> dbTeacherList = updateMapper.getByTeacherUid(uid);
+            log.info("dbTeacherList是:{}",dbTeacherList);
+            if (dbTeacherList != null && !dbTeacherList.isEmpty()) {
+                for (Teacher dbTeacher : dbTeacherList) {
+                    dbTeacher.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+                    dbTeacher.setName(dbSysUser.getRealname());
+                    dbTeacher.setSex(dbSysUser.getSex());
+                    dbTeacher.setRemarks(dbSysUser.getRemarks());
+                    log.info("dbTeacher2是:{}", dbTeacher);
+                    updateMapper.updateByTeacherUid(dbTeacher);
+                }
+            }
         } else if (roleId == 3L) {
             Student dbStudent = updateMapper.getByStudentUid(uid);
             log.info("dbStudent是:{}",dbStudent);
