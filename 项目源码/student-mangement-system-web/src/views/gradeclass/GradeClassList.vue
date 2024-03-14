@@ -165,7 +165,7 @@ const loadData = async (state: any)=> {
     'searchValue': state.searchValue
   }
   const { data } = await getGradeClassListApi(params)
-  state.tableData = data.content
+  state.tableData = data.content.filter((item: { name: string; })=> item.name !== '未定')
   state.total = data.totalElements
   state.loading = false
 }

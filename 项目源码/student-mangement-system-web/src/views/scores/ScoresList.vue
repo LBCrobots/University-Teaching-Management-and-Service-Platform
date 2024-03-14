@@ -168,7 +168,7 @@ async function gradeClassList() {
   try {
     const { data } = await gradeClassListApi()
     if (data.status === 200) {
-      gradeClassOptions.value = data.result
+      gradeClassOptions.value = data.result.filter((item: { name: string; }) => item.name !== '未定')
     }
   } catch (e) {
     console.log(e)
