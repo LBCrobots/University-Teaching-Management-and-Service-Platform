@@ -30,7 +30,7 @@ public interface UpdateMapper {
 
     /*根据uid查询教师信息*/
     @Select("SELECT * from s_teacher where uid = #{uid}")
-    Teacher getByTeacherUid(Long uid);
+    List<Teacher> getByTeacherUid(Long uid);
 
     /*根据uid更新教师信息*/
     void updateByTeacherUid(Teacher teacher);
