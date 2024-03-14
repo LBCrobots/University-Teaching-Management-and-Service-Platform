@@ -35,7 +35,7 @@ spring:
             class: javax.net.ssl.SSLSocketFactory
 # 用户头像存放路径
 user:
-  icon: E:\\student-mangement-system
+  icon: E:\\student-mangement-system\\
 
 server:
   port: 8080
