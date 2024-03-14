@@ -7,15 +7,16 @@
     <update id="updateByTeacherUid">
         update s_teacher
         <set>
-            <if test="name != null and username != ''">
+            <if test="name != null">
                 name = #{name},
             </if>
-            <if test="sex != null and password != ''">
+            <if test="sex != null">
                 sex = #{sex},
             </if>
             <if test="updateTime != null">
                 update_time = #{updateTime}
             </if>
+                remarks = #{remarks}
         </set>
         where uid = #{uid}
     </update>
@@ -24,17 +25,17 @@
     <update id="updateByStudentUid">
         update s_student
         <set>
-            <if test="name != null and username != ''">
+            <if test="name != null">
                 name = #{name},
             </if>
-            <if test="sex != null and password != ''">
+            <if test="sex != null">
                 sex = #{sex},
             </if>
             <if test="updateTime != null">
                 update_time = #{updateTime}
             </if>
+            remarks = #{remarks}
         </set>
         where uid = #{uid}
     </update>
-
 </mapper>
