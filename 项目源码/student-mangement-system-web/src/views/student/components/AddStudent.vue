@@ -2,7 +2,7 @@
   <el-form ref="ruleFormRef" :rules="rules"  :model="formStudent"  label-width="80px">
     <el-row>
       <el-col :span="12">
-        <el-form-item prop="gradeClass" label="所属班级">
+        <el-form-item label="所属班级" prop="gradeClass">
           <el-select v-model="formStudent.gradeClass.id" placeholder="请选择班级" style="width: 100%;">
             <el-option v-for="item in gradeClassOptions" :key="item.id" :label="item.name" :value="item.id" />
           </el-select>
@@ -53,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-import {ref, reactive} from 'vue'
+import {ref, reactive, Ref} from 'vue'
 import {ElMessage} from 'element-plus'
 import {addStudentApi, gradeClassListApi} from "../../../api/student/student"
 import type { FormInstance, FormRules } from 'element-plus'
@@ -77,7 +77,7 @@ const rules = reactive<FormRules>({
   sex: [{ required: true, message: '性别不能为空', trigger: 'blur' }],
   phone: [{ required: true, message: '手机号不能为空', trigger: 'blur' }],
   qq: [{ required: true, message: 'qq号不能为空', trigger: 'blur' }],
-  gradeClass: [{ required: true, message: '班级不能为空', trigger: 'blur' }],
+  gradeClass: [{ required: true, message: '班级不能为空', trigger: 'blur'}],
   stuno: [{ required: true, message: '班级不能为空', trigger: 'blur' }],
 })
 // 新增学生信息
@@ -102,7 +102,7 @@ const addStudent = async (formEl: FormInstance | undefined) => {
 }
 
 // 定义班级下拉选择项
-const gradeClassOptions = ref<object[]>([])
+const gradeClassOptions: Ref<{id:number, name:string}[]> = ref([{id:1, name:'defaultClass'}])
 // 获取所有班级列表
 async function gradeClassList() {
   try {
