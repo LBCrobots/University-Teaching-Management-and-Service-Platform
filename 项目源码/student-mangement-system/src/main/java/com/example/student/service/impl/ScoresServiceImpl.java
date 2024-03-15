@@ -10,6 +10,7 @@ import com.example.student.domain.Student;
 import com.example.student.repository.CourseScoresMapper;
 import com.example.student.repository.ScoresRepository;
 import com.example.student.repository.StudentRepository;
+import com.example.student.repository.UpdateMapper;
 import com.example.student.service.IScoresService;
 import com.example.student.service.dto.ScoresQueryCriteria;
 import com.example.student.vo.BarEchartsSeriesModel;
@@ -49,6 +50,7 @@ public class ScoresServiceImpl implements IScoresService {
 
     private final CourseScoresMapper courseScoresMapper;
 
+    private final UpdateMapper updateMapper;
     /**
      * 获取成绩列表数据
      * @param queryCriteria
@@ -108,6 +110,8 @@ public class ScoresServiceImpl implements IScoresService {
     public boolean addCourseSelect(Scores scores){
         Long studentId = scores.getStudent().getId();
         log.info("studentId是:{}",studentId);
+        Long gradeClassId = scores.getGradeClass().getId();
+        log.info("gradeClassId是:{}",gradeClassId);
 
         List<HashMap<String, Object>> courseIdList = courseScoresMapper.findCourseIdByStudentId(studentId);
         log.info("courseList有：{}",courseIdList);
@@ -129,6 +133,7 @@ public class ScoresServiceImpl implements IScoresService {
         scores.setType("未批改");
         scores.setRemarks("初始成绩");
         scoresRepository.save(scores);
+        courseScoresMapper.addGradeClassId(studentId, gradeClassId);
         return true;
     }
 
