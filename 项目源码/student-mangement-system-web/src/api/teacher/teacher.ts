@@ -44,10 +44,13 @@ export function deleteTeacherApi(id:number) {
     })
 }
 
-//TODO 根据uid获取教师信息
-export function getTeacherByUidApi(uid:string) {
+//TODO 根据教师uid获取教师信息
+export function getCourseByTeacherUidApi(uid:string) {
     return request({
-        url: `teacher/uid/${uid}`,
-        method: 'get'
+        url: `teacher`,
+        method: 'get',
+        data: {
+
+        }
     })
 }
