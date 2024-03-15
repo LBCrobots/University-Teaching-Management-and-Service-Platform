@@ -284,8 +284,7 @@ const addSubjects = async () => {
     ElMessage.success('请选择学科')
     return false
   }
-  console.log(typeof courseId.value)
-  const { data } =  await addSubjectsApi(parseInt(userNoStore.studentId),courseId.value,parseInt(userNoStore.gradeClassId))
+  const { data } =  await addSubjectsApi(userNoStore.studentId,courseId.value,userNoStore.gradeClassId)
   if(data.status===200){
     await loadData(state)
     ElMessage.success(data.message)
