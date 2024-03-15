@@ -146,7 +146,7 @@
 
 <script setup lang="ts">
 import { ref,reactive,toRefs, onMounted  } from 'vue'
-import {deleteTeacherApi, getTeacherApi, getTeacherListApi} from "../../api/teacher/teacher"
+import {deleteTeacherApi, getTeacherApi, getTeacherListApi,getCourseByTeacherUidApi} from "../../api/teacher/teacher"
 import { formatTime } from "../../utils/date"
 import {ElMessage} from 'element-plus'
 import AddTeacher from "./components/AddTeacher.vue"
@@ -176,15 +176,16 @@ const loadData = async (state: any)=> {
     'pageSize': state.pageSize,
     'searchValue': state.searchValue
   }
-  const { data } = await getTeacherListApi(params)
 
   //TODO
   if(userInfo.role.id === 1){
+    const { data } = await getTeacherListApi(params)
     state.tableData = data.content
     state.total = data.totalElements
   }
   else {
-    state.tableData = data.content.filter((item: { uid: any }) => item.uid === userInfo.id)
+    const { data } = await getCourseByTeacherUidApi(userInfo.id,params)
+    state.tableData = data.content
     state.total = data.totalElements
     userNoStore.setTeachno(state.tableData[0].teachno)
   }
