@@ -358,7 +358,6 @@ const exportExcelAction = () => {
 
 //挂载后加载数据
 onMounted(() => {
-  loadData2(state2)
   loadData(state)
   getAllCourseList()
   gradeClassList()
