@@ -90,8 +90,8 @@ const toBindRules = reactive({
     { required: true, message: '请输入邮箱', trigger: 'blur'},
     { type: 'email',  message: '请输入正确的邮箱地址', trigger: ['blur', 'change']}
   ],
-  code: [{ required: true, message: "请输入用户名", trigger: "blur" }],
-  code2: [{ required: true, message: "请输入用户名", trigger: "blur" }],
+  code: [{ required: true, message: "请输入邮箱验证码", trigger: "blur" }],
+  code2: [{ required: true, message: "请输入新邮箱验证码", trigger: "blur" }],
 })
 const { userInfo } = useUserStore()
 // 一个计算属性 将邮箱中间位置转为星号
@@ -179,6 +179,7 @@ const toBindSubmit = async () => {
     codeText.value = "获取验证码";
     const { data } = await updateEmailApi(state.toBind.email,state.toBind.code2)
     if(data.status===200){
+      userInfo.email = state.toBind.email
       // 提示
       ElMessage({
         message: '更换绑定邮箱成功~',

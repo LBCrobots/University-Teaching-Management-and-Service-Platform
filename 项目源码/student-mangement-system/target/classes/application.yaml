@@ -25,8 +25,8 @@ spring:
   mail:
     host: smtp.qq.com
     port: 465
-    username: 893893@qq.com
-    password: dcvnqakynwtkdghi  # 配置用户的密码（即上面我们申请到的授权码）
+    username: 1532795384@qq.com
+    password: fxuwxeccjxatjjch  # 配置用户的密码（即上面我们申请到的授权码）
     properties:
       mail:
         debug: true # 开启 debug，这样方便开发者查看邮件发送日志
