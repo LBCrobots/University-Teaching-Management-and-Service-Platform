@@ -4,6 +4,7 @@ import com.example.base.BaseResult;
 import com.example.exception.BadRequestException;
 import com.example.student.domain.Teacher;
 import com.example.student.service.ITeacherService;
+import com.example.student.service.dto.ScoresQueryCriteria;
 import com.example.student.service.dto.TeacherQueryCriteria;
 import com.example.utils.PageVo;
 import org.springframework.data.domain.PageRequest;
@@ -88,6 +89,21 @@ public class TeacherController {
         }
         teacherService.deleteById(id);
         return BaseResult.success("删除成功");
+    }
+
+    /**
+     * 获取老师个人课程列表数据
+     *
+     * @param uid     老师个人信息
+     * @param queryCriteria 课程查询条件
+     * @param pageVo     分页信息
+     * @return 老师个人课程列表数据
+     */
+    @GetMapping("/getTeacherPersonalList")
+    public ResponseEntity<Object> getTeacherPersonalList(Long uid, TeacherQueryCriteria queryCriteria, PageVo pageVo){
+        Pageable pageable = PageRequest.of(pageVo.getPageIndex()-1,pageVo.getPageSize(), Sort.Direction.DESC, "id");
+        Object result = teacherService.getTeacherPersonalList(uid, queryCriteria, pageable);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 }

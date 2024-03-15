@@ -1,6 +1,7 @@
 package com.example.student.service;
 
 import com.example.student.domain.Teacher;
+import com.example.student.service.dto.ScoresQueryCriteria;
 import com.example.student.service.dto.TeacherQueryCriteria;
 import org.springframework.data.domain.Pageable;
 
@@ -46,4 +47,6 @@ public interface ITeacherService {
      * @return
      */
     long getCount();
+
+    Object getTeacherPersonalList(Long uid, TeacherQueryCriteria queryCriteria, Pageable pageable);
 }

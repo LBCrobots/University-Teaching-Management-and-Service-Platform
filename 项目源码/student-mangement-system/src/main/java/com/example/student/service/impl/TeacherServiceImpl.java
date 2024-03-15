@@ -2,15 +2,19 @@ package com.example.student.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
+import com.example.student.domain.Scores;
 import com.example.student.domain.Teacher;
 import com.example.student.repository.TeacherRepository;
 import com.example.student.service.ITeacherService;
+import com.example.student.service.dto.ScoresQueryCriteria;
 import com.example.student.service.dto.TeacherQueryCriteria;
 import com.example.utils.PageUtil;
 import com.example.utils.QueryHelp;
+import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -87,5 +91,23 @@ public class TeacherServiceImpl implements ITeacherService {
     @Override
     public long getCount() {
         return teacherRepository.count();
+    }
+
+    /**
+     * 获取学生个人课程列表数据
+     *
+     * @param uid     老师个人信息
+     * @param queryCriteria 课程查询条件
+     * @param pageable      分页信息
+     * @return 老师个人信息列表数据
+     */
+    public Object getTeacherPersonalList(Long uid, TeacherQueryCriteria queryCriteria, Pageable pageable) {
+        Specification<Teacher> specification = (root, query, criteriaBuilder) -> {
+            Predicate teacherPredicate = criteriaBuilder.equal(root.get("uid"), uid);
+            Predicate coursePredicate = QueryHelp.getPredicate(root, queryCriteria, criteriaBuilder);
+            return criteriaBuilder.and(teacherPredicate, coursePredicate);
+        };
+        Page<Teacher> page = teacherRepository.findAll(specification, pageable);
+        return PageUtil.toPage(page);
     }
 }

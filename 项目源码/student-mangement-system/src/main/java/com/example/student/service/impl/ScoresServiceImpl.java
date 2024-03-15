@@ -12,17 +12,20 @@ import com.example.student.repository.ScoresRepository;
 import com.example.student.repository.StudentRepository;
 import com.example.student.repository.UpdateMapper;
 import com.example.student.service.IScoresService;
+import com.example.student.service.dto.CourseQueryCriteria;
 import com.example.student.service.dto.ScoresQueryCriteria;
 import com.example.student.vo.BarEchartsSeriesModel;
 import com.example.student.vo.EchartsSeriesModel;
 import com.example.student.vo.RegisterScoresModel;
 import com.example.utils.PageUtil;
 import com.example.utils.QueryHelp;
+import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.juli.logging.Log;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -398,4 +401,61 @@ public class ScoresServiceImpl implements IScoresService {
         resultMap.put("barEchartsSeriesList",barEchartsSeriesList);
         return resultMap;
     }
+
+    /**
+     * 获取学生个人课程列表数据
+     *
+     * @param studentId     学生ID
+     * @param queryCriteria 课程查询条件
+     * @param pageable      分页信息
+     * @return 学生个人课程列表数据
+     */
+    public Object getStudentScoresList(Long studentId, ScoresQueryCriteria queryCriteria, Pageable pageable) {
+        // 构建查询条件
+        Specification<Scores> specification = (root, query, criteriaBuilder) -> {
+            // 添加学生ID的条件
+            Predicate studentPredicate = criteriaBuilder.equal(root.get("student").get("id"), studentId);
+
+            // 添加课程查询条件
+            Predicate coursePredicate = QueryHelp.getPredicate(root, queryCriteria, criteriaBuilder);
+
+            // 组合学生ID条件和课程查询条件
+            return criteriaBuilder.and(studentPredicate, coursePredicate);
+        };
+
+        // 查询学生个人课程列表数据
+        Page<Scores> page = scoresRepository.findAll(specification, pageable);
+
+        // 转换为通用分页格式并返回
+        return PageUtil.toPage(page);
+    }
+
+    @Override
+    public Object getStudentsByTeacherCourses(Long uid, ScoresQueryCriteria queryCriteria, Pageable pageable) {
+        // 根据老师的 UID 获取老师教的所有课程的 ID 列表
+        List<Long> teacherCourses = updateMapper.getCoursesByTeacherUid(uid);
+        log.info("teacherCourses是：{}", teacherCourses);
+
+        // 构建总的查询条件
+        Specification<Scores> specification = (root, query, criteriaBuilder) -> {
+            // 创建一个空的 Predicate，用于后续组合
+            Predicate predicate = criteriaBuilder.conjunction();
+
+            // 遍历老师教授的每门课程
+            for (Long courseId : teacherCourses) {
+                // 为每门课程构建查询条件，添加到总的查询条件中
+                Predicate coursePredicate = criteriaBuilder.equal(root.get("course").get("id"), courseId);
+                predicate = criteriaBuilder.or(predicate, coursePredicate);
+            }
+            return predicate;
+        };
+
+        // 查询选修老师教授课程的学生列表
+        Page<Scores> scoresPage = scoresRepository.findAll(specification, pageable);
+
+        // 转换为通用分页格式并返回
+        return PageUtil.toPage(scoresPage);
+    }
+
+
 }
