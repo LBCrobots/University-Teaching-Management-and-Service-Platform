@@ -13,7 +13,6 @@ import com.example.utils.PageVo;
 import com.example.utils.ManageUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,9 +24,11 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.HashMap;
 import java.util.Map;
 
+import jakarta.mail.Session;
+import jakarta.mail.internet.MimeMessage;
+
 /**功能描述：系统用户前端控制器*/
 @RestController
-@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("user")
 public class UserController {
@@ -37,12 +38,6 @@ public class UserController {
      */
     @Value("${user.icon}")
     private String userIcon;
-
-    /**
-     * 邮件发送方
-     */
-    @Value("${spring.mail.username}")
-    private String from;
 
     private final ISysUserService sysUserService;
 
@@ -137,7 +132,7 @@ public class UserController {
     }
 
     /**
-         * 修改个人信息
+     * 修改个人信息
      * @param sysUser
      * @return
      */
@@ -145,9 +140,7 @@ public class UserController {
     public BaseResult updateInfo(@RequestBody SysUser sysUser, HttpServletRequest request){
         // 获取登录用户Id
         String token = (String)request.getServletContext().getAttribute("token");
-        log.info("token是：{}", token);
         Long userId = HutoolJWTUtil.parseToken(token);
-        log.info("userId是：{}", userId);
         sysUser.setId(userId);
         sysUserService.editUser(sysUser);
         return BaseResult.success("更新成功");
@@ -159,8 +152,7 @@ public class UserController {
      * @return
      */
     @GetMapping("sendEmail")
-    public BaseResult sendEmail(@RequestParam("email")String email, HttpServletRequest request){
-        // 发送到旧邮箱
+    public BaseResult sendEmail(@RequestParam("email")String email, HttpServletRequest request) throws Exception {
         if(email==null||email==""){
             // 获取登录用户Id
             String token = (String)request.getServletContext().getAttribute("token");
@@ -170,10 +162,17 @@ public class UserController {
         }
         int code = ManageUtil.randomSixNums();
         String content = "验证码："+code+"此验证码用于更换邮箱绑定，请勿将验证码告知他人，有效期3分钟，请妥善保管。";
-        mailService.sendSimpleMail(from,email,email,"修改邮箱验证码",content);
+
+        // 发送到旧邮箱
+        Session session = mailService.getSession();
+        MimeMessage message = mailService.createMimeMessage(session, email, content);
+        mailService.sendMessage(session, message);
+
         request.getServletContext().setAttribute("code",code);
         return BaseResult.success();
     }
+
+
 
     /**
      * 校验验证码
@@ -188,12 +187,12 @@ public class UserController {
         }
         System.out.println("request.getServletContext().getAttribute(\"code\"):::"+request.getServletContext().getAttribute("code"));
         Integer sessionCode = (Integer) request.getServletContext().getAttribute("code");
-       if(sessionCode==null){
-           return BaseResult.fail("验证码已过期！");
-       }
-       if(!sessionCode.equals(code)){
-           return BaseResult.fail("验证码输入不正确，请重新输入！");
-       }
+        if(sessionCode==null){
+            return BaseResult.fail("验证码已过期！");
+        }
+        if(!sessionCode.equals(code)){
+            return BaseResult.fail("验证码输入不正确，请重新输入！");
+        }
         return BaseResult.success();
     }
 
