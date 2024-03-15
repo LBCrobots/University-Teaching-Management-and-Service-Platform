@@ -1,2 +1,9 @@
 # 项目排除路径
 /target/
+.idea
+
+# 项目排除配置文件
+application.yaml
+src/main/resources/application.yaml
+target/classes/application.yaml
+
