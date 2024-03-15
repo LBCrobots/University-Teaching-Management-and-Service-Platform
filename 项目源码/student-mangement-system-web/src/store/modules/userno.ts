@@ -6,6 +6,7 @@ export const useUserNoStore = defineStore({
         teachno: '',
         teachcourse: [],
         studentId: '',
+        gradeClassId: '',
     }),
     actions: {
         setTeachno(teachno: string) {
@@ -16,6 +17,9 @@ export const useUserNoStore = defineStore({
         },
         setStudentId(studentId: string) {
             this.studentId = studentId
+        },
+        setGradeClassId(gradeClassId: string) {
+            this.gradeClassId = gradeClassId
         }
     }
 })

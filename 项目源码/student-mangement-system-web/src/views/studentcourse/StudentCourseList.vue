@@ -244,9 +244,10 @@ const loadData = async (state: any)=> {
   }
   else {
     state.tableData = data.content
-    // console.log('userInfo:',typeof data.content[0].student.uid)
     state.tableData = data.content.filter((item: { uid: any }) => item.student.uid === userInfo.id)
     state.total = data.totalElements
+    userNoStore.setStudentId(state.tableData[0].student.id)
+    userNoStore.setGradeClassId(state.tableData[0].student.gradeClass.id)
   }
   state.loading = false
 
@@ -283,7 +284,8 @@ const addSubjects = async () => {
     ElMessage.success('请选择学科')
     return false
   }
-  const { data } =  await addSubjectsApi(gradeClassId.value,courseId.value)
+  console.log(typeof courseId.value)
+  const { data } =  await addSubjectsApi(parseInt(userNoStore.studentId),courseId.value,parseInt(userNoStore.gradeClassId))
   if(data.status===200){
     await loadData(state)
     ElMessage.success(data.message)

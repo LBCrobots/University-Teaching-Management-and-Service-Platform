@@ -46,13 +46,14 @@ export function getCourseByStudentUidApi(uid:string) {
 }
 
 //TODO 添加课程
-export function addSubjectsApi(gradeClassId:number,courseId:number) {
+export function addSubjectsApi(studentId:number,courseId:number,gradeClassId:number) {
     return request({
-        url: 'scores',
+        url: 'scores/addCourseSelect',
         method: 'post',
         data: {
-            gradeClassId: gradeClassId,
-            courseId: courseId
+            student: studentId,
+            course: courseId,
+            gradeClass: gradeClassId
         }
     })
 }
