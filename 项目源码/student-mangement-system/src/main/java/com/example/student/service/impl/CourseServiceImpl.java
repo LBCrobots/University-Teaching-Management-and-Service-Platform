@@ -5,13 +5,17 @@ import cn.hutool.core.bean.copier.CopyOptions;
 import com.example.student.domain.Course;
 
 import com.example.student.repository.CourseRepository;
+import com.example.student.repository.CourseScoresMapper;
+import com.example.student.repository.ScoresRepository;
 import com.example.student.service.ICourseService;
 import com.example.student.service.dto.CourseQueryCriteria;
 import com.example.utils.PageUtil;
 import com.example.utils.QueryHelp;
+import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +29,9 @@ public class CourseServiceImpl implements ICourseService {
 
     private final CourseRepository courseRepository;
 
+    private final CourseScoresMapper courseScoresMapper;
+
+    private final ScoresRepository scoresRepository;
     /**
      * 获取课程列表数据
      * @param queryCriteria
@@ -98,4 +105,5 @@ public class CourseServiceImpl implements ICourseService {
     public long getCount() {
         return courseRepository.count();
     }
+
 }

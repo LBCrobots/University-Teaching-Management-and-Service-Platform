@@ -172,7 +172,7 @@ import { ref, reactive,toRefs, onMounted  } from 'vue'
 // 定义班级下拉选择项
 import {gradeClassListApi} from "../../api/student/student";
 import {getAllCourseListApi} from "../../api/teacher/teacher";
-import {deleteScoresApi, getScoresListApi, addSubjectsApi, registerScoresApi} from "../../api/scores/scores";
+import {deleteScoresApi, getScoresListApi, addSubjectsApi, registerScoresApi, getCourseByStudentIdApi} from "../../api/scores/scores";
 import { formatTime } from "../../utils/date"
 import {ElMessage} from 'element-plus'
 import { useUserStore } from '../../store/modules/user'
@@ -235,19 +235,20 @@ const loadData = async (state: any)=> {
     'courseId': courseId.value,
     'gradeClassId': gradeClassId.value
   }
-  const { data } = await getScoresListApi(params)
 
-  //TODO
+  const { data } = await getScoresListApi(params)
+  userNoStore.setStudentId(data.content[0].student.id)
+  userNoStore.setGradeClassId(data.content[0].student.gradeClass.id)
+
   if(userInfo.role.id === 1){
+    const { data } = await getScoresListApi(params)
     state.tableData = data.content
     state.total = data.totalElements
   }
   else {
+    const { data } = await getCourseByStudentIdApi(userNoStore.studentId, params)
     state.tableData = data.content
-    state.tableData = data.content.filter((item: { uid: any }) => item.student.uid === userInfo.id)
     state.total = data.totalElements
-    userNoStore.setStudentId(state.tableData[0].student.id)
-    userNoStore.setGradeClassId(state.tableData[0].student.gradeClass.id)
   }
   state.loading = false
 

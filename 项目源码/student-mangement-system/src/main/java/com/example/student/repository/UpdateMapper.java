@@ -35,11 +35,14 @@ public interface UpdateMapper {
     /*根据uid更新教师信息*/
     void updateByTeacherUid(Teacher teacher);
 
+    /*根据uid查询学生信息*/
     @Select("SELECT * from s_student where uid = #{uid}")
     Student getByStudentUid(Long uid);
 
+    /*根据uid更新学生信息*/
     void updateByStudentUid(Student student);
-
+    
+    /*根据uid删除*/
     @Delete("DELETE from s_teacher where uid = #{uid}")
     void deleteTeacher(Long uid);
 
@@ -49,4 +52,8 @@ public interface UpdateMapper {
     /*根据用户id获取其role类型*/
     @Select("SELECT role_id from sys_user where id = #{id}")
     Long getRole(Long id);
+
+
+    @Select("SELECT course_id from s_teacher where uid = #{uid}")
+    List<Long> getCoursesByTeacherUid(Long uid);
 }
