@@ -1,5 +1,5 @@
 <template>
-  <el-col class="hidden-md-and-down" :lg="6" :xl="6">
+  <el-col class="hidden-md-and-down" :md="6" :lg="6" :xl="6">
     <div class="right_box">
       <h3 class="title">
         <el-icon style="margin-right: 10px;">
