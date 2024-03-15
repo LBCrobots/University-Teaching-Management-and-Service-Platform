@@ -187,7 +187,7 @@ public class SysUserServiceImpl implements ISysUserService {
             dbStudent.setName(dbSysUser.getRealname());
             dbStudent.setSex(dbSysUser.getSex());
             dbStudent.setRemarks(dbSysUser.getRemarks());
-            log.info("dbTeacher2是:{}",dbStudent);
+            log.info("dbTeacher3是:{}",dbStudent);
             updateMapper.updateByStudentUid(dbStudent);
         }
     }
