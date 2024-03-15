@@ -58,7 +58,7 @@ export function addSubjectsApi(studentId:string,courseId:number,gradeClassId:str
 //TODO 根据教师uid获取教师所教课程，通过所教课程查找对应课程的成绩
 export function getScoresByTeacherUidApi(uid:number, data:object) {
     return request({
-        url: `scores/getScoresByTeacherUid`,
+        url: `scores/getStudentsByTeacherCourses`,
         method: 'get',
         data: uid,
         params: data
