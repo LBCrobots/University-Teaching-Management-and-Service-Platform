@@ -43,7 +43,8 @@ web框架：SpringBoot3.X
 学生可查看自己的选课信息  
 ![image](https://github.com/Jzxcvbnm/University-Teaching-Management-and-Service-Platform/assets/96617124/59475dca-41e8-45f3-9819-45b7481d2fc1)
 
-
+## 注意
+导出项目后自行在\student-mangement-system\src\main\resources目录下添加application.yaml文件
 
 
 
