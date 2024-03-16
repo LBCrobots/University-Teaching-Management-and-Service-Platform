@@ -441,12 +441,15 @@ public class ScoresServiceImpl implements IScoresService {
             // 创建一个空的 Predicate，用于后续组合
             Predicate predicate = criteriaBuilder.conjunction();
 
-            // 遍历老师教授的每门课程
-            for (Long courseId : teacherCourses) {
-                // 为每门课程构建查询条件，添加到总的查询条件中
-                Predicate coursePredicate = criteriaBuilder.equal(root.get("course").get("id"), courseId);
-                predicate = criteriaBuilder.or(predicate, coursePredicate);
-            }
+            // 添加老师教授课程的查询条件
+            Predicate coursePredicate = root.get("course").get("id").in(teacherCourses);
+
+            // 添加课程其他查询条件
+            Predicate otherCriteriaPredicate = QueryHelp.getPredicate(root, queryCriteria, criteriaBuilder);
+
+            // 组合查询条件
+            predicate = criteriaBuilder.and(coursePredicate, otherCriteriaPredicate);
+
             return predicate;
         };
 
