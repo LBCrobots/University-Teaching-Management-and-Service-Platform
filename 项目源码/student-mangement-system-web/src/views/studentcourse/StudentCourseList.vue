@@ -237,11 +237,12 @@ const loadData = async (state: any)=> {
     'courseId': courseId.value,
     'gradeClassId': gradeClassId.value
   }
-  
-  const {data}  = await getStudentInfoByStudentUIdApi(userInfo.id)
+  if(userInfo.role.id ===3){
+    const {data}  = await getStudentInfoByStudentUIdApi(userInfo.id)
+    userNoStore.studentId = data.id
+    userNoStore.gradeClassId = data.gradeClassId
+  }
 
-  userNoStore.studentId = data.id
-  userNoStore.gradeClassId = data.gradeClassId
 
   if(userInfo.role.id === 1){
     const { data } = await getScoresListApi(params)
