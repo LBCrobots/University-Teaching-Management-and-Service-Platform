@@ -60,17 +60,20 @@ export function getScoresByTeacherUidApi(uid:number, data:object) {
     return request({
         url: `scores/getStudentsByTeacherCourses`,
         method: 'get',
-        data: uid,
-        params: data
+        params: {
+            uid: uid,
+            ...data
+        }
     })
 }
 
-//TODO 根据学生id获取课程信息
 export function getCourseByStudentIdApi(id:number, data:object) {
     return request({
         url: `scores/getStudentScoresList`,
         method: 'get',
-        data: id,
-        params: data
+        params: {
+            studentId: id,
+            ...data
+        }
     })
 }

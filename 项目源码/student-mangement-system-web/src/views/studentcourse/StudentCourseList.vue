@@ -246,6 +246,8 @@ const loadData = async (state: any)=> {
     state.total = data.totalElements
   }
   else {
+    console.log('userNoStore.studentId:',userNoStore.studentId)
+    console.log('params:',params)
     const { data } = await getCourseByStudentIdApi(userNoStore.studentId, params)
     state.tableData = data.content
     state.total = data.totalElements

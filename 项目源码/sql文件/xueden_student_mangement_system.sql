@@ -11,7 +11,7 @@
  Target Server Version : 80032
  File Encoding         : 65001
 
- Date: 14/03/2024 10:51:10
+ Date: 16/03/2024 09:44:10
 */
 
 SET NAMES utf8mb4;
@@ -69,12 +69,12 @@ CREATE TABLE `s_grade_class`  (
   `grade` int NULL DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '班级信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '班级信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of s_grade_class
 -- ----------------------------
-INSERT INTO `s_grade_class` VALUES (0, 1, '2024-03-14 10:48:21.000000', '未定', 1, '2024-03-14 10:48:31.000000', 0, '0', 0, '未定');
+INSERT INTO `s_grade_class` VALUES (0, 1, '2024-03-14 10:48:21.000000', '未定', 1, '2024-03-14 10:48:31.000000', 0, '未定', 0, '未定');
 INSERT INTO `s_grade_class` VALUES (1, 1, '2022-12-10 11:35:22.735000', '221级1班', 1, '2024-03-13 03:16:28.076000', 1, '202101', 2022, '21级1班');
 INSERT INTO `s_grade_class` VALUES (2, 1, '2022-12-10 18:02:08.000000', '21级2班', 1, '2022-12-10 18:02:11.000000', 2, '202102', 2021, '21级2班');
 INSERT INTO `s_grade_class` VALUES (3, 1, '2022-12-10 11:32:26.550000', '21级3班', 1, '2022-12-10 11:32:26.552000', 3, '202103', 2021, '21级3班');
@@ -102,12 +102,12 @@ CREATE TABLE `s_student`  (
   `sex` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `stuno` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `grade_class_id` bigint NULL DEFAULT NULL,
-  `uid` int NULL DEFAULT NULL,
+  `uid` bigint NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `FKhqce64ggjxx3othwe3cu4hdsd`(`grade_class_id` ASC) USING BTREE,
   INDEX `uid`(`uid` ASC) USING BTREE,
   CONSTRAINT `s_student_ibfk_1` FOREIGN KEY (`grade_class_id`) REFERENCES `s_grade_class` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '学生信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 48 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '学生信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of s_student
@@ -140,9 +140,7 @@ INSERT INTO `s_student` VALUES (26, 1, '2022-12-21 07:06:19.690000', '落云宗�
 INSERT INTO `s_student` VALUES (27, 1, '2022-12-21 07:07:06.107000', '落云宗大长老。', 1, '2022-12-21 07:07:06.107000', '程天坤', '13800138000', '11184629', '男', '202201009', 5, 0);
 INSERT INTO `s_student` VALUES (28, 1, '2022-12-21 07:07:48.235000', '落云宗长老', 1, '2022-12-21 07:07:48.235000', '吕洛', '13800138000', '11184629', '男', '202201010', 5, 0);
 INSERT INTO `s_student` VALUES (29, 1, '2022-12-21 07:08:36.588000', '元婴中期，苍坤上人后人', 1, '2024-03-13 07:41:54.101000', '南陇侯', '13800138000', '11184629', '男', '202201011', 10, 0);
-INSERT INTO `s_student` VALUES (30, 1, '2024-03-10 14:53:41.000000', 'kekeke', 1, '2024-03-13 08:03:27.550000', 'keke', '123456', '123456', '女', '202201012', 5, 3);
-INSERT INTO `s_student` VALUES (31, 1, '2024-03-13 08:15:01.840000', '', 1, '2024-03-13 08:15:01.840000', 'yiyi', '1', '1', '女', '202204009', 9, NULL);
-INSERT INTO `s_student` VALUES (32, 1, '2024-03-14 02:07:46.333000', NULL, 1, '2024-03-14 02:07:46.333000', 'xixi', NULL, NULL, '男', '未定', 0, 22);
+INSERT INTO `s_student` VALUES (30, 1, '2024-03-10 14:53:41.000000', '202201012', 1, '2024-03-14 08:12:03.102000', 'keke', '123456', '123456', '男', '202201012', 5, 3);
 
 -- ----------------------------
 -- Table structure for s_student_score
@@ -323,6 +321,9 @@ INSERT INTO `s_student_score` VALUES (420, 1, '2024-03-14 01:40:32.331000', '初
 INSERT INTO `s_student_score` VALUES (421, 1, '2024-03-14 01:40:32.332000', '初始成绩', 1, '2024-03-14 01:40:32.333000', 0, '未批改', 2, 30, 5);
 INSERT INTO `s_student_score` VALUES (422, 1, '2024-03-14 01:40:34.792000', '初始成绩', 1, '2024-03-14 01:40:34.792000', 0, '未批改', 3, 30, 5);
 INSERT INTO `s_student_score` VALUES (423, 1, '2024-03-14 01:40:37.681000', '初始成绩', 1, '2024-03-14 01:40:37.681000', 0, '未批改', 4, 30, 5);
+INSERT INTO `s_student_score` VALUES (424, 3, '2024-03-15 03:34:58.495000', '初始成绩', 3, '2024-03-15 03:34:58.495000', 0, '未批改', 13, 30, 5);
+INSERT INTO `s_student_score` VALUES (425, 3, '2024-03-15 03:35:10.619000', '初始成绩', 3, '2024-03-15 03:35:10.620000', 0, '未批改', 12, 30, 5);
+INSERT INTO `s_student_score` VALUES (426, 3, '2024-03-16 01:39:58.510000', '初始成绩', 3, '2024-03-16 01:39:58.510000', 0, '未批改', 9, 30, 5);
 
 -- ----------------------------
 -- Table structure for s_teacher
@@ -341,11 +342,11 @@ CREATE TABLE `s_teacher`  (
   `sex` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `teach_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `course_id` bigint NULL DEFAULT NULL,
-  `uid` int NULL DEFAULT NULL,
+  `uid` bigint NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `FKgpacv4uc6gmdaridy3afaf5co`(`course_id` ASC) USING BTREE,
   CONSTRAINT `s_teacher_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `s_course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '教师信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '教师信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of s_teacher
@@ -357,12 +358,9 @@ INSERT INTO `s_teacher` VALUES (4, 1, '2022-12-16 12:21:57.329000', '乱星海�
 INSERT INTO `s_teacher` VALUES (5, 1, '2022-12-16 12:22:55.723000', '弥罗老祖是仙界真言门覆灭前最后一任宗主，修炼时间法则至大罗后期，坐下有五大亲传弟子；', 1, '2022-12-16 12:22:55.723000', '弥罗老祖', '13800138005', '11184629', '男', 't005', 5, 0);
 INSERT INTO `s_teacher` VALUES (6, 1, '2022-12-16 12:25:14.578000', '本体是只黄金巨蟹，前世为魔域魔君石空解。自以为前主人未知原因陨落、自己掉落魔界魔源海苦灵岛附近百万余年，隐秘收集仙灵力修复自身。', 1, '2022-12-16 12:25:14.578000', '蟹道人', '13800138006', '11184629', '男', 't006', 6, 0);
 INSERT INTO `s_teacher` VALUES (8, 1, '2022-12-16 12:27:26.298000', '天才人物，千竹教教主，自创《大衍决》、《傀儡术》。万年前自知无望突破化神，把元神寄付傀儡之上存于世间。', 1, '2024-03-08 03:47:33.295000', '大衍神君', '13800138008', '11184629', '男', 't008', 8, 0);
-INSERT INTO `s_teacher` VALUES (9, 2, '2024-03-10 06:39:00.544000', 'momo是线代老师呀', 2, '2024-03-13 02:34:22.369000', 'momo', '123456', '123456', '女', 't009', 4, 2);
-INSERT INTO `s_teacher` VALUES (15, 2, '2024-03-11 07:54:39.288000', 'momo又教高数捏', 2, '2024-03-13 03:21:31.833000', 'momo', '123456', '123456', '女', 't009', 12, 2);
-INSERT INTO `s_teacher` VALUES (16, 2, '2024-03-11 08:29:20.393000', 'hh', 2, '2024-03-13 06:39:19.134000', 'momo', '2', '2', '女', 't009', 7, 2);
-INSERT INTO `s_teacher` VALUES (20, 1, '2024-03-13 08:14:08.194000', '', 1, '2024-03-13 08:14:08.194000', 'haha', '1', '1', '女', 't010', 8, NULL);
-INSERT INTO `s_teacher` VALUES (24, 1, '2024-03-14 01:21:45.770000', '1', 1, '2024-03-14 01:21:45.771000', 'admin', '1', '1', '女', 't016', 1, NULL);
-INSERT INTO `s_teacher` VALUES (25, 1, '2024-03-14 02:06:55.431000', '', 1, '2024-03-14 02:08:57.232000', 'hehe', '1', '1', '男', 't0021', 1, 21);
+INSERT INTO `s_teacher` VALUES (9, 2, '2024-03-10 06:39:00.544000', 't009', 2, '2024-03-14 08:27:04.241000', 'momo', '123456', '123456', '女', 't009', 4, 2);
+INSERT INTO `s_teacher` VALUES (15, 2, '2024-03-11 07:54:39.288000', 't009', 2, '2024-03-14 08:27:04.241000', 'momo', '123456', '123456', '女', 't009', 12, 2);
+INSERT INTO `s_teacher` VALUES (16, 2, '2024-03-11 08:29:20.393000', 't009', 1, '2024-03-14 08:27:04.241000', 'momo', '2', '2', '女', 't009', 7, 2);
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -409,16 +407,14 @@ CREATE TABLE `sys_user`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `FK4dm5kxn3potpfgdigehw7pdyu`(`role_id` ASC) USING BTREE,
   CONSTRAINT `sys_user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `sys_role` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统用户信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统用户信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 1, '2022-12-02 12:55:05.000000', '114514', 1, '2024-03-14 01:50:40.804000', 'E10ADC3949BA59ABBE56E057F20F883E', '绫波丽', '女', 1, 'admin', '114514893@qq.com', 'ddd59845-19b2-49b5-b780-2c77a3720239.jpg', 1);
-INSERT INTO `sys_user` VALUES (2, 1, '2022-12-05 13:06:48.040000', 't009', 2, '2024-03-10 06:18:46.778000', 'E10ADC3949BA59ABBE56E057F20F883E', 'momo', '女', 1, 'momo', 'momo@qq.com', '', 2);
-INSERT INTO `sys_user` VALUES (3, 1, '2022-12-05 13:09:44.441000', '202201012', 3, '2024-03-10 02:01:49.649000', 'E10ADC3949BA59ABBE56E057F20F883E', 'keke', '女', 1, 'keke', 'keke@qq.com', '', 3);
-INSERT INTO `sys_user` VALUES (21, 1, '2024-03-14 02:06:55.431000', '', 1, '2024-03-14 02:06:55.431000', '827CCB0EEA8A706C4C34A16891F84E7B', 'hehe', '男', 1, 'hehe', '1', NULL, 2);
-INSERT INTO `sys_user` VALUES (22, 1, '2024-03-14 02:07:46.333000', '', 1, '2024-03-14 02:07:46.333000', '827CCB0EEA8A706C4C34A16891F84E7B', 'xixi', '男', 1, 'xixi', '1', NULL, 3);
+INSERT INTO `sys_user` VALUES (1, 1, '2022-12-02 12:55:05.000000', '114514', 1, '2024-03-15 01:34:44.780000', 'E10ADC3949BA59ABBE56E057F20F883E', '绫波丽', '女', 1, 'admin', '1532795384@qq.com', 'aeb7d313-bc02-4850-988d-95a7f7944c2f.jpg', 1);
+INSERT INTO `sys_user` VALUES (2, 1, '2022-12-05 13:06:48.040000', 't009', 2, '2024-03-14 08:27:04.242000', 'E10ADC3949BA59ABBE56E057F20F883E', 'momo', '女', 1, 'momo', 'momo@qq.com', '', 2);
+INSERT INTO `sys_user` VALUES (3, 1, '2022-12-05 13:09:44.441000', '202201012', 3, '2024-03-14 08:12:03.103000', 'E10ADC3949BA59ABBE56E057F20F883E', 'keke', '男', 1, 'keke', 'keke@qq.com', '8172f883-7a32-42e1-b5a4-3fd231231b30.jpg', 3);
 
 -- ----------------------------
 -- Table structure for token
@@ -431,6 +427,6 @@ CREATE TABLE `token`  (
 -- ----------------------------
 -- Records of token
 -- ----------------------------
-INSERT INTO `token` VALUES ('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE3MTAzODIwOTcsImV4cCI6MTcxMDM4OTI5NywiaWF0IjoxNzEwMzgyMDk3LCJhaWQiOjEsInVzZXJuYW1lIjoiYWRtaW4ifQ.5BX9B9b3PHfrOV-gYW3X5xkbGJj4JcyJIywAFVrBzBs');
+INSERT INTO `token` VALUES ('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE3MTA1NTMyMjYsImV4cCI6MTcxMDU2MDQyNiwiaWF0IjoxNzEwNTUzMjI2LCJhaWQiOjIsInVzZXJuYW1lIjoibW9tbyJ9.uWP-Jo8SJSDP0VUn_I4xMiz30lEw0KOjPyNTBu3ENWQ');
 
 SET FOREIGN_KEY_CHECKS = 1;
