@@ -435,20 +435,27 @@ public class ScoresServiceImpl implements IScoresService {
         // 根据老师的 UID 获取老师教的所有课程的 ID 列表
         List<Long> teacherCourses = updateMapper.getCoursesByTeacherUid(uid);
         log.info("teacherCourses是：{}", teacherCourses);
+
         // 构建总的查询条件
         Specification<Scores> specification = (root, query, criteriaBuilder) -> {
             // 创建一个空的 Predicate，用于后续组合
             Predicate predicate = criteriaBuilder.conjunction();
+
             // 添加老师教授课程的查询条件
             Predicate coursePredicate = root.get("course").get("id").in(teacherCourses);
+
             // 添加课程其他查询条件
             Predicate otherCriteriaPredicate = QueryHelp.getPredicate(root, queryCriteria, criteriaBuilder);
+
             // 组合查询条件
             predicate = criteriaBuilder.and(coursePredicate, otherCriteriaPredicate);
+
             return predicate;
         };
+
         // 查询选修老师教授课程的学生列表
         Page<Scores> scoresPage = scoresRepository.findAll(specification, pageable);
+
         // 转换为通用分页格式并返回
         return PageUtil.toPage(scoresPage);
     }
