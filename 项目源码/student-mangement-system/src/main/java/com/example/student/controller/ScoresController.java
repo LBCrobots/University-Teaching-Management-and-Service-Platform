@@ -45,7 +45,7 @@ public class ScoresController {
     }
 
     /**
-     * 查询班级学科成绩
+     * 登记班级学科成绩
      * @param scoresModel
      * @return
      */

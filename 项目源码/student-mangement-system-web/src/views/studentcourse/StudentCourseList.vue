@@ -245,7 +245,12 @@ const loadData = async (state: any)=> {
   }
   else {
     const { data } = await getCourseByStudentUIdApi(userInfo.id, params)
-    userNoStore.studentId = data.content[0].student.id
+    if(data.content.length > 0){
+      userNoStore.studentId = data.content[0].student.id
+      userNoStore.gradeClassId = data.content[0].gradeClass.id
+      console.log('userNoStore.studentId:',userNoStore.studentId)
+      console.log('userNoStore.gradeClassId:',userNoStore.gradeClassId)
+    }
     state.tableData = data.content
     state.total = data.totalElements
   }

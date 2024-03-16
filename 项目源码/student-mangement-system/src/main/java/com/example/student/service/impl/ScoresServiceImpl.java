@@ -67,7 +67,7 @@ public class ScoresServiceImpl implements IScoresService {
     }
 
     /**
-     * 查询班级学科成绩
+     * 登记班级学科成绩
      * @param scoresModel
      * @return
      */
@@ -130,6 +130,9 @@ public class ScoresServiceImpl implements IScoresService {
                 });
 
         if (courseAlreadySelected) {
+            return false;
+        }
+        if (gradeClassId == 0 || studentId == 0){
             return false;
         }
         scores.setScore(0);
