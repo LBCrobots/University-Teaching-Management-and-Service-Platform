@@ -11,7 +11,7 @@
  Target Server Version : 80032
  File Encoding         : 65001
 
- Date: 16/03/2024 09:44:10
+ Date: 16/03/2024 10:02:42
 */
 
 SET NAMES utf8mb4;
@@ -36,8 +36,8 @@ CREATE TABLE `s_course`  (
 -- ----------------------------
 -- Records of s_course
 -- ----------------------------
-INSERT INTO `s_course` VALUES (0, 1, '2024-03-12 07:21:12.901000', '', 1, '2024-03-12 07:21:12.902000', '未定', '0');
-INSERT INTO `s_course` VALUES (1, 1, '2022-12-14 10:59:59.497000', '', 1, '2022-12-14 10:59:59.498000', '线性代数', 'c001');
+INSERT INTO `s_course` VALUES (0, 1, '2024-03-12 07:21:12.901000', '未定', 1, '2024-03-12 07:21:12.902000', '未定', '0');
+INSERT INTO `s_course` VALUES (1, 1, '2022-12-14 10:59:59.497000', '线性代数', 1, '2022-12-14 10:59:59.498000', '线性代数', 'c001');
 INSERT INTO `s_course` VALUES (2, 1, '2022-12-14 11:00:31.283000', '高等数学', 1, '2022-12-14 11:00:31.284000', '高等数学', 'c002');
 INSERT INTO `s_course` VALUES (3, 1, '2022-12-14 11:00:50.909000', '大学英语', 1, '2022-12-14 11:00:50.910000', '大学英语', 'c003');
 INSERT INTO `s_course` VALUES (4, 1, '2022-12-14 11:01:17.114000', 'C语言程序设计', 1, '2022-12-14 11:01:17.115000', 'C语言程序设计', 'c004');
@@ -321,9 +321,9 @@ INSERT INTO `s_student_score` VALUES (420, 1, '2024-03-14 01:40:32.331000', '初
 INSERT INTO `s_student_score` VALUES (421, 1, '2024-03-14 01:40:32.332000', '初始成绩', 1, '2024-03-14 01:40:32.333000', 0, '未批改', 2, 30, 5);
 INSERT INTO `s_student_score` VALUES (422, 1, '2024-03-14 01:40:34.792000', '初始成绩', 1, '2024-03-14 01:40:34.792000', 0, '未批改', 3, 30, 5);
 INSERT INTO `s_student_score` VALUES (423, 1, '2024-03-14 01:40:37.681000', '初始成绩', 1, '2024-03-14 01:40:37.681000', 0, '未批改', 4, 30, 5);
-INSERT INTO `s_student_score` VALUES (424, 3, '2024-03-15 03:34:58.495000', '初始成绩', 3, '2024-03-15 03:34:58.495000', 0, '未批改', 13, 30, 5);
-INSERT INTO `s_student_score` VALUES (425, 3, '2024-03-15 03:35:10.619000', '初始成绩', 3, '2024-03-15 03:35:10.620000', 0, '未批改', 12, 30, 5);
-INSERT INTO `s_student_score` VALUES (426, 3, '2024-03-16 01:39:58.510000', '初始成绩', 3, '2024-03-16 01:39:58.510000', 0, '未批改', 9, 30, 5);
+INSERT INTO `s_student_score` VALUES (424, 3, '2024-03-15 03:34:58.495000', '初始成绩', 2, '2024-03-16 01:54:48.749000', 97, '已批改', 13, 30, 5);
+INSERT INTO `s_student_score` VALUES (425, 3, '2024-03-15 03:35:10.619000', '初始成绩', 2, '2024-03-16 01:54:42.958000', 98, '已批改', 12, 30, 5);
+INSERT INTO `s_student_score` VALUES (426, 3, '2024-03-16 01:39:58.510000', '初始成绩', 2, '2024-03-16 01:54:29.735000', 99, '已批改', 9, 30, 5);
 
 -- ----------------------------
 -- Table structure for s_teacher
@@ -359,8 +359,8 @@ INSERT INTO `s_teacher` VALUES (5, 1, '2022-12-16 12:22:55.723000', '弥罗老�
 INSERT INTO `s_teacher` VALUES (6, 1, '2022-12-16 12:25:14.578000', '本体是只黄金巨蟹，前世为魔域魔君石空解。自以为前主人未知原因陨落、自己掉落魔界魔源海苦灵岛附近百万余年，隐秘收集仙灵力修复自身。', 1, '2022-12-16 12:25:14.578000', '蟹道人', '13800138006', '11184629', '男', 't006', 6, 0);
 INSERT INTO `s_teacher` VALUES (8, 1, '2022-12-16 12:27:26.298000', '天才人物，千竹教教主，自创《大衍决》、《傀儡术》。万年前自知无望突破化神，把元神寄付傀儡之上存于世间。', 1, '2024-03-08 03:47:33.295000', '大衍神君', '13800138008', '11184629', '男', 't008', 8, 0);
 INSERT INTO `s_teacher` VALUES (9, 2, '2024-03-10 06:39:00.544000', 't009', 2, '2024-03-14 08:27:04.241000', 'momo', '123456', '123456', '女', 't009', 4, 2);
-INSERT INTO `s_teacher` VALUES (15, 2, '2024-03-11 07:54:39.288000', 't009', 2, '2024-03-14 08:27:04.241000', 'momo', '123456', '123456', '女', 't009', 12, 2);
-INSERT INTO `s_teacher` VALUES (16, 2, '2024-03-11 08:29:20.393000', 't009', 1, '2024-03-14 08:27:04.241000', 'momo', '2', '2', '女', 't009', 7, 2);
+INSERT INTO `s_teacher` VALUES (15, 2, '2024-03-11 07:54:39.288000', 't009', 2, '2024-03-16 01:59:24.556000', 'momo', '123456', '123456', '女', 't009', 2, 2);
+INSERT INTO `s_teacher` VALUES (16, 2, '2024-03-11 08:29:20.393000', 't009', 2, '2024-03-16 01:59:14.189000', 'momo', '2', '2', '女', 't009', 1, 2);
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -427,6 +427,6 @@ CREATE TABLE `token`  (
 -- ----------------------------
 -- Records of token
 -- ----------------------------
-INSERT INTO `token` VALUES ('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE3MTA1NTMyMjYsImV4cCI6MTcxMDU2MDQyNiwiaWF0IjoxNzEwNTUzMjI2LCJhaWQiOjIsInVzZXJuYW1lIjoibW9tbyJ9.uWP-Jo8SJSDP0VUn_I4xMiz30lEw0KOjPyNTBu3ENWQ');
+INSERT INTO `token` VALUES ('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE3MTA1NTQzNDcsImV4cCI6MTcxMDU2MTU0NywiaWF0IjoxNzEwNTU0MzQ3LCJhaWQiOjIsInVzZXJuYW1lIjoibW9tbyJ9.ERPAqs32edm0EFh7mBcT_UmVkEgdIEUUfa-uGfuBSGc');
 
 SET FOREIGN_KEY_CHECKS = 1;
