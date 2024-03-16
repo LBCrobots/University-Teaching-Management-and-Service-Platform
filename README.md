@@ -7,7 +7,7 @@ https://github.com/seasonl2014/student-mangement-system
 
 ## 技术栈
 web框架：SpringBoot3.X  
-数据库持久框架：Sping Data JPA  
+数据库持久框架：Sping Data JPA、Mybatis-plus  
 数据库：MySql  
 项目构建工具：Maven、vite  
 前端框架：Vue3.X、element plus、pina、axios、Vue Router  
