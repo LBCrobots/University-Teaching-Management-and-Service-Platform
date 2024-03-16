@@ -72,7 +72,8 @@ const formTeacher = reactive({
     id: ''
   },
   qq: '',
-  remarks: ''
+  remarks: '',
+  uid: userInfo.id
 })
 // 定义表单约束规则对象
 const rules = reactive<FormRules>({  

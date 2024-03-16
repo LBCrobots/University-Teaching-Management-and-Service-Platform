@@ -172,12 +172,13 @@ import { ref, reactive,toRefs, onMounted  } from 'vue'
 // 定义班级下拉选择项
 import {gradeClassListApi} from "../../api/student/student";
 import {getAllCourseListApi} from "../../api/teacher/teacher";
-import {deleteScoresApi, getScoresListApi, addSubjectsApi, registerScoresApi, getCourseByStudentUIdApi} from "../../api/scores/scores";
+import {deleteScoresApi, getScoresListApi, addSubjectsApi, registerScoresApi, getCourseByStudentUIdApi, getStudentInfoByStudentUIdApi} from "../../api/scores/scores";
 import { formatTime } from "../../utils/date"
 import {ElMessage} from 'element-plus'
 import { useUserStore } from '../../store/modules/user'
 import { useUserNoStore } from "../../store/modules/userno";
 import {exportExcel} from "../../utils/exprotExcel";
+import { da } from 'element-plus/es/locale';
 const { userInfo } = useUserStore()
 const userNoStore = useUserNoStore()
 // 定义班级ID
@@ -236,7 +237,11 @@ const loadData = async (state: any)=> {
     'courseId': courseId.value,
     'gradeClassId': gradeClassId.value
   }
+  
+  const {data}  = await getStudentInfoByStudentUIdApi(userInfo.id)
 
+  userNoStore.studentId = data.id
+  userNoStore.gradeClassId = data.gradeClassId
 
   if(userInfo.role.id === 1){
     const { data } = await getScoresListApi(params)
@@ -245,12 +250,6 @@ const loadData = async (state: any)=> {
   }
   else {
     const { data } = await getCourseByStudentUIdApi(userInfo.id, params)
-    if(data.content.length > 0){
-      userNoStore.studentId = data.content[0].student.id
-      userNoStore.gradeClassId = data.content[0].gradeClass.id
-      console.log('userNoStore.studentId:',userNoStore.studentId)
-      console.log('userNoStore.gradeClassId:',userNoStore.gradeClassId)
-    }
     state.tableData = data.content
     state.total = data.totalElements
   }

@@ -2,29 +2,35 @@ package com.example.student.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
-import com.example.student.domain.Scores;
 import com.example.student.domain.Teacher;
+import com.example.student.repository.TeacherMapper;
 import com.example.student.repository.TeacherRepository;
 import com.example.student.service.ITeacherService;
-import com.example.student.service.dto.ScoresQueryCriteria;
 import com.example.student.service.dto.TeacherQueryCriteria;
 import com.example.utils.PageUtil;
 import com.example.utils.QueryHelp;
 import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
+import java.util.List;
+
 /**功能描述：教师信息业务接口实现类*/
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class TeacherServiceImpl implements ITeacherService {
 
     private final TeacherRepository teacherRepository;
+
+    private final TeacherMapper teacherMapper;
 
 
     /**
@@ -47,6 +53,18 @@ public class TeacherServiceImpl implements ITeacherService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean addTeacher(Teacher teacher) {
+        log.info("teacherId是:{}",teacher.getUid());
+        List<HashMap<String, Object>> courseIdList = teacherMapper.findCourseIdByTeacherUid(teacher.getUid());
+        log.info("courseIdList是:{}",courseIdList);
+        boolean courseAlreadySelected = courseIdList.stream()
+                .anyMatch(item -> {
+                    Long existingCourseId = (Long) item.get("course_id");
+                    log.info("Comparing {} with {}", existingCourseId, teacher.getCourse().getId());
+                    return existingCourseId.equals(teacher.getCourse().getId());
+                });
+        if (courseAlreadySelected) {
+            return false;
+        }
         Teacher dbTeacher = teacherRepository.save(teacher);
         return dbTeacher.getId()!=null;
     }

@@ -31,8 +31,6 @@ public class CourseController {
 
     private final ICourseService courseService;
 
-    private final IScoresService scoresService;
-
     /**
      * 获取课程列表数据
      * @param queryCriteria

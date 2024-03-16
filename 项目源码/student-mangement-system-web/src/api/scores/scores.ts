@@ -36,7 +36,7 @@ export function deleteScoresApi(id:number) {
         method: 'delete'
     })
 }
-// 根据ID获取成绩信息
+// 根据ID添加选课信息
 export function addSubjectsApi(studentId:number,courseId:number,gradeClassId:string) {
     return request({
         url: 'scores/addCourseSelect',
@@ -79,7 +79,7 @@ export function getCourseByStudentUIdApi(uid:number, data:object) {
 // 根据学生UID获取学号、班号信息
 export function getStudentInfoByStudentUIdApi(uid:number) {
     return request({
-        url: `scores/getStudentInfo`,
+        url: `student/getStudentInfo`,
         method: 'get',
         params: {
             studentUId: uid

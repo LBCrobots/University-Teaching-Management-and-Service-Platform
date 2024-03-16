@@ -95,7 +95,7 @@
                            icon-color="#bb1f0abf" :title="'确定删除名为“'+scope.row.name+'”的教师吗？'"
                            @confirm="delTeacher(scope.row.id)">
               <template #reference>
-                <el-button size="small" type="danger" style="margin-bottom: 10px;">删除</el-button>
+                <el-button size="small" type="danger" style="margin-bottom: 10px;" :disabled="state.total<=1" class="no-cursor">删除</el-button>
               </template>
             </el-popconfirm>
           </template>
@@ -336,6 +336,9 @@ const {tableData,pageIndex,pageSize,loading,total,searchValue} = toRefs(state)
 .my-button {
   display: flex;
   justify-content:space-between;
+}
+.no-cursor {
+  cursor: default !important;
 }
 /*修改v-loading样式*/
 :deep(.el-loading-spinner .el-loading-text){
