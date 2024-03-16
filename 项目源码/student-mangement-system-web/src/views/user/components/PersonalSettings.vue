@@ -1,7 +1,7 @@
 <template>
 <el-row :gutter="20">
-  <!--左侧信息 start-->
-  <el-col :span="18">
+  <!--左侧信息 -->
+  <el-col :md="18" :lg="18">
      <div class="left_box">
        <h3 class="title">
          <el-icon style="margin-right: 10px;">
@@ -10,26 +10,26 @@
          个人信息设置
        </h3>
 
-       <!--基本设置 start-->
+       <!--基本设置 -->
         <div class="set">
           <h4>基础设置</h4>
           <el-form ref="basicFormRef" :rules="basicRules" status-icon :model="basic" @submit.prevent>
             <el-row :gutter="20">
             <!--用户真实姓名-->
-            <el-col :span="8">
+            <el-col :xs="24" :sm="12" :md="12" :lg="8">
                 <el-form-item prop="realname" label="真实姓名" style="width: 100%;">
                   <el-input v-model="basic.realname" placeholder="请输入真实姓名"/>
                 </el-form-item>
             </el-col>
             <!--用户性别-->
-            <el-col :span="8">
+            <el-col :xs="24" :sm="12" :md="12" :lg="6">
               <el-form-item prop="sex" label="性别" style="width: 100%;">
                   <el-radio v-model="basic.sex" label="男" size="large">男</el-radio>
                   <el-radio v-model="basic.sex" label="女" size="large">女</el-radio>
               </el-form-item>
             </el-col>
             <!--头像-->
-            <el-col :span="5">
+            <el-col :xs="12" :sm="12" :md="12" :lg="6">
               <el-form-item  label="头像：" style="margin: auto;">
                 <el-upload class="avatar-uploader" action name="fileResource" :http-request="uploadAvatar" :show-file-list="false">
                   <img v-if="basic.userIcon" :src="url+'uploadFile/'+basic.userIcon"
@@ -42,9 +42,9 @@
                 </el-upload>
               </el-form-item>
             </el-col>
-            <el-col :span="3">
+            <el-col :xs="4" :sm="12"  :md="12" :lg="2">
               <el-form-item>
-                <el-button :loading="loading" plain color="#0554af"  style="margin-left: 50px;" @click="onBasicSubmit(basicFormRef)">
+                <el-button :loading="loading" plain color="#0554af"  style="margin-left: 25px;" @click="onBasicSubmit(basicFormRef)">
                   提交
                 </el-button>
               </el-form-item>
@@ -52,21 +52,19 @@
             </el-row>
           </el-form>
         </div>
-       <!--基本设置 end-->
        <el-divider border-style="dashed" />
-       <!--绑定邮箱 start-->
+
+       <!--绑定邮箱 -->
        <BindEmail/>
-       <!--绑定邮箱 end-->
        <el-divider border-style="dashed" />
-       <!--修改密码 start-->
+
+       <!--修改密码 -->
         <UpdatePwd/>
-       <!--修改密码 end-->
      </div>
   </el-col>
-  <!--左侧信息 end-->
-  <!--右侧个人信息 start-->
+
+  <!--右侧个人信息 组件-->
   <UserInfo/>
-  <!--右侧个人信息 end-->
 </el-row>
 </template>
 
@@ -165,7 +163,6 @@ const {basic} = toRefs(state)
   height: auto;
   background: white;
   padding: 20px;
-  /* 添加此属性 padding间距不扩大div */
   box-sizing: border-box;
 }
 .left_box .title {
