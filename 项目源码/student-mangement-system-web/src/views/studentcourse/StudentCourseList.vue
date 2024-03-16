@@ -172,11 +172,12 @@ import { ref, reactive,toRefs, onMounted  } from 'vue'
 // 定义班级下拉选择项
 import {gradeClassListApi} from "../../api/student/student";
 import {getAllCourseListApi} from "../../api/teacher/teacher";
-import {deleteScoresApi, getScoresListApi, addSubjectsApi, registerScoresApi, getCourseByStudentIdApi} from "../../api/scores/scores";
+import {deleteScoresApi, getScoresListApi, addSubjectsApi, registerScoresApi, getCourseByStudentUIdApi} from "../../api/scores/scores";
 import { formatTime } from "../../utils/date"
 import {ElMessage} from 'element-plus'
 import { useUserStore } from '../../store/modules/user'
 import { useUserNoStore } from "../../store/modules/userno";
+import {exportExcel} from "../../utils/exprotExcel";
 const { userInfo } = useUserStore()
 const userNoStore = useUserNoStore()
 // 定义班级ID
@@ -236,9 +237,6 @@ const loadData = async (state: any)=> {
     'gradeClassId': gradeClassId.value
   }
 
-  const { data } = await getScoresListApi(params)
-  userNoStore.setStudentId(data.content[0].student.id)
-  userNoStore.setGradeClassId(data.content[0].student.gradeClass.id)
 
   if(userInfo.role.id === 1){
     const { data } = await getScoresListApi(params)
@@ -246,9 +244,8 @@ const loadData = async (state: any)=> {
     state.total = data.totalElements
   }
   else {
-    console.log('userNoStore.studentId:',userNoStore.studentId)
-    console.log('params:',params)
-    const { data } = await getCourseByStudentIdApi(userNoStore.studentId, params)
+    const { data } = await getCourseByStudentUIdApi(userInfo.id, params)
+    userNoStore.studentId = data.content[0].student.id
     state.tableData = data.content
     state.total = data.totalElements
   }
@@ -351,10 +348,10 @@ const exportExcelAction = () => {
   const newTableData = state.tableData.flatMap((item: any)=> {
     return {...item,...item.course,...item.student}
   })
-  exportExcel({
+exportExcel({
     column,
     data:newTableData,
-    filename: '班级学科成绩数据',
+    filename: '班级选课数据',
     format: 'xlsx',
     autoWidth: true,
   })

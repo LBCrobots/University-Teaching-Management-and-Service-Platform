@@ -405,16 +405,16 @@ public class ScoresServiceImpl implements IScoresService {
     /**
      * 获取学生个人课程列表数据
      *
-     * @param studentId     学生ID
+     * @param studentUId     学生ID
      * @param queryCriteria 课程查询条件
      * @param pageable      分页信息
      * @return 学生个人课程列表数据
      */
-    public Object getStudentScoresList(Long studentId, ScoresQueryCriteria queryCriteria, Pageable pageable) {
+    public Object getStudentScoresList(Long studentUId, ScoresQueryCriteria queryCriteria, Pageable pageable) {
         // 构建查询条件
         Specification<Scores> specification = (root, query, criteriaBuilder) -> {
             // 添加学生ID的条件
-            Predicate studentPredicate = criteriaBuilder.equal(root.get("student").get("id"), studentId);
+            Predicate studentPredicate = criteriaBuilder.equal(root.get("student").get("uid"), studentUId);
 
             // 添加课程查询条件
             Predicate coursePredicate = QueryHelp.getPredicate(root, queryCriteria, criteriaBuilder);

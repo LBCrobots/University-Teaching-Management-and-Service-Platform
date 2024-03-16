@@ -37,13 +37,13 @@ export function deleteScoresApi(id:number) {
     })
 }
 
-export function addSubjectsApi(studentId:string,courseId:number,gradeClassId:string) {
+export function addSubjectsApi(studentId:number,courseId:number,gradeClassId:string) {
     return request({
         url: 'scores/addCourseSelect',
         method: 'post',
         data: {
             "student": {
-                "id":parseInt(studentId),
+                "id":studentId,
             },
             "course": {
                 "id":courseId,
@@ -55,7 +55,6 @@ export function addSubjectsApi(studentId:string,courseId:number,gradeClassId:str
     })
 }
 
-//TODO 根据教师uid获取教师所教课程，通过所教课程查找对应课程的成绩
 export function getScoresByTeacherUidApi(uid:number, data:object) {
     return request({
         url: `scores/getStudentsByTeacherCourses`,
@@ -67,12 +66,12 @@ export function getScoresByTeacherUidApi(uid:number, data:object) {
     })
 }
 
-export function getCourseByStudentIdApi(id:number, data:object) {
+export function getCourseByStudentUIdApi(uid:number, data:object) {
     return request({
         url: `scores/getStudentScoresList`,
         method: 'get',
         params: {
-            studentId: id,
+            studentUId: uid,
             ...data
         }
     })
