@@ -1,0 +1,2 @@
+需将s_grade_class表中的“未定”班级字段id改为0；
+需将s_course表中的“未定”课程字段id改为0

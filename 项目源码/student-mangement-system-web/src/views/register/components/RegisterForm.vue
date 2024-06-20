@@ -124,7 +124,6 @@
     {value:'女', label:'女'},
   ]
   const roleOptions = [
-    {value:1, label:'系统管理员'},    
     {value:2, label:'老师'},    
     {value:3, label:'学生'},
   ]

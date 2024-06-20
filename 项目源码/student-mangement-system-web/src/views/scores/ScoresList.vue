@@ -151,7 +151,7 @@ import { ref, reactive,toRefs, onMounted  } from 'vue'
 // 定义班级下拉选择项
 import {gradeClassListApi} from "../../api/student/student";
 import {getAllCourseListApi} from "../../api/teacher/teacher";
-import {deleteScoresApi, editScoresApi, getScoresListApi} from "../../api/scores/scores";
+import {deleteScoresApi, editScoresApi, getScoresListApi,getScoresByTeacherUidApi} from "../../api/scores/scores";
 import {getTeacherListApi} from "../../api/teacher/teacher"
 import { formatTime } from "../../utils/date"
 import {ElMessage} from 'element-plus'
@@ -216,56 +216,21 @@ const loadData = async (state: any)=> {
     'courseId': courseId.value,
     'gradeClassId': gradeClassId.value
   }
-  const { data } = await getScoresListApi(params)
 
-  //TODO
   if(userInfo.role.id === 1){
+    const { data } = await getScoresListApi(params)
     state.tableData = data.content
     state.total = data.totalElements
   }
   else {
-    state.tableData = data.content.filter((item: { course: { courseno: never; }; }) => userNoStore.teachcourse.includes(item.course.courseno))
+    const { data } = await getScoresByTeacherUidApi(userInfo.id,params)
+    state.tableData = data.content
     state.total = data.totalElements
   }
 
   state.loading = false
 }
 
-const state2 = reactive({
-  // 搜索表单内容
-  searchValue: "",
-  // 表格全部信息
-  tableData: [],
-  total: 0, //总条数
-  pageSize: 10, //每页显示行数
-  pageIndex: 1, //当前页码
-  loading: false, // 数据加载
-})
-// 获取教师列表数据
-const loadData2 = async (state: any)=> {
-  state2.loading = true
-  // 先清空数据
-  state2.tableData=[]
-  const params = {
-    'pageIndex':state2.pageIndex,
-    'pageSize': state2.pageSize,
-    'searchValue': state2.searchValue
-  }
-  const { data } = await getTeacherListApi(params)
-
-  if(userInfo.role.id === 1){
-    state2.tableData = data.content
-    state2.total = data.totalElements
-  }
-  else {
-    state2.tableData = data.content.filter((item: { uid: any }) => item.uid === userInfo.id)
-    state2.total = data.totalElements
-    let coursenoList = state.tableData.map(item => item.course.courseno);
-    userNoStore.setTeachcourse(coursenoList)
-  }
-
-  state2.loading = false
-}
 const Nindex = (index) => {
   // 当前页数 - 1 * 每页数据条数 + 1
   const page = state.pageIndex // 当前页码
@@ -393,7 +358,6 @@ const exportExcelAction = () => {
 
 //挂载后加载数据
 onMounted(() => {
-  loadData2(state2)
   loadData(state)
   getAllCourseList()
   gradeClassList()

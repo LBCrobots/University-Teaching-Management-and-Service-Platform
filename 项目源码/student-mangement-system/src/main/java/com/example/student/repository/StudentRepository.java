@@ -16,4 +16,11 @@ public interface StudentRepository extends JpaRepository<Student, Long>, JpaSpec
      * @return
      */
     List<Student> findAllByGradeClassId(Long gradeClassId);
+
+    /**
+     * 根据学生UID获取学生信息
+     * @param studentUId
+     * @return
+     */
+    Student findByUid(Long studentUId);
 }

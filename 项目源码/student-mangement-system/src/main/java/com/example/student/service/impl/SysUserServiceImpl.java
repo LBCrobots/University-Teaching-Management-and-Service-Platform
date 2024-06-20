@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Map;
 
 /**功能描述：系统用户业务接口实现类*/
@@ -122,9 +123,11 @@ public class SysUserServiceImpl implements ISysUserService {
             student.setCreateTime(sysUser.getCreateTime());
             student.setUpdateBy(1L);
             student.setUpdateTime(sysUser.getUpdateTime());
+            student.setRemarks(sysUser.getRemarks());
             student.setName(sysUser.getRealname());
             student.setSex(sysUser.getSex());
             student.setUid(sysUser.getId());
+            student.setStuno("未定");
             updateMapper.addStudent(student);
         }
         return dbSysUser.getId()!=null;
@@ -157,23 +160,36 @@ public class SysUserServiceImpl implements ISysUserService {
             String encryptedPassword = Md5Util.MD5(sysUser.getPassword());
             dbSysUser.setPassword(encryptedPassword);
         }
+
+        sysUserRepository.save(dbSysUser);
         //根据id找到teacher表或者student表的uid，实现更新
         Long roleId = updateMapper.getRole(sysUser.getId());
+        log.info("roleId是:{}",roleId);
         Long uid = sysUser.getId();
-        if (roleId == 2) {
-            Teacher dbTeacher = updateMapper.getByTeacherUid(uid);
-            dbTeacher.setUpdateTime(new Timestamp(System.currentTimeMillis()));
-            dbTeacher.setName(dbSysUser.getRealname());
-            dbTeacher.setSex(dbSysUser.getSex());
-            updateMapper.updateByTeacherUid(dbTeacher);
-        } else if (roleId == 3) {
+        log.info("uid是:{}",uid);
+        if (roleId == 2L) {
+            List<Teacher> dbTeacherList = updateMapper.getByTeacherUid(uid);
+            log.info("dbTeacherList是:{}",dbTeacherList);
+            if (dbTeacherList != null && !dbTeacherList.isEmpty()) {
+                for (Teacher dbTeacher : dbTeacherList) {
+                    dbTeacher.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+                    dbTeacher.setName(dbSysUser.getRealname());
+                    dbTeacher.setSex(dbSysUser.getSex());
+                    dbTeacher.setRemarks(dbSysUser.getRemarks());
+                    log.info("dbTeacher3是:{}", dbTeacher);
+                    updateMapper.updateByTeacherUid(dbTeacher);
+                }
+            }
+        } else if (roleId == 3L) {
             Student dbStudent = updateMapper.getByStudentUid(uid);
+            log.info("dbStudent是:{}",dbStudent);
             dbStudent.setUpdateTime(new Timestamp(System.currentTimeMillis()));
             dbStudent.setName(dbSysUser.getRealname());
             dbStudent.setSex(dbSysUser.getSex());
+            dbStudent.setRemarks(dbSysUser.getRemarks());
+            log.info("dbTeacher3是:{}",dbStudent);
             updateMapper.updateByStudentUid(dbStudent);
         }
-        sysUserRepository.save(dbSysUser);
     }
 
     /**

@@ -64,15 +64,16 @@ const { userInfo } = useUserStore()
 const ruleFormRef = ref<FormInstance>()
 const subLoading = ref(false)
 const formTeacher = reactive({
-  name: '',
-  teachno: '',
-  sex: '',
+  name: userInfo.username,
+  teachno: userNoStore.teachno,
+  sex: userInfo.sex,
   phone: '',
   course: {
     id: ''
   },
   qq: '',
-  remarks: ''
+  remarks: '',
+  uid: userInfo.id
 })
 // 定义表单约束规则对象
 const rules = reactive<FormRules>({  

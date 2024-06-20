@@ -172,11 +172,13 @@ import { ref, reactive,toRefs, onMounted  } from 'vue'
 // 定义班级下拉选择项
 import {gradeClassListApi} from "../../api/student/student";
 import {getAllCourseListApi} from "../../api/teacher/teacher";
-import {deleteScoresApi, getScoresListApi, addSubjectsApi, registerScoresApi} from "../../api/scores/scores";
+import {deleteScoresApi, getScoresListApi, addSubjectsApi, registerScoresApi, getCourseByStudentUIdApi, getStudentInfoByStudentUIdApi} from "../../api/scores/scores";
 import { formatTime } from "../../utils/date"
 import {ElMessage} from 'element-plus'
 import { useUserStore } from '../../store/modules/user'
 import { useUserNoStore } from "../../store/modules/userno";
+import {exportExcel} from "../../utils/exprotExcel";
+import { da } from 'element-plus/es/locale';
 const { userInfo } = useUserStore()
 const userNoStore = useUserNoStore()
 // 定义班级ID
@@ -235,17 +237,21 @@ const loadData = async (state: any)=> {
     'courseId': courseId.value,
     'gradeClassId': gradeClassId.value
   }
-  const { data } = await getScoresListApi(params)
+  if(userInfo.role.id ===3){
+    const {data}  = await getStudentInfoByStudentUIdApi(userInfo.id)
+    userNoStore.studentId = data.id
+    userNoStore.gradeClassId = data.gradeClassId
+  }
 
-  //TODO
+
   if(userInfo.role.id === 1){
+    const { data } = await getScoresListApi(params)
     state.tableData = data.content
     state.total = data.totalElements
   }
   else {
+    const { data } = await getCourseByStudentUIdApi(userInfo.id, params)
     state.tableData = data.content
-    // console.log('userInfo:',typeof data.content[0].student.uid)
-    state.tableData = data.content.filter((item: { uid: any }) => item.student.uid === userInfo.id)
     state.total = data.totalElements
   }
   state.loading = false
@@ -283,7 +289,7 @@ const addSubjects = async () => {
     ElMessage.success('请选择学科')
     return false
   }
-  const { data } =  await addSubjectsApi(gradeClassId.value,courseId.value)
+  const { data } =  await addSubjectsApi(userNoStore.studentId,courseId.value,userNoStore.gradeClassId)
   if(data.status===200){
     await loadData(state)
     ElMessage.success(data.message)
@@ -347,10 +353,10 @@ const exportExcelAction = () => {
   const newTableData = state.tableData.flatMap((item: any)=> {
     return {...item,...item.course,...item.student}
   })
-  exportExcel({
+exportExcel({
     column,
     data:newTableData,
-    filename: '班级学科成绩数据',
+    filename: '班级选课数据',
     format: 'xlsx',
     autoWidth: true,
   })

@@ -57,6 +57,10 @@ public class Student extends BaseEntity {
     @Column(name = "uid")
     private Long uid;
 
-
+    /**
+     * 备注
+     */
+    @Column(name = "remarks")
+    private String remarks;
 
 }

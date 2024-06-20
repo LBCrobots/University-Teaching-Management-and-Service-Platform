@@ -3,10 +3,15 @@ package com.example.student.controller;
 import com.example.base.BaseResult;
 import com.example.exception.BadRequestException;
 import com.example.student.domain.Course;
+import com.example.student.repository.CourseScoresMapper;
 import com.example.student.service.ICourseService;
+import com.example.student.service.IScoresService;
 import com.example.student.service.dto.CourseQueryCriteria;
+import com.example.student.service.dto.ScoresQueryCriteria;
 import com.example.utils.PageVo;
 import com.example.utils.ResultVo;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -19,15 +24,12 @@ import java.util.stream.Collectors;
 
 /**功能描述：课程信息前端控制器*/
 @RestController
+@RequiredArgsConstructor
+@Slf4j
 @RequestMapping("course")
 public class CourseController {
 
     private final ICourseService courseService;
-
-    /**依赖注入*/
-    public CourseController(ICourseService courseService) {
-        this.courseService = courseService;
-    }
 
     /**
      * 获取课程列表数据
@@ -37,7 +39,9 @@ public class CourseController {
      */
     @GetMapping
     public ResponseEntity<Object> getList(CourseQueryCriteria queryCriteria, PageVo pageVo){
+        log.info("queryCriteria的内容是：{}",queryCriteria);
         Pageable pageable = PageRequest.of(pageVo.getPageIndex()-1,pageVo.getPageSize(), Sort.Direction.DESC, "id");
+        log.info("pageable的内容是：{}",pageable);
         return new ResponseEntity<>(courseService.getList(queryCriteria,pageable), HttpStatus.OK);
     }
 
@@ -111,6 +115,5 @@ public class CourseController {
         }).collect(Collectors.toList());
         return BaseResult.success(result);
     }
-
 
 }

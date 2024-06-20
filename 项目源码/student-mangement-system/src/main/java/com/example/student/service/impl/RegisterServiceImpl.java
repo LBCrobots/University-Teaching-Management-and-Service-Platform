@@ -64,6 +64,7 @@ public class RegisterServiceImpl implements IRegisterService {
             student.setName(sysUser.getRealname());
             student.setSex(sysUser.getSex());
             student.setUid(sysUser.getId());
+            student.setStuno("未定");
             updateMapper.addStudent(student);
         }
     }

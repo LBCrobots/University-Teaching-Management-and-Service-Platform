@@ -57,7 +57,9 @@ import {ref, reactive, Ref} from 'vue'
 import {ElMessage} from 'element-plus'
 import {addStudentApi, gradeClassListApi} from "../../../api/student/student"
 import type { FormInstance, FormRules } from 'element-plus'
+import { useUserStore } from '../../../store/modules/user'
 const emit = defineEmits(['closeAddStudentForm','success'])
+const { userInfo } = useUserStore()
 const subLoading = ref(false)
 const formStudent = reactive({
   name: '',
@@ -68,7 +70,8 @@ const formStudent = reactive({
     id: ''
   },
   qq: '',
-  remarks: ''
+  remarks: '',
+  uid: userInfo.id
 })
 const ruleFormRef = ref<FormInstance>()
 // 定义表单约束规则对象

@@ -4,6 +4,8 @@ import com.example.student.domain.Student;
 import com.example.student.service.dto.StudentQueryCriteria;
 import org.springframework.data.domain.Pageable;
 
+import java.util.HashMap;
+
 /**功能描述：学生信息业务接口*/
 public interface IStudentService {
     /**
@@ -45,4 +47,7 @@ public interface IStudentService {
      * @return
      */
     long getCount();
+
+
+    HashMap<String, Object> getStudentInfo(Long studentUId);
 }

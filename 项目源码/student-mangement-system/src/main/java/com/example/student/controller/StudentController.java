@@ -7,6 +7,7 @@ import com.example.student.service.IStudentService;
 
 import com.example.student.service.dto.StudentQueryCriteria;
 import com.example.utils.PageVo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -14,7 +15,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+
 /**功能描述：学生信息前端控制器*/
+@Slf4j
 @RestController
 @RequestMapping("student")
 public class StudentController {
@@ -89,6 +93,18 @@ public class StudentController {
         }
         studentService.deleteById(id);
         return BaseResult.success("删除成功");
+    }
+
+    /**
+     * 根据学生uid获取学生id和班号
+     * @Param uid
+     * @return
+     */
+    @GetMapping("getStudentInfo")
+    public ResponseEntity<Object> getStudentInfo(Long studentUId){
+        HashMap<String, Object> result = studentService.getStudentInfo(studentUId);
+        log.info("result是{}",result);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 }

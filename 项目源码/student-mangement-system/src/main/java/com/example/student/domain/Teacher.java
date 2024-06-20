@@ -45,6 +45,11 @@ public class Teacher extends BaseEntity {
     @Column(name = "qq")
     private String qq;
 
+    /**
+     * 用户ID
+     */
+    @Column(name = "uid")
+    private Long uid;
 
     /**
      * 教授科目
@@ -52,11 +57,5 @@ public class Teacher extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "course_id",referencedColumnName="id")
     private Course course;
-
-    /**
-     * 用户ID
-     */
-    @Column(name = "uid")
-    private Long uid;
 
 }

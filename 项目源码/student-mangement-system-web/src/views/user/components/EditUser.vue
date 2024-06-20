@@ -4,7 +4,7 @@
     <el-row>
       <el-col :span="24">
         <el-form-item prop="role" label="所属角色">
-          <el-select v-model="formUser.sysRole.id" placeholder="请选择角色" style="width: 100%;">
+          <el-select v-model="formUser.sysRole.id" placeholder="请选择角色" style="width: 100%; pointer-events: none;" disabled>
             <el-option v-for="item in roleOptions" :key="item.id" :label="item.name" :value="item.id" />
           </el-select>
         </el-form-item>
@@ -151,5 +151,9 @@ const close = ()=> {
 .dialong__button--wrap {
   text-align: center;
   margin-top: 20px;
+}
+
+.no-cursor {
+  cursor: default !important;
 }
 </style>

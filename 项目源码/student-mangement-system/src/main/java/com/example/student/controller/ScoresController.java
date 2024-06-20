@@ -45,7 +45,7 @@ public class ScoresController {
     }
 
     /**
-     * 查询班级学科成绩
+     * 登记班级学科成绩
      * @param scoresModel
      * @return
      */
@@ -119,5 +119,36 @@ public class ScoresController {
     public BaseResult getScoresContrastCensus(@RequestParam("courseId")Long courseId){
         return BaseResult.success(scoresService.getScoresContrastCensus(courseId));
     }
+
+
+    /**
+     * 获取学生个人课程列表数据
+     *
+     * @param studentUId     学生UID
+     * @param queryCriteria 课程查询条件
+     * @param pageVo     分页信息
+     * @return 学生个人课程列表数据
+     */
+    @GetMapping("/getStudentScoresList")
+    public ResponseEntity<Object> getStudentScoresList(Long studentUId, ScoresQueryCriteria queryCriteria, PageVo pageVo){
+        Pageable pageable = PageRequest.of(pageVo.getPageIndex()-1,pageVo.getPageSize(), Sort.Direction.DESC, "id");
+        Object result = scoresService.getStudentScoresList(studentUId, queryCriteria, pageable);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    /**
+     * 获取老师教授课程的选课学生列表
+     *
+     * @param uid 老师的 UID
+     * @param pageVo     分页信息
+     * @return 老师教授课程的选课学生列表
+     */
+    @GetMapping("/getStudentsByTeacherCourses")
+    public ResponseEntity<Object> getStudentsByTeacherCourses(Long uid, ScoresQueryCriteria queryCriteria, PageVo pageVo) {
+        Pageable pageable = PageRequest.of(pageVo.getPageIndex()-1,pageVo.getPageSize(), Sort.Direction.DESC, "id");
+        Object result = scoresService.getStudentsByTeacherCourses(uid, queryCriteria, pageable);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
 
 }

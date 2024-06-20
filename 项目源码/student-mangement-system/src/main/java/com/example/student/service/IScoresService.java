@@ -1,6 +1,7 @@
 package com.example.student.service;
 
 import com.example.student.domain.Scores;
+import com.example.student.service.dto.CourseQueryCriteria;
 import com.example.student.service.dto.ScoresQueryCriteria;
 
 import com.example.student.vo.EchartsSeriesModel;
@@ -64,4 +65,8 @@ public interface IScoresService {
      * @return
      */
     HashMap<String, Object> getAllSubjectScoreContrast();
+
+    Object getStudentScoresList(Long studentId, ScoresQueryCriteria queryCriteria, Pageable pageable);
+
+    Object getStudentsByTeacherCourses(Long uid, ScoresQueryCriteria queryCriteria, Pageable pageable);
 }
